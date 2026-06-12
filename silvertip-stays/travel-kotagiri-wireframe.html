@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Kotagiri — Clickable Wireframe</title>
+<style>
+  :root{
+    --ink:#3b4a3f;
+    --line:#b9c4ba;
+    --fill:#eef2ee;
+    --accent:#4a7c59;
+    --accent-soft:#dce8de;
+    --note:#8a6d3b;
+    --note-bg:#fdf6e3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:"Helvetica Neue",Arial,sans-serif}
+  body{background:#f5f7f5;color:var(--ink);padding:16px}
+  .topbar{max-width:980px;margin:0 auto 14px;text-align:center}
+  .topbar h1{font-size:18px;letter-spacing:1px}
+  .topbar p{font-size:12px;color:#6b7a6e;margin-top:4px}
+  .tabs{max-width:980px;margin:0 auto 18px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  .tabs button{padding:7px 12px;font-size:12px;border:1px solid var(--line);background:#fff;border-radius:16px;cursor:pointer;color:var(--ink)}
+  .tabs button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .phone{max-width:420px;margin:0 auto;background:#fff;border:2px solid var(--ink);border-radius:24px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+  .screen{display:none}
+  .screen.active{display:block}
+  /* wireframe atoms */
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
+  .logo{font-weight:700;font-size:14px;letter-spacing:.5px}
+  .logo span{color:var(--accent)}
+  .menu{font-size:11px;color:#6b7a6e}
+  .menu a{color:var(--accent);text-decoration:none;margin-left:8px;cursor:pointer}
+  .img{background:repeating-linear-gradient(45deg,var(--fill),var(--fill) 8px,#e2e9e2 8px,#e2e9e2 16px);border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;color:#7d8c80;font-size:11px;text-align:center;padding:6px}
+  .hero{height:170px;position:relative}
+  .hero .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+  .hero h2{font-size:18px;background:#ffffffd9;padding:4px 10px;border-radius:4px}
+  .hero p{font-size:11px;background:#ffffffd9;padding:2px 8px;border-radius:4px}
+  .search{margin:-18px 14px 0;position:relative;z-index:2;background:#fff;border:1.5px solid var(--ink);border-radius:24px;padding:9px 14px;font-size:12px;color:#7d8c80;display:flex;justify-content:space-between}
+  .search b{color:var(--accent)}
+  .section{padding:14px}
+  .section h3{font-size:13px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+  .row{display:flex;gap:8px}
+  .chip-row{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{border:1px solid var(--line);border-radius:14px;padding:5px 10px;font-size:11px;background:#fff;cursor:pointer}
+  .chip.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+  .card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;flex:1;cursor:pointer}
+  .card .img{height:64px;border:none;border-bottom:1px dashed var(--line)}
+  .card .pad{padding:7px}
+  .card h4{font-size:11px}
+  .card p{font-size:10px;color:#6b7a6e;margin-top:2px}
+  .list-card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;margin-bottom:10px;cursor:pointer}
+  .list-card .img{height:90px;border:none;border-bottom:1px dashed var(--line)}
+  .list-card .pad{padding:9px}
+  .list-card h4{font-size:12px;display:flex;justify-content:space-between;align-items:center}
+  .list-card p{font-size:10.5px;color:#6b7a6e;margin-top:3px}
+  .badge{font-size:9px;background:var(--accent);color:#fff;border-radius:3px;padding:2px 5px;font-weight:600}
+  .badge.gold{background:#b08d3c}
+  .btn{display:block;width:100%;text-align:center;background:var(--accent);color:#fff;border:none;border-radius:6px;padding:10px;font-size:12px;font-weight:600;cursor:pointer;margin-top:8px}
+  .btn.ghost{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+  .btn-row{display:flex;gap:8px;margin-top:8px}
+  .btn-row .btn{margin-top:0}
+  .note{margin:10px 14px;background:var(--note-bg);border:1px dashed var(--note);border-radius:6px;padding:8px 10px;font-size:10.5px;color:var(--note)}
+  .note b{display:block;margin-bottom:2px}
+  .field{border:1px solid var(--line);border-radius:6px;padding:9px 10px;font-size:11px;color:#7d8c80;background:#fff;margin-bottom:8px}
+  .footer{border-top:1px solid var(--line);padding:12px 14px;font-size:10px;color:#6b7a6e;text-align:center}
+  .footer a{color:var(--accent);cursor:pointer}
+  .crumb{font-size:10px;color:#6b7a6e;padding:10px 14px 0}
+  .crumb a{color:var(--accent);cursor:pointer}
+  table{width:100%;border-collapse:collapse;font-size:10.5px}
+  td,th{border:1px solid var(--line);padding:6px;text-align:left}
+  th{background:var(--fill)}
+  .price-col{text-align:center}
+  .tier{border:1.5px solid var(--line);border-radius:8px;padding:10px;flex:1;text-align:center;background:#fff}
+  .tier.best{border-color:var(--accent);background:var(--accent-soft)}
+  .tier h4{font-size:12px}
+  .tier .amt{font-size:15px;font-weight:700;color:var(--accent);margin:4px 0}
+  .tier ul{list-style:none;font-size:9.5px;color:#6b7a6e;text-align:left;margin-top:6px}
+  .tier ul li{margin-bottom:3px}
+  .tier ul li::before{content:"✓ ";color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>TRAVEL KOTAGIRI — WIREFRAME v1</h1>
+  <p>Clickable draft · mobile-first · nature theme · listing-fee revenue model. Yellow boxes = notes for you, not part of the site.</p>
+</div>
+
+<div class="tabs" id="tabs">
+  <button data-s="home" class="active">1. Home</button>
+  <button data-s="explore">2. Explore</button>
+  <button data-s="stays">3. Stays</button>
+  <button data-s="detail">4. Stay Detail</button>
+  <button data-s="todo">5. Things to Do</button>
+  <button data-s="plan">6. Plan Your Trip</button>
+  <button data-s="list">7. List Your Property</button>
+  <button data-s="owner">8. Owner Dashboard</button>
+</div>
+
+<div class="phone" id="phone">
+<!-- ============ 1. HOME ============ -->
+<div class="screen active" id="s-home">
+  <div class="nav">
+    <div class="logo">TRAVEL <span>KOTAGIRI</span></div>
+    <div class="menu">☰ <a onclick="go('stays')">Stays</a> <a onclick="go('todo')">Do</a> <a onclick="go('plan')">Plan</a></div>
+  </div>
+  <div class="hero img">
+    <div class="overlay">
+      <h2>The Quiet Side of the Nilgiris</h2>
+      <p>Tea estates · misty trails · homestays</p>
+    </div>
+  </div>
+  <div class="search" onclick="go('stays')">Search stays, places, activities… <b>🔍</b></div>
+  <div class="section">
+    <div class="row" style="margin-top:4px">
+      <div class="card" onclick="go('stays')"><div class="pad" style="text-align:center"><h4>🏡<br>Stays</h4></div></div>
+      <div class="card" onclick="go('explore')"><div class="pad" style="text-align:center"><h4>⛰️<br>Explore</h4></div></div>
+      <div class="card" onclick="go('todo')"><div class="pad" style="text-align:center"><h4>🥾<br>Activities</h4></div></div>
+      <div class="card" onclick="go('plan')"><div class="pad" style="text-align:center"><h4>🗺️<br>Plan Trip</h4></div></div>
+    </div>
+  </div>
+  <div class="section">
+    <h3>Featured Stays</h3>
+    <div class="row">
+      <div class="card" onclick="go('detail')"><div class="img">photo</div><div class="pad"><h4>Tea Estate Homestay <span class="badge gold">★</span></h4><p>₹2,500/night · 4.8 ★</p></div></div>
+      <div class="card" onclick="go('detail')"><div class="img">photo</div><div class="pad"><h4>Misty Valley B&amp;B</h4><p>₹1,800/night · 4.6 ★</p></div></div>
+    </div>
+  </div>
+  <div class="note"><b>💰 Revenue note</b>"Featured Stays" slots go to Premium-tier subscribers. Gold star = featured badge.</div>
+  <div class="section">
+    <h3>Top Places to See</h3>
+    <div class="row">
+      <div class="card" onclick="go('explore')"><div class="img">photo</div><div class="pad"><h4>Kodanad Viewpoint</h4></div></div>
+      <div class="card" onclick="go('explore')"><div class="img">photo</div><div class="pad"><h4>Catherine Falls</h4></div></div>
+      <div class="card" onclick="go('explore')"><div class="img">photo</div><div class="pad"><h4>Longwood Shola</h4></div></div>
+    </div>
+  </div>
+  <div class="section">
+    <h3>Best Time to Visit</h3>
+    <div class="img" style="height:54px">Seasonal strip: Jan–Mar crisp ☀ · Apr–Jun pleasant 🌤 · Jul–Sep misty 🌧 · Oct–Dec clear ✨</div>
+  </div>
+  <div class="section" style="background:var(--accent-soft);border-radius:8px;margin:0 14px 14px;text-align:center">
+    <h3 style="margin-top:10px">Own a homestay in Kotagiri?</h3>
+    <p style="font-size:11px;color:#5a6b5d">Reach travellers planning their Nilgiris trip.</p>
+    <button class="btn" onclick="go('list')">List Your Property →</button>
+  </div>
+  <div class="footer">About · Contact · <a onclick="go('list')">List Your Property</a> · Instagram · WhatsApp<br>© travelkotagiri</div>
+</div>
+
+<!-- ============ 2. EXPLORE ============ -->
+<div class="screen" id="s-explore">
+  <div class="nav">
+    <div class="logo" onclick="go('home')" style="cursor:pointer">TRAVEL <span>KOTAGIRI</span></div>
+    <div class="menu"><a onclick="go('home')">← Home</a></div>
+  </div>
+  <div class="section">
+    <h3>Explore Kotagiri</h3>
+    <div class="chip-row">
+      <div class="chip on">All</div><div class="chip">Viewpoints</div><div class="chip">Waterfalls</div><div class="chip">Tea Estates</div><div class="chip">Heritage</div><div class="chip">Forests</div>
+    </div>
+  </div>
+  <div class="section" style="padding-top:0">
+    <div class="list-card"><div class="img">photo · Kodanad Viewpoint</div><div class="pad"><h4>Kodanad Viewpoint <span class="badge">Viewpoint</span></h4><p>Sweeping views of the Moyar valley &amp; Rangaswamy Pillar. 18 km from town.</p><p>📍 Map &amp; directions · ⏱ Best at sunrise · 🚗 ~40 min drive</p></div></div>
+    <div class="list-card"><div class="img">photo · Catherine Falls</div><div class="pad"><h4>Catherine Falls <span class="badge">Waterfall</span></h4><p>250-ft double cascade, best after monsoon. Viewpoint near Aravenu.</p><p>📍 Map &amp; directions · ⏱ Jul–Dec</p></div></div>
+    <div class="list-card"><div class="img">photo · Longwood Shola</div><div class="pad"><h4>Longwood Shola Forest <span class="badge">Forest</span></h4><p>Last surviving shola patch — birdwatching trail, permits at gate.</p><p>📍 Map &amp; directions · 🐦 120+ bird species</p></div></div>
+    <div class="list-card"><div class="img">photo · John Sullivan Memorial</div><div class="pad"><h4>Sullivan Memorial &amp; Tea Museum <span class="badge">Heritage</span></h4><p>Where the Nilgiris story began — colonial history &amp; Toda culture.</p><p>📍 Map &amp; directions · 🎟 Entry fee applies</p></div></div>
+    <button class="btn ghost">Load more places…</button>
+  </div>
+  <div class="note"><b>📝 Content note</b>Each place gets its own detail page (photos, story, map, nearby stays). "Nearby stays" links cross-sell your listed properties.</div>
+  <div class="section" style="padding-top:0">
+    <h3>Stay Near These Places</h3>
+    <div class="row">
+      <div class="card" onclick="go('detail')"><div class="img">photo</div><div class="pad"><h4>Aravenu Homestay</h4><p>Near Catherine Falls</p></div></div>
+      <div class="card" onclick="go('stays')"><div class="pad" style="text-align:center;padding-top:24px"><h4>See all stays →</h4></div></div>
+    </div>
+  </div>
+  <div class="footer"><a onclick="go('home')">Home</a> · <a onclick="go('stays')">Stays</a> · <a onclick="go('plan')">Plan Your Trip</a></div>
+</div>
+
+<!-- ============ 3. STAYS ============ -->
+<div class="screen" id="s-stays">
+  <div class="nav">
+    <div class="logo" onclick="go('home')" style="cursor:pointer">TRAVEL <span>KOTAGIRI</span></div>
+    <div class="menu"><a onclick="go('home')">← Home</a></div>
+  </div>
+  <div class="section">
+    <h3>Homestays &amp; B&amp;Bs in Kotagiri</h3>
+    <div class="field">📅 Dates (optional) — helps owners respond faster</div>
+    <div class="chip-row">
+      <div class="chip on">All</div><div class="chip">Homestay</div><div class="chip">B&amp;B</div><div class="chip">Cottage</div><div class="chip">Under ₹2,000</div><div class="chip">Family</div><div class="chip">Pet-friendly</div>
+    </div>
+  </div>
+  <div class="section" style="padding-top:0">
+    <div class="list-card" onclick="go('detail')">
+      <div class="img">photo gallery (swipe)</div>
+      <div class="pad"><h4>Tea Estate Homestay <span><span class="badge gold">FEATURED</span> <span class="badge">VERIFIED</span></span></h4>
+      <p>3 rooms · estate walks · home food · from ₹2,500/night</p>
+      <p>★ 4.8 (32 reviews) · Kannerimukku, 3 km from town</p></div>
+    </div>
+    <div class="list-card" onclick="go('detail')">
+      <div class="img">photo gallery (swipe)</div>
+      <div class="pad"><h4>Misty Valley B&amp;B <span class="badge">VERIFIED</span></h4>
+      <p>2 rooms · valley view · breakfast incl. · from ₹1,800/night</p>
+      <p>★ 4.6 (21 reviews) · Aravenu</p></div>
+    </div>
+    <div class="list-card" onclick="go('detail')">
+      <div class="img">photo gallery (swipe)</div>
+      <div class="pad"><h4>Pine Edge Cottage</h4>
+      <p>Full cottage · kitchen · from ₹3,200/night</p>
+      <p>★ 4.5 (9 reviews) · Near Longwood Shola</p></div>
+    </div>
+    <button class="btn ghost">Load more stays…</button>
+  </div>
+  <div class="note"><b>💰 Revenue note</b>Sort order: Featured (Premium tier) first, then Verified, then free/basic listings. "VERIFIED" badge = you've visited/vetted the property — this builds guest trust and is the reason owners pay.</div>
+  <div class="footer"><a onclick="go('list')">Own a property? List it here</a></div>
+</div>
+
+<!-- ============ 4. STAY DETAIL ============ -->
+<div class="screen" id="s-detail">
+  <div class="nav">
+    <div class="logo" onclick="go('home')" style="cursor:pointer">TRAVEL <span>KOTAGIRI</span></div>
+    <div class="menu"><a onclick="go('stays')">← All stays</a></div>
+  </div>
+  <div class="img" style="height:150px">photo gallery — swipe · 12 photos</div>
+  <div class="section">
+    <h3 style="text-transform:none;font-size:15px">Tea Estate Homestay <span class="badge gold">FEATURED</span> <span class="badge">VERIFIED</span></h3>
+    <p style="font-size:11px;color:#6b7a6e;margin-top:3px">★ 4.8 (32 reviews) · Kannerimukku · Hosted by Mani &amp; family since 2019</p>
+    <p style="font-size:12px;margin-top:8px">From <b style="color:var(--accent);font-size:15px">₹2,500</b>/night · 3 rooms · up to 8 guests</p>
+    <div class="btn-row">
+      <button class="btn">📱 WhatsApp Host</button>
+      <button class="btn ghost">📞 Call</button>
+    </div>
+    <button class="btn ghost">✉️ Send Enquiry (dates + guests form)</button>
+  </div>
+  <div class="note"><b>💰 Revenue note</b>No payment on the site (Phase 1) — guests contact the host directly. WhatsApp/Call/Enquiry taps are tracked so you can show owners "your listing got 45 enquiries this month" at renewal time.</div>
+  <div class="section">
+    <h3>About this stay</h3>
+    <p style="font-size:11px;color:#5a6b5d">2 paragraphs from the host — the estate, the rooms, the food. Written in their voice, edited by you.</p>
+    <h3 style="margin-top:12px">Amenities</h3>
+    <div class="chip-row"><div class="chip">Wi-Fi</div><div class="chip">Parking</div><div class="chip">Home food</div><div class="chip">Hot water</div><div class="chip">Campfire</div><div class="chip">Estate walk</div></div>
+    <h3 style="margin-top:12px">Location</h3>
+    <div class="img" style="height:80px">map embed — approximate pin until enquiry</div>
+    <h3 style="margin-top:12px">Reviews</h3>
+    <div class="list-card"><div class="pad"><h4>"Felt like family" ★★★★★</h4><p>Asha, Bengaluru · May 2026 — review text snippet…</p></div></div>
+    <h3>Nearby</h3>
+    <div class="row">
+      <div class="card" onclick="go('explore')"><div class="pad"><h4>Kodanad Viewpoint</h4><p>18 km</p></div></div>
+      <div class="card" onclick="go('todo')"><div class="pad"><h4>Tea factory tour</h4><p>2 km</p></div></div>
+    </div>
+  </div>
+  <div class="footer"><a onclick="go('stays')">← Back to all stays</a></div>
+</div>
+<!-- ============ 5. THINGS TO DO ============ -->
+<div class="screen" id="s-todo">
+  <div class="nav">
+    <div class="logo" onclick="go('home')" style="cursor:pointer">TRAVEL <span>KOTAGIRI</span></div>
+    <div class="menu"><a onclick="go('home')">← Home</a></div>
+  </div>
+  <div class="section">
+    <h3>Things to Do</h3>
+    <div class="chip-row">
+      <div class="chip on">All</div><div class="chip">Treks</div><div class="chip">Tea Trails</div><div class="chip">Birding</div><div class="chip">Cycling</div><div class="chip">Local Food</div>
+    </div>
+  </div>
+  <div class="section" style="padding-top:0">
+    <div class="list-card"><div class="img">photo · trek</div><div class="pad"><h4>Kotagiri–Catherine Falls Trek <span class="badge">Guided</span></h4><p>Half day · easy-moderate · ₹800/person · local guide</p><div class="btn-row"><button class="btn" style="font-size:11px;padding:7px">📱 WhatsApp to Book</button></div></div></div>
+    <div class="list-card"><div class="img">photo · tea factory</div><div class="pad"><h4>Tea Factory Tour &amp; Tasting <span class="badge">Guided</span></h4><p>2 hrs · ₹300/person · see leaf-to-cup process</p><div class="btn-row"><button class="btn" style="font-size:11px;padding:7px">📱 WhatsApp to Book</button></div></div></div>
+    <div class="list-card"><div class="img">photo · birding</div><div class="pad"><h4>Longwood Shola Birding Walk</h4><p>Early morning · ₹600/person · binoculars provided</p><div class="btn-row"><button class="btn" style="font-size:11px;padding:7px">📱 WhatsApp to Book</button></div></div></div>
+    <div class="list-card"><div class="pad"><h4>Self-guided: Heritage Town Walk 🆓</h4><p>Free downloadable map — Sullivan's bungalow, old market, churches. Builds SEO traffic &amp; goodwill.</p></div></div>
+  </div>
+  <div class="note"><b>💰 Revenue note (Phase 2)</b>Activity operators are your second subscriber group — same listing-fee model as stays. Later, commission on paid bookings can be added here first (smaller amounts, easier to start).</div>
+  <div class="footer"><a onclick="go('plan')">Plan your full trip →</a></div>
+</div>
+
+<!-- ============ 6. PLAN YOUR TRIP ============ -->
+<div class="screen" id="s-plan">
+  <div class="nav">
+    <div class="logo" onclick="go('home')" style="cursor:pointer">TRAVEL <span>KOTAGIRI</span></div>
+    <div class="menu"><a onclick="go('home')">← Home</a></div>
+  </div>
+  <div class="section">
+    <h3>Plan Your Trip</h3>
+    <div class="list-card"><div class="pad"><h4>🚗 How to Reach</h4><p>From Coimbatore (70 km, 2.5 hrs) · Mettupalayam · Ooty (28 km) · nearest rail: Mettupalayam · taxis &amp; buses info</p></div></div>
+    <div class="list-card"><div class="pad"><h4>🌤 Weather &amp; Best Time</h4><p>Month-by-month strip: temperature, rain, what to pack. Live weather widget.</p></div></div>
+    <div class="list-card"><div class="pad"><h4>🗓 Ready-made Itineraries</h4><p>"1 Day in Kotagiri" · "Weekend Escape (2D)" · "Slow Week in the Hills (5D)" — each links to stays &amp; activities</p></div></div>
+    <div class="list-card"><div class="pad"><h4>💡 Local Tips</h4><p>ATMs, network coverage, petrol, hospitals, forest permits, responsible-travel etiquette</p></div></div>
+  </div>
+  <div class="note"><b>📝 SEO note</b>This section wins Google searches like "how to reach Kotagiri", "Kotagiri itinerary", "best time to visit Kotagiri" — your main free traffic source. Each itinerary embeds 2–3 listed stays = subscribers get visibility.</div>
+  <div class="section" style="padding-top:0">
+    <h3>Stories from Kotagiri</h3>
+    <div class="row">
+      <div class="card"><div class="img">photo</div><div class="pad"><h4>A Morning in a Tea Estate</h4><p>Blog · 5 min read</p></div></div>
+      <div class="card"><div class="img">photo</div><div class="pad"><h4>The Kota People of Kotagiri</h4><p>Blog · 7 min read</p></div></div>
+    </div>
+  </div>
+  <div class="footer"><a onclick="go('stays')">Find a stay</a> · <a onclick="go('todo')">Things to do</a></div>
+</div>
+
+<!-- ============ 7. LIST YOUR PROPERTY ============ -->
+<div class="screen" id="s-list">
+  <div class="nav">
+    <div class="logo" onclick="go('home')" style="cursor:pointer">TRAVEL <span>KOTAGIRI</span></div>
+    <div class="menu"><a onclick="go('home')">← Home</a></div>
+  </div>
+  <div class="hero img" style="height:110px">
+    <div class="overlay"><h2 style="font-size:15px">Get Found by Nilgiris Travellers</h2><p>List your homestay or B&amp;B on travelkotagiri</p></div>
+  </div>
+  <div class="section">
+    <h3>Why list with us?</h3>
+    <div class="row" style="text-align:center;font-size:10px">
+      <div class="card"><div class="pad"><h4>👀</h4><p>Travellers searching Kotagiri find YOU first</p></div></div>
+      <div class="card"><div class="pad"><h4>📱</h4><p>Direct WhatsApp enquiries — no commission cut</p></div></div>
+      <div class="card"><div class="pad"><h4>✅</h4><p>Verified badge builds guest trust</p></div></div>
+    </div>
+  </div>
+  <div class="section">
+    <h3>Plans</h3>
+    <div class="row">
+      <div class="tier"><h4>Basic</h4><div class="amt">Free</div><ul><li>Name + 2 photos</li><li>Listed below paid plans</li><li>No contact button</li></ul></div>
+      <div class="tier best"><h4>Verified</h4><div class="amt">₹500/mo</div><ul><li>Full listing + 12 photos</li><li>WhatsApp &amp; call buttons</li><li>Verified badge</li><li>Enquiry stats</li></ul></div>
+      <div class="tier"><h4>Premium</h4><div class="amt">₹1,200/mo</div><ul><li>All Verified features</li><li>Featured on homepage</li><li>Top of search results</li><li>In itinerary pages</li></ul></div>
+    </div>
+    <p style="font-size:9.5px;color:#6b7a6e;margin-top:6px;text-align:center">Annual plans 2 months free · pricing is placeholder — set after talking to 5–10 owners</p>
+  </div>
+  <div class="note"><b>💰 Strategy note</b>Free tier exists to get inventory fast (empty directory = no visitors). Once a free owner sees a paid neighbour getting enquiries, upgrading sells itself.</div>
+  <div class="section">
+    <h3>Apply to list</h3>
+    <div class="field">Property name</div>
+    <div class="field">Your name &amp; WhatsApp number</div>
+    <div class="field">Location / village</div>
+    <div class="field">Type: Homestay ▾</div>
+    <div class="field">No. of rooms</div>
+    <button class="btn">Submit — we'll visit &amp; verify</button>
+  </div>
+  <div class="footer"><a onclick="go('home')">← Back to home</a></div>
+</div>
+
+<!-- ============ 8. OWNER DASHBOARD (Phase 2) ============ -->
+<div class="screen" id="s-owner">
+  <div class="nav">
+    <div class="logo">TRAVEL <span>KOTAGIRI</span></div>
+    <div class="menu">Mani's Homestay ▾</div>
+  </div>
+  <div class="note" style="margin-top:12px"><b>🔮 Phase 2 screen</b>Not needed at launch — in Phase 1 YOU manage listings for owners (they send photos on WhatsApp). Build this once you have ~20 paying owners.</div>
+  <div class="section">
+    <h3>My Listing</h3>
+    <table>
+      <tr><th>This month</th><th class="price-col">Views</th><th class="price-col">WhatsApp taps</th><th class="price-col">Enquiries</th></tr>
+      <tr><td>Tea Estate Homestay</td><td class="price-col">412</td><td class="price-col">38</td><td class="price-col">12</td></tr>
+    </table>
+    <button class="btn ghost">✏️ Edit listing &amp; photos</button>
+    <button class="btn ghost">📅 Mark dates unavailable</button>
+  </div>
+  <div class="section">
+    <h3>Subscription</h3>
+    <div class="list-card"><div class="pad"><h4>Verified plan <span class="badge">ACTIVE</span></h4><p>Renews 01 Aug 2026 · ₹500/mo · UPI autopay</p><p style="color:var(--accent);font-weight:600;margin-top:4px">⬆ Upgrade to Premium — get featured on the homepage</p></div></div>
+  </div>
+  <div class="section">
+    <h3>Recent Enquiries</h3>
+    <div class="list-card"><div class="pad"><h4>Rahul · 2 adults · Jun 20–22</h4><p>"Is the estate walk included?" · 2 hrs ago · <span style="color:var(--accent)">Reply on WhatsApp →</span></p></div></div>
+    <div class="list-card"><div class="pad"><h4>Priya · family of 5 · Jul 4–6</h4><p>"Do you have parking?" · yesterday · Replied ✓</p></div></div>
+  </div>
+  <div class="footer"><a onclick="go('home')">View public site</a></div>
+</div>
+</div>
+
+<script>
+function go(s){
+  document.querySelectorAll('.screen').forEach(e=>e.classList.remove('active'));
+  document.getElementById('s-'+s).classList.add('active');
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active',b.dataset.s===s));
+  document.getElementById('phone').scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>go(b.dataset.s));
+</script>
+</body>
+</html>

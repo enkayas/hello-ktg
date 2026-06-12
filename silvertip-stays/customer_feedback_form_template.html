@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback Form - Silvertip</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            page-break-inside: avoid;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-section {
+            margin-bottom: 25px;
+        }
+
+        .form-section label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .rating-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .rating-btn {
+            width: 45px;
+            height: 45px;
+            border: 2px solid #bdc3c7;
+            border-radius: 50%;
+            background: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .rating-btn:hover {
+            border-color: #e74c3c;
+            background: #ffe6e3;
+        }
+
+        .rating-btn.selected {
+            border-color: #27ae60;
+            background: #27ae60;
+            color: white;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .yes-no-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .yes-no-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #bdc3c7;
+            border-radius: 4px;
+            background: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .yes-no-btn:hover {
+            border-color: #3498db;
+        }
+
+        .yes-no-btn.selected {
+            border-color: #27ae60;
+            background: #27ae60;
+            color: white;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #229954;
+        }
+
+        .qr-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            background: #ecf0f1;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .qr-code {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .qr-instructions {
+            flex: 1;
+        }
+
+        .qr-instructions h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .qr-instructions p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .print-template {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            page-break-after: always;
+        }
+
+        .header-banner {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header-banner h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header-banner p {
+            color: #ecf0f1;
+            margin: 5px 0 0 0;
+            font-size: 13px;
+        }
+
+        .small-qr {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .small-qr img {
+            max-width: 150px;
+            height: 150px;
+        }
+
+        .qr-label {
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .print-template {
+                page-break-after: always;
+                margin-bottom: 0;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+
+        .feedback-type {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-btn {
+            padding: 10px;
+            border: 2px solid #bdc3c7;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-btn:hover {
+            border-color: #3498db;
+        }
+
+        .checkbox-btn.selected {
+            border-color: #e74c3c;
+            background: #ffe6e3;
+        }
+
+        .success-message {
+            display: none;
+            background: #d5f4e6;
+            color: #27ae60;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .divider {
+            height: 2px;
+            background: #ecf0f1;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- QR Code Setup Section -->
+    <div class="card">
+        <h2 style="color: #2c3e50; margin-bottom: 20px;">📱 Customer Feedback - QR Setup</h2>
+
+        <div class="qr-section">
+            <div class="qr-code">
+                <div id="qrcode" style="width: 200px; height: 200px;"></div>
+            </div>
+            <div class="qr-instructions">
+                <h2>How to Use This Form</h2>
+                <p><strong>Step 1:</strong> Print this page</p>
+                <p><strong>Step 2:</strong> Place QR code stickers at:</p>
+                <ul style="margin-left: 20px; color: #555;">
+                    <li>Table stands (dine-in)</li>
+                    <li>Delivery bags (takeaway)</li>
+                    <li>Receipt printer (on bills)</li>
+                    <li>Entrance (for post-visit feedback)</li>
+                </ul>
+                <p><strong>Step 3:</strong> Customers scan QR → fill form on phone</p>
+                <p><strong>Step 4:</strong> You review feedback weekly</p>
+                <p style="margin-top: 15px; font-weight: 600; color: #27ae60;">✓ Form responses are collected in Google Sheets</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instructions for Setup -->
+    <div class="card">
+        <h2 style="color: #2c3e50; margin-bottom: 15px;">🔧 Setup Instructions</h2>
+        <ol style="color: #555; line-height: 1.8; margin-left: 20px;">
+            <li style="margin-bottom: 10px;">
+                <strong>Create Google Form:</strong>
+                <ul style="margin: 10px 0 10px 20px;">
+                    <li>Go to forms.google.com</li>
+                    <li>Click "Create → Blank Form"</li>
+                    <li>Add questions from section below</li>
+                    <li>Get the "Share" link (shortened)</li>
+                </ul>
+            </li>
+            <li style="margin-bottom: 10px;">
+                <strong>Generate QR Code:</strong>
+                <ul style="margin: 10px 0 10px 20px;">
+                    <li>Go to qr-code-generator.com</li>
+                    <li>Paste your Google Form link</li>
+                    <li>Download QR code image</li>
+                    <li>Print as stickers (100 recommended)</li>
+                </ul>
+            </li>
+            <li style="margin-bottom: 10px;">
+                <strong>Place QR Codes:</strong>
+                <ul style="margin: 10px 0 10px 20px;">
+                    <li>Small stands on each table</li>
+                    <li>Delivery bag stickers</li>
+                    <li>Bottom of every receipt</li>
+                    <li>Main entrance signage</li>
+                </ul>
+            </li>
+            <li style="margin-bottom: 10px;">
+                <strong>Review Responses:</strong>
+                <ul style="margin: 10px 0 10px 20px;">
+                    <li>Google Form auto-collects responses</li>
+                    <li>Review responses weekly (Mondays)</li>
+                    <li>Export to CSV for analysis</li>
+                    <li>Use findings in menu/operation decisions</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <!-- Google Form Questions -->
+    <div class="card">
+        <h2 style="color: #2c3e50; margin-bottom: 15px;">📋 Google Form Questions</h2>
+        <p style="color: #555; margin-bottom: 20px; line-height: 1.6;">
+            Copy these questions into your Google Form (in order). Use the question types specified.
+        </p>
+
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+            <strong style="color: #2c3e50;">Question 1 (Short Answer)</strong>
+            <p style="color: #555; margin-top: 5px;">What's your name or order number?</p>
+            <p style="color: #999; font-size: 12px;">Purpose: Track repeat customers</p>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+            <strong style="color: #2c3e50;">Question 2 (Linear Scale 1-5)</strong>
+            <p style="color: #555; margin-top: 5px;">How would you rate the food quality? (1=Poor, 5=Excellent)</p>
+            <p style="color: #999; font-size: 12px;">Purpose: Track quality consistency</p>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+            <strong style="color: #2c3e50;">Question 3 (Linear Scale 1-5)</strong>
+            <p style="color: #555; margin-top: 5px;">How would you rate the service speed? (1=Slow, 5=Very Fast)</p>
+            <p style="color: #999; font-size: 12px;">Purpose: Track service efficiency</p>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+            <strong style="color: #2c3e50;">Question 4 (Multiple Choice)</strong>
+            <p style="color: #555; margin-top: 5px;">Would you order from us again?</p>
+            <p style="color: #999; font-size: 12px;">Options: Yes | Maybe | No</p>
+            <p style="color: #999; font-size: 12px;">Purpose: Track repeat intention</p>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+            <strong style="color: #2c3e50;">Question 5 (Checkboxes - Multi-select)</strong>
+            <p style="color: #555; margin-top: 5px;">What did you like most? (Check all that apply)</p>
+            <p style="color: #999; font-size: 12px;">Options: Food Quality | Taste | Portion Size | Price | Service | Ambiance | Cleanliness | Other</p>
+            <p style="color: #999; font-size: 12px;">Purpose: Identify strengths to promote</p>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+            <strong style="color: #2c3e50;">Question 6 (Checkboxes - Multi-select)</strong>
+            <p style="color: #555; margin-top: 5px;">What could we improve? (Check all that apply)</p>
+            <p style="color: #999; font-size: 12px;">Options: Wait Time | Food Quality | Portion Size | Price | Staff Behavior | Cleanliness | Menu Variety | Delivery Speed | Other</p>
+            <p style="color: #999; font-size: 12px;">Purpose: Identify improvement priorities</p>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 4px;">
+            <strong style="color: #2c3e50;">Question 7 (Long Answer)</strong>
+            <p style="color: #555; margin-top: 5px;">Any other comments or suggestions?</p>
+            <p style="color: #999; font-size: 12px;">Purpose: Capture detailed feedback</p>
+        </div>
+    </div>
+
+    <!-- Weekly Review Template -->
+    <div class="card">
+        <h2 style="color: #2c3e50; margin-bottom: 15px;">📊 Weekly Review Process</h2>
+
+        <div style="background: #e8f4f8; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+            <strong style="color: #2c3e50;">Monday Morning Review (15 mins)</strong>
+            <ol style="color: #555; margin: 10px 0 0 20px;">
+                <li>Export Google Form responses to CSV</li>
+                <li>Count star ratings (food quality, service speed)</li>
+                <li>Identify 3 top complaints from Q6</li>
+                <li>Identify 3 top strengths from Q5</li>
+                <li>Review written feedback (Q7)</li>
+                <li>Share summary in team meeting</li>
+            </ol>
+        </div>
+
+        <div style="background: #fff3cd; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+            <strong style="color: #2c3e50;">Action Items (Based on Feedback)</strong>
+            <ul style="color: #555; margin: 10px 0 0 20px;">
+                <li><strong>Quality Issues:</strong> Address in next day's prep (if food quality < 4/5)</li>
+                <li><strong>Service Issues:</strong> Adjust staffing/process (if speed < 4/5)</li>
+                <li><strong>Repeat Intention:</strong> If "No" increases, trigger menu/service audit</li>
+                <li><strong>Consistent Feedback:</strong> Implement improvement within week</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Sample Print Layout -->
+    <div class="divider"></div>
+
+    <div style="page-break-before: always; margin-top: 40px;">
+        <h2 style="color: #2c3e50; text-align: center; margin-bottom: 30px;">📄 Sample Print Templates (Use These)</h2>
+    </div>
+
+    <!-- Print Template 1: Table Stand Size -->
+    <div class="print-template">
+        <div class="header-banner">
+            <h1>Quick Feedback</h1>
+            <p>Help us serve you better</p>
+        </div>
+
+        <div style="text-align: center; padding: 20px;">
+            <p style="color: #555; font-size: 16px; margin-bottom: 20px;">
+                <strong>Scan to give feedback:</strong>
+            </p>
+
+            <div class="small-qr" id="qrcode-table">
+                <!-- Will be populated by JavaScript -->
+            </div>
+
+            <p class="qr-label">Takes 1 minute</p>
+
+            <div style="background: #ecf0f1; padding: 15px; margin-top: 20px; border-radius: 4px;">
+                <p style="color: #555; font-size: 13px; margin: 0;">
+                    Your feedback helps us improve.<br>
+                    Thank you for dining with us! 🙏
+                </p>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; font-size: 11px; color: #999;">
+            <p>Print on cardstock (6" x 4") and laminate for durability</p>
+        </div>
+    </div>
+
+    <!-- Print Template 2: Receipt Bottom -->
+    <div class="print-template">
+        <div style="text-align: center; padding: 15px; border: 1px dashed #bdc3c7;">
+            <p style="color: #555; font-size: 12px; margin-bottom: 10px;">
+                <strong>📱 Give Us Feedback!</strong>
+            </p>
+
+            <div class="small-qr" id="qrcode-receipt" style="margin: 10px 0;">
+                <!-- Will be populated by JavaScript -->
+            </div>
+
+            <p style="color: #999; font-size: 10px; margin: 10px 0 0 0;">
+                Scan QR to share your experience
+            </p>
+        </div>
+
+        <div style="margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 4px; text-align: center;">
+            <p style="color: #555; font-size: 11px; margin: 0;">
+                Thank you for your order!<br>
+                Visit us again soon 🙏
+            </p>
+        </div>
+
+        <div style="margin-top: 10px; text-align: center; font-size: 10px; color: #999;">
+            <p style="margin: 0;">Print on receipt paper (width: 80mm)</p>
+        </div>
+    </div>
+
+    <!-- Print Template 3: Door Signage -->
+    <div class="print-template" style="text-align: center;">
+        <div class="header-banner">
+            <h1 style="font-size: 32px;">We'd Love Your Feedback!</h1>
+            <p style="font-size: 16px;">Tell us how we did</p>
+        </div>
+
+        <div style="padding: 40px 20px;">
+            <div class="small-qr" id="qrcode-door" style="transform: scale(2); margin: 40px 0;">
+                <!-- Will be populated by JavaScript -->
+            </div>
+
+            <p style="color: #555; font-size: 18px; font-weight: 600; margin: 40px 0 20px 0;">
+                Scan to give feedback
+            </p>
+
+            <p style="color: #777; font-size: 14px; line-height: 1.6;">
+                Your 1-minute feedback helps us<br>
+                serve you even better next time!
+            </p>
+
+            <div style="background: #e8f4f8; padding: 20px; margin-top: 30px; border-radius: 8px;">
+                <p style="color: #555; font-size: 13px; margin: 0;">
+                    📊 Every response is valuable to us!<br>
+                    Thank you for helping us improve 🙏
+                </p>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; text-align: center; font-size: 11px; color: #999;">
+            <p>Print on A4 paper and laminate for entrance display</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Generate QR codes pointing to your Google Form
+    // Replace 'YOUR_GOOGLE_FORM_URL_HERE' with your actual form short link
+
+    const formUrl = "https://forms.gle/YOUR_FORM_ID_HERE"; // Replace this!
+
+    // Main QR code
+    if (document.getElementById('qrcode')) {
+        new QRCode(document.getElementById('qrcode'), {
+            text: formUrl,
+            width: 200,
+            height: 200,
+            colorDark: '#2c3e50',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    }
+
+    // Table stand QR
+    if (document.getElementById('qrcode-table')) {
+        new QRCode(document.getElementById('qrcode-table'), {
+            text: formUrl,
+            width: 150,
+            height: 150,
+            colorDark: '#2c3e50',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    }
+
+    // Receipt QR
+    if (document.getElementById('qrcode-receipt')) {
+        new QRCode(document.getElementById('qrcode-receipt'), {
+            text: formUrl,
+            width: 100,
+            height: 100,
+            colorDark: '#2c3e50',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    }
+
+    // Door signage QR
+    if (document.getElementById('qrcode-door')) {
+        new QRCode(document.getElementById('qrcode-door'), {
+            text: formUrl,
+            width: 300,
+            height: 300,
+            colorDark: '#2c3e50',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    }
+</script>
+
+</body>
+</html>

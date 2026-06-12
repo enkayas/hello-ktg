@@ -309,7 +309,161 @@ footer a:hover{color:#fff}
         </div>
       </div>
     </div>
-    <div style="text-align:center;margin-top:34px" class="rv"><a class="btn" href="#">See all stays</a></div>
+    <div style="text-align:center;margin-top:34px" class="rv">
+      <button id="toggleStays" class="btn">See all stays</button>
+    </div>
+    
+    <!-- All stays (initially hidden) -->
+    <div id="allStaysGrid" style="display:none;margin-top:38px">
+      <div class="grid c3">
+        <!-- Nithya Valley View -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiritea.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Nithya Valley View</h3>
+            <p>Near River Side Factory, Aravenu — 286 photos, home-cooked meals, peaceful valley views.</p>
+            <div class="stars">★ 4.8 <small style="color:var(--muted);font-weight:500">(192 reviews)</small></div>
+            <div class="stay-price">₹2,800 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Nithya%20Valley%20View&host=08147099516">Book</a>
+              <a class="link" href="http://www.thehoneycomb.in/" target="_blank">Website →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Oraganic Farmer Estate View -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiritea.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Oraganic Farmer Estate View</h3>
+            <p>Near Nayara Petrol Bunk, Aravenu — working organic farm, garden views.</p>
+            <div class="stars">★ 4.8 <small style="color:var(--muted);font-weight:500">(5 reviews)</small></div>
+            <div class="stay-price">₹2,400 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Oraganic%20Farmer&host=09054623315">Book</a>
+              <a class="link" href="tel:09054623315">Call →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Cloud Nine Resorts -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Kotagiri_Town.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Cloud Nine Resorts</h3>
+            <p>Yellacombai, Kodanad — 3-star resort with tea estate views and housekeeping.</p>
+            <div class="stars">★ 4.1 <small style="color:var(--muted);font-weight:500">(127 reviews)</small></div>
+            <div class="stay-price">₹3,500 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Cloud%20Nine&host=08460485956">Book</a>
+              <a class="link" href="tel:08460485956">Call →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Trilan Cottages -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Shola_forest_and_grassland.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Trilan Cottages</h3>
+            <p>Kannerimukku — tea estate homestay with kitchen, 80 photos, family-friendly.</p>
+            <div class="stars">★ 4.4 <small style="color:var(--muted);font-weight:500">(421 reviews)</small></div>
+            <div class="stay-price">₹2,900 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Trilan%20Cottages&host=919962541214">Book</a>
+              <a class="link" href="http://www.trilancottages.com/" target="_blank">Website →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Green Pearl Cottages -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Kodanad.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Green Pearl Cottages</h3>
+            <p>Near Rajeshwari Tea Factory, Konavakorai — scenic location, complimentary breakfast.</p>
+            <div class="stars">★ 4.1 <small style="color:var(--muted);font-weight:500">(226 reviews)</small></div>
+            <div class="stay-price">₹2,600 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Green%20Pearl&host=919962541214">Book</a>
+              <a class="link" href="http://www.greenpearlcottage.com/" target="_blank">Website →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Airy Home Stay -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/CATHERINE_WATER_FALLS.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Airy Home Stay</h3>
+            <p>Ketti — 40 reviews, high rating, WiFi, parking available.</p>
+            <div class="stars">★ 4.9 <small style="color:var(--muted);font-weight:500">(40 reviews)</small></div>
+            <div class="stay-price">₹2,200 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Airy%20Home%20Stay&host=09035081711">Book</a>
+              <a class="link" href="tel:09035081711">Call →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- IVC Villa -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiri_Flycatcher_by_N.A._Naseer.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>IVC Villa</h3>
+            <p>Milidane — 433 reviews, fireplace, butler service, laundry.</p>
+            <div class="stars">★ 3.7 <small style="color:var(--muted);font-weight:500">(433 reviews)</small></div>
+            <div class="stay-price">₹1,500 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=IVC%20Villa&host=919962541214">Book</a>
+              <a class="link" href="#">Details →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- White House Resort -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/John_Sullivan_Ootacamund.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>White House Resort</h3>
+            <p>Donnington — 275 reviews, valley-facing, wake-up call service.</p>
+            <div class="stars">★ 4.6 <small style="color:var(--muted);font-weight:500">(275 reviews)</small></div>
+            <div class="stay-price">₹2,700 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=White%20House&host=919962541214">Book</a>
+              <a class="link" href="#">Details →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Peri Resorts -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Rangasamy_Peak_seen_from_Kodanad.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Peri Resorts</h3>
+            <p>Battakorai, Donnington — 197 reviews, 24-hour concierge, butler service.</p>
+            <div class="stars">★ 4.1 <small style="color:var(--muted);font-weight:500">(197 reviews)</small></div>
+            <div class="stay-price">₹3,800 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Peri%20Resorts&host=919962541214">Book</a>
+              <a class="link" href="#">Details →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:34px">
+        <button id="collapseStays" class="btn outline">Show fewer stays</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -397,35 +551,57 @@ footer a:hover{color:#fff}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
+/* Toggle "See all stays" button */
+document.getElementById('toggleStays').addEventListener('click',function(){
+  const allStaysGrid=document.getElementById('allStaysGrid');
+  allStaysGrid.style.display=allStaysGrid.style.display==='none'?'block':'none';
+  // Re-observe new cards for animation
+  allStaysGrid.querySelectorAll('.card').forEach(el=>{if(!el.classList.contains('in')){io.observe(el);}});
+  // Re-tilt cards
+  applyTilt(allStaysGrid.querySelectorAll('.card'));
+  window.scrollTo({top:allStaysGrid.offsetTop-100,behavior:'smooth'});
+});
+
+document.getElementById('collapseStays').addEventListener('click',function(){
+  document.getElementById('allStaysGrid').style.display='none';
+  window.scrollTo({top:document.getElementById('stays').offsetTop-100,behavior:'smooth'});
+});
+
 /* 3D tilt — cards follow the cursor */
 const MAX_TILT=9;
-const tiltables=document.querySelectorAll('.card,.season,.reach .r');
-const fineHover=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if(fineHover&&!reduced){
-  tiltables.forEach(el=>{
-    if(el.classList.contains('card')){const s=document.createElement('div');s.className='shine';el.appendChild(s);}
-    let raf=null;
-    el.addEventListener('mousemove',e=>{
-      const r=el.getBoundingClientRect();
-      const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-      el.style.setProperty('--mx',(px*100)+'%');
-      el.style.setProperty('--my',(py*100)+'%');
-      if(raf)return;
-      raf=requestAnimationFrame(()=>{
-        const rx=(py-.5)*-2*MAX_TILT, ry=(px-.5)*2*MAX_TILT;
-        el.style.transform=`rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-4px) scale(1.015)`;
-        el.classList.add('tilting');
-        raf=null;
+function applyTilt(elements){
+  const fineHover=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(fineHover&&!reduced){
+    elements.forEach(el=>{
+      if(el.classList.contains('card')&&!el.querySelector('.shine')){const s=document.createElement('div');s.className='shine';el.appendChild(s);}
+      let raf=null;
+      el.addEventListener('mousemove',e=>{
+        const r=el.getBoundingClientRect();
+        const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        el.style.setProperty('--mx',(px*100)+'%');
+        el.style.setProperty('--my',(py*100)+'%');
+        if(raf)return;
+        raf=requestAnimationFrame(()=>{
+          const rx=(py-.5)*-2*MAX_TILT, ry=(px-.5)*2*MAX_TILT;
+          el.style.transform=`rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-4px) scale(1.015)`;
+          el.classList.add('tilting');
+          raf=null;
+        });
+      });
+      el.addEventListener('mouseleave',()=>{
+        if(raf){cancelAnimationFrame(raf);raf=null;}
+        el.classList.remove('tilting');
+        el.style.transform='';
       });
     });
-    el.addEventListener('mouseleave',()=>{
-      if(raf){cancelAnimationFrame(raf);raf=null;}
-      el.classList.remove('tilting');
-      el.style.transform='';
-    });
-  });
+  }
 }
+
+// Initial tilt on featured stays
+const tiltables=document.querySelectorAll('.card,.season,.reach .r');
+applyTilt(document.querySelectorAll('#stays > .wrap > .grid.c3 .card'));
+document.querySelectorAll('.season,.reach .r').forEach(el=>{applyTilt([el]);});
 </script>
 </script>
 </body>

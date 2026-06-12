@@ -483,7 +483,7 @@ if(fineHover&&!reduced){
     const guests = document.getElementById('guests').value;
     const msg = document.getElementById('booking-msg').value.trim();
     const body = `Booking request for ${currentStay}\nName: ${name}\nPhone: ${phone}\nCheck-in: ${checkin}\nCheck-out: ${checkout}\nGuests: ${guests}\nNotes: ${msg}`;
-    const waUrl = 'https://wa.me/?text=' + encodeURIComponent(body);
+    const waUrl = 'https://wa.me/919962541214?text=' + encodeURIComponent(body);
     window.open(waUrl, '_blank');
     document.getElementById('booking-modal').classList.remove('in');
   });

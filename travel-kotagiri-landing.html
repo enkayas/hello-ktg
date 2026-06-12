@@ -170,6 +170,15 @@ footer a:hover{color:#fff}
 /* reveal on scroll */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
 .rv.in{opacity:1;transform:none}
+
+/* BOOKING MODAL */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);z-index:120;opacity:0;pointer-events:none;transition:opacity .18s}
+.modal.in{opacity:1;pointer-events:auto}
+.modal .dialog{background:#fff;border-radius:12px;max-width:520px;width:94%;padding:18px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.modal h3{margin:0 0 10px;color:var(--forest)}
+.modal input,.modal textarea,.modal select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e6e6;margin-bottom:8px;font-size:14px}
+.modal .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:6px}
+.modal small{color:var(--muted)}
 </style>
 </head>
 <body>
@@ -271,6 +280,10 @@ footer a:hover{color:#fff}
           <p>3 rooms in a working estate — morning walks through the plantation, meals from the family kitchen.</p>
           <div class="stars">★ 4.8 <small style="color:var(--muted);font-weight:500">(32 reviews)</small></div>
           <div class="stay-price">₹2,500 <small>/ night</small></div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+            <button class="btn book-btn" data-stay="Tea Estate Homestay">Book</button>
+            <a class="link" href="#">Map &amp; details →</a>
+          </div>
         </div>
       </div>
       <div class="card rv">
@@ -281,6 +294,10 @@ footer a:hover{color:#fff}
           <p>Two valley-view rooms near Aravenu — breakfast included, Catherine Falls viewpoint 10 minutes away.</p>
           <div class="stars">★ 4.6 <small style="color:var(--muted);font-weight:500">(21 reviews)</small></div>
           <div class="stay-price">₹1,800 <small>/ night</small></div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+            <button class="btn book-btn" data-stay="Misty Valley B&B">Book</button>
+            <a class="link" href="#">Map &amp; details →</a>
+          </div>
         </div>
       </div>
       <div class="card rv">
@@ -291,6 +308,10 @@ footer a:hover{color:#fff}
           <p>A full cottage with kitchen near Longwood Shola — made for slow weeks and remote work in the hills.</p>
           <div class="stars">★ 4.5 <small style="color:var(--muted);font-weight:500">(9 reviews)</small></div>
           <div class="stay-price">₹3,200 <small>/ night</small></div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+            <button class="btn book-btn" data-stay="Pine Edge Cottage">Book</button>
+            <a class="link" href="#">Map &amp; details →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -363,6 +384,27 @@ footer a:hover{color:#fff}
   </div>
 </section>
 
+<div id="booking-modal" class="modal" aria-hidden="true">
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <h3 id="booking-title">Book — <span id="booking-stay-name"></span></h3>
+    <form id="booking-form">
+      <input type="text" id="guest-name" placeholder="Your name" required>
+      <input type="tel" id="guest-phone" placeholder="WhatsApp number (include +91)" required>
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <input type="date" id="checkin" required>
+        <input type="date" id="checkout" required>
+      </div>
+      <input type="number" id="guests" min="1" value="2" required>
+      <textarea id="booking-msg" placeholder="Message / requests" rows="3"></textarea>
+      <div class="actions">
+        <button type="button" class="btn outline" id="booking-cancel">Cancel</button>
+        <button type="submit" class="btn" id="booking-whatsapp">Send via WhatsApp</button>
+      </div>
+      <small>Prefer email? <a href="#" id="email-fallback">Send by email</a></small>
+    </form>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap foot">
@@ -411,6 +453,54 @@ if(fineHover&&!reduced){
     });
   });
 }
+</script>
+</script>
+<script>
+(function(){
+  let currentStay='';
+  document.addEventListener('click', function(e){
+    const b = e.target.closest('.book-btn');
+    if(!b) return;
+    e.preventDefault();
+    currentStay = b.getAttribute('data-stay') || '';
+    const modal = document.getElementById('booking-modal');
+    document.getElementById('booking-stay-name').textContent = currentStay;
+    document.getElementById('booking-form').reset();
+    modal.classList.add('in');
+  });
+
+  document.getElementById('booking-cancel').addEventListener('click', function(){
+    document.getElementById('booking-modal').classList.remove('in');
+  });
+
+  const form = document.getElementById('booking-form');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('guest-name').value.trim();
+    const phone = document.getElementById('guest-phone').value.trim();
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    const guests = document.getElementById('guests').value;
+    const msg = document.getElementById('booking-msg').value.trim();
+    const body = `Booking request for ${currentStay}\nName: ${name}\nPhone: ${phone}\nCheck-in: ${checkin}\nCheck-out: ${checkout}\nGuests: ${guests}\nNotes: ${msg}`;
+    const waUrl = 'https://wa.me/?text=' + encodeURIComponent(body);
+    window.open(waUrl, '_blank');
+    document.getElementById('booking-modal').classList.remove('in');
+  });
+
+  document.getElementById('email-fallback').addEventListener('click', function(e){
+    e.preventDefault();
+    const name = document.getElementById('guest-name').value.trim();
+    const phone = document.getElementById('guest-phone').value.trim();
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    const guests = document.getElementById('guests').value;
+    const msg = document.getElementById('booking-msg').value.trim();
+    const subject = `Booking request: ${currentStay}`;
+    const body = `Booking request for ${currentStay}%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0ACheck-in: ${encodeURIComponent(checkin)}%0ACheck-out: ${encodeURIComponent(checkout)}%0AGuests: ${encodeURIComponent(guests)}%0ANotes: ${encodeURIComponent(msg)}`;
+    window.location.href = 'mailto:hello@travelkotagiri.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
+  });
+})();
 </script>
 </body>
 </html>

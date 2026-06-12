@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Host dashboard — travelkotagiri</title>
+<style>
+body{font-family:Inter,system-ui;padding:24px;background:#f6f8f6;color:#163020}
+.container{max-width:900px;margin:0 auto}
+.card{background:#fff;padding:16px;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
+.input{padding:10px;border-radius:8px;border:1px solid #e6e6e6;width:100%;margin-bottom:8px}
+.btn{background:#2d5240;color:#fff;padding:10px 14px;border-radius:10px;border:none;cursor:pointer}
+.table{width:100%;border-collapse:collapse;margin-top:12px}
+.table th,.table td{padding:8px;border-bottom:1px solid #eee;text-align:left;font-size:13px}
+.small{font-size:13px;color:#506055}
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Host login</h2>
+  <div class="card">
+    <p class="small">Enter your WhatsApp number in international format (e.g. 919962541214) to view bookings sent to you.</p>
+    <input id="host-num" class="input" placeholder="9199..." />
+    <div style="display:flex;gap:8px"><button id="btn-login" class="btn">Login</button><button id="btn-export" class="btn" style="background:#496b5a">Export CSV</button></div>
+  </div>
+
+  <div id="dashboard" style="margin-top:18px;display:none">
+    <h3>Bookings for <span id="host-display"></span></h3>
+    <div class="card">
+      <table class="table" id="bookings-table">
+        <thead><tr><th>When</th><th>Stay</th><th>Guest</th><th>Phone</th><th>Check-in</th><th>Check-out</th><th>Guests</th><th>Notes</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+function loadBookings(){
+  try{const raw=localStorage.getItem('travelkotagiri_bookings'); return raw?JSON.parse(raw):[];}catch(e){console.warn(e);return[]}
+}
+function renderFor(host){
+  const rows=loadBookings().filter(b=>b.host==host).sort((a,b)=>b.id-a.id);
+  const tbody=document.querySelector('#bookings-table tbody'); tbody.innerHTML='';
+  rows.forEach(r=>{const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${new Date(r.created).toLocaleString()}</td><td>${r.stay}</td><td>${r.name}</td><td>${r.phone}</td><td>${r.checkin}</td><td>${r.checkout}</td><td>${r.guests}</td><td>${(r.msg||'')}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+document.getElementById('btn-login').addEventListener('click',()=>{
+  const host=document.getElementById('host-num').value.trim(); if(!host) return alert('Enter your number');
+  document.getElementById('host-display').textContent=host; document.getElementById('dashboard').style.display='block';
+  renderFor(host);
+});
+
+document.getElementById('btn-export').addEventListener('click',()=>{
+  const host=document.getElementById('host-num').value.trim(); if(!host) return alert('Enter your number');
+  const rows=loadBookings().filter(b=>b.host==host).map(r=>({when:r.created,stay:r.stay,guest:r.name,phone:r.phone,checkin:r.checkin,checkout:r.checkout,guests:r.guests,notes:r.msg}));
+  if(!rows.length) return alert('No bookings');
+  const headers=Object.keys(rows[0]);
+  const csv=[headers.join(','),...rows.map(row=>headers.map(h=>`"${String(row[h]||'').replace(/"/g,'""')}"`).join(','))].join('\n');
+  const blob=new Blob([csv],{type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`bookings_${host}.csv`; a.click(); URL.revokeObjectURL(url);
+});
+</script>
+</body>
+</html>

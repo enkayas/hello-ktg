@@ -281,7 +281,7 @@ footer a:hover{color:#fff}
           <div class="stars">★ 4.8 <small style="color:var(--muted);font-weight:500">(32 reviews)</small></div>
           <div class="stay-price">₹2,500 <small>/ night</small></div>
           <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
-            <button class="btn book-btn" data-stay="Tea Estate Homestay">Book</button>
+            <button class="btn book-btn" data-stay="Tea Estate Homestay" data-host="919962541214">Book</button>
             <a class="link" href="#">Map &amp; details →</a>
           </div>
         </div>
@@ -295,7 +295,7 @@ footer a:hover{color:#fff}
           <div class="stars">★ 4.6 <small style="color:var(--muted);font-weight:500">(21 reviews)</small></div>
           <div class="stay-price">₹1,800 <small>/ night</small></div>
           <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
-            <button class="btn book-btn" data-stay="Misty Valley B&B">Book</button>
+            <button class="btn book-btn" data-stay="Misty Valley B&B" data-host="919962541214">Book</button>
             <a class="link" href="#">Map &amp; details →</a>
           </div>
         </div>
@@ -309,7 +309,7 @@ footer a:hover{color:#fff}
           <div class="stars">★ 4.5 <small style="color:var(--muted);font-weight:500">(9 reviews)</small></div>
           <div class="stay-price">₹3,200 <small>/ night</small></div>
           <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
-            <button class="btn book-btn" data-stay="Pine Edge Cottage">Book</button>
+            <button class="btn book-btn" data-stay="Pine Edge Cottage" data-host="919962541214">Book</button>
             <a class="link" href="#">Map &amp; details →</a>
           </div>
         </div>
@@ -463,6 +463,7 @@ if(fineHover&&!reduced){
     if(!b) return;
     e.preventDefault();
     currentStay = b.getAttribute('data-stay') || '';
+    currentHost = b.getAttribute('data-host') || '919962541214';
     const modal = document.getElementById('booking-modal');
     document.getElementById('booking-stay-name').textContent = currentStay;
     document.getElementById('booking-form').reset();
@@ -483,7 +484,14 @@ if(fineHover&&!reduced){
     const guests = document.getElementById('guests').value;
     const msg = document.getElementById('booking-msg').value.trim();
     const body = `Booking request for ${currentStay}\nName: ${name}\nPhone: ${phone}\nCheck-in: ${checkin}\nCheck-out: ${checkout}\nGuests: ${guests}\nNotes: ${msg}`;
-    const waUrl = 'https://wa.me/919962541214?text=' + encodeURIComponent(body);
+    // persist booking locally (prototype) so hosts can log in and view
+    try{
+      const raw = localStorage.getItem('travelkotagiri_bookings');
+      const arr = raw? JSON.parse(raw):[];
+      arr.push({id:Date.now(),created:new Date().toISOString(),host:currentHost,stay:currentStay,name,phone,checkin,checkout,guests,msg});
+      localStorage.setItem('travelkotagiri_bookings', JSON.stringify(arr));
+    }catch(e){console.warn('localStorage save failed',e)}
+    const waUrl = 'https://wa.me/' + (currentHost||'919962541214') + '?text=' + encodeURIComponent(body);
     window.open(waUrl, '_blank');
     document.getElementById('booking-modal').classList.remove('in');
   });
@@ -496,6 +504,13 @@ if(fineHover&&!reduced){
     const checkout = document.getElementById('checkout').value;
     const guests = document.getElementById('guests').value;
     const msg = document.getElementById('booking-msg').value.trim();
+    // also save to localStorage for host dashboard
+    try{
+      const raw = localStorage.getItem('travelkotagiri_bookings');
+      const arr = raw? JSON.parse(raw):[];
+      arr.push({id:Date.now(),created:new Date().toISOString(),host:currentHost,stay:currentStay,name,phone,checkin,checkout,guests,msg});
+      localStorage.setItem('travelkotagiri_bookings', JSON.stringify(arr));
+    }catch(e){console.warn('localStorage save failed',e)}
     const subject = `Booking request: ${currentStay}`;
     const body = `Booking request for ${currentStay}%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0ACheck-in: ${encodeURIComponent(checkin)}%0ACheck-out: ${encodeURIComponent(checkout)}%0AGuests: ${encodeURIComponent(guests)}%0ANotes: ${encodeURIComponent(msg)}`;
     window.location.href = 'mailto:hello@travelkotagiri.com?subject=' + encodeURIComponent(subject) + '&body=' + body;

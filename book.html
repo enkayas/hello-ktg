@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Book — Travel Kotagiri</title>
+<style>
+body{font-family:Inter,system-ui;background:#f6f8f6;color:#163020;padding:18px}
+.container{max-width:800px;margin:0 auto}
+.card{background:#fff;padding:18px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.h{font-size:18px;color:#21402f;margin-bottom:8px}
+.small{font-size:13px;color:#506055}
+.input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e6e6;margin-bottom:8px}
+.btn{background:#2d5240;color:#fff;padding:10px 14px;border-radius:10px;border:none;cursor:pointer}
+.row{display:flex;gap:8px}
+.row .input{flex:1}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <div class="h">Book: <span id="stay-name">Stay</span></div>
+    <div class="small" id="stay-sub">Hosted in Kotagiri</div>
+    <hr style="margin:12px 0">
+    <form id="book-form">
+      <input id="guest-name" class="input" placeholder="Your name" required>
+      <input id="guest-phone" class="input" placeholder="WhatsApp number (include country code)" required>
+      <div class="row">
+        <input id="checkin" class="input" type="date" required>
+        <input id="checkout" class="input" type="date" required>
+      </div>
+      <input id="guests" class="input" type="number" min="1" value="2" required>
+      <textarea id="notes" class="input" rows="4" placeholder="Any requests"></textarea>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px">
+        <button type="button" id="back" class="btn" style="background:#9aaea0">Back</button>
+        <button type="submit" id="wa" class="btn">Send via WhatsApp</button>
+      </div>
+      <p class="small" style="margin-top:8px">Or <a href="#" id="email-link">send by email</a></p>
+    </form>
+  </div>
+</div>
+<script>
+// Parse query params
+function qs(){const q={};location.search.slice(1).split('&').forEach(p=>{if(!p) return;const [k,v]=p.split('=');q[decodeURIComponent(k)]=decodeURIComponent(v||'');});return q}
+const params=qs();
+const stay=params.stay||'Selected stay';
+const host=params.host||'919962541214';
+document.getElementById('stay-name').textContent=stay;
+
+// Back button
+document.getElementById('back').addEventListener('click',()=>history.back());
+
+// submit
+document.getElementById('book-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  const name=document.getElementById('guest-name').value.trim();
+  const phone=document.getElementById('guest-phone').value.trim();
+  const checkin=document.getElementById('checkin').value;
+  const checkout=document.getElementById('checkout').value;
+  const guests=document.getElementById('guests').value;
+  const notes=document.getElementById('notes').value.trim();
+  const body=`Booking request for ${stay}\nName: ${name}\nPhone: ${phone}\nCheck-in: ${checkin}\nCheck-out: ${checkout}\nGuests: ${guests}\nNotes: ${notes}`;
+  // save to localStorage
+  try{const raw=localStorage.getItem('travelkotagiri_bookings');const arr=raw?JSON.parse(raw):[];arr.push({id:Date.now(),created:new Date().toISOString(),host:host,stay:stay,name,phone,checkin,checkout,guests,msg:notes});localStorage.setItem('travelkotagiri_bookings',JSON.stringify(arr));}catch(e){console.warn(e)}
+  // open WhatsApp
+  window.open('https://wa.me/'+host+'?text='+encodeURIComponent(body),'_blank');
+});
+
+// email fallback
+document.getElementById('email-link').addEventListener('click',function(e){e.preventDefault();const name=document.getElementById('guest-name').value.trim();const phone=document.getElementById('guest-phone').value.trim();const checkin=document.getElementById('checkin').value;const checkout=document.getElementById('checkout').value;const guests=document.getElementById('guests').value;const notes=document.getElementById('notes').value.trim();const subject='Booking request: '+stay;const body=`Booking request for ${stay}%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0ACheck-in: ${encodeURIComponent(checkin)}%0ACheck-out: ${encodeURIComponent(checkout)}%0AGuests: ${encodeURIComponent(guests)}%0ANotes: ${encodeURIComponent(notes)}`;window.location.href='mailto:hello@travelkotagiri.com?subject='+encodeURIComponent(subject)+'&body='+body});
+</script>
+</body>
+</html>

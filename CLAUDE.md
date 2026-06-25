@@ -210,10 +210,27 @@ without that restriction (Vercel/Netlify).
 
 **Run locally:** `cd web && npm install && npm run dev`.
 
-**Auth:** email + password (Supabase native, no SMTP/SMS setup needed). Sessions
-refreshed via `src/proxy.ts` (Next 16 renamed middleware → **proxy**) using
-`src/lib/supabase/proxy-session.ts`. Phone-OTP is future work (needs an SMS
-provider configured in Supabase Auth).
+**Auth:** email + password (Supabase native, no SMTP/SMS setup needed). Server
+guards read the session via `getCurrentUser()`; the browser client refreshes
+tokens client-side. Phone-OTP is future work (needs an SMS provider in Supabase
+Auth).
+- **No middleware/proxy:** Next 16's `proxy` is Node-runtime-only (can't be
+  Edge), and the OpenNext Cloudflare adapter doesn't yet support Node
+  middleware — so the Supabase session-refresh proxy was **removed** to keep the
+  Cloudflare build working. Re-add it if/when OpenNext supports Node middleware
+  (or if we move off Cloudflare).
+
+**Deploy target: Cloudflare Workers via `@opennextjs/cloudflare` (OpenNext).**
+Config: `web/wrangler.jsonc` (name `travelktg`, `nodejs_compat`, assets in
+`.open-next/`), `web/open-next.config.ts`, and `initOpenNextCloudflareForDev()`
+in `next.config.ts`. Scripts: `npm run preview` (local Workers runtime),
+`npm run deploy` (build + `wrangler deploy`). `opennextjs-cloudflare build`
+verified passing on Next 16. **Deploy needs:** (a) code on Cloudflare — either
+connect the GitHub repo via **Workers Builds** (root dir `web/`, build
+`npx opennextjs-cloudflare build`) or `npm run deploy` from a machine with
+`wrangler login`; (b) set `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+as **build variables** (they're inlined at build time). Cloudflare runtime can
+reach Supabase (no egress block), so live data works once deployed.
 
 **Routes built:**
 - Public: `/`, `/stays`, `/stays/[slug]`, `/list-your-property` (→

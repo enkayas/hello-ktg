@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import BookingForm from "@/components/BookingForm";
+import StayGallery from "@/components/StayGallery";
 import { getPublishedStays, getStayBySlug } from "@/lib/queries";
 
 export const revalidate = 300;
@@ -46,19 +47,12 @@ export default async function StayPage({
           ← All stays
         </Link>
 
-        <div className="mt-4 overflow-hidden rounded-2xl bg-mist">
-          <div className="flex aspect-[16/9] items-center justify-center">
-            {stay.image_url ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={stay.image_url}
-                alt={stay.name}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <span className="font-serif text-6xl text-tea">🍃</span>
-            )}
-          </div>
+        <div className="mt-4">
+          <StayGallery
+            photos={stay.homestay_photos ?? []}
+            fallback={stay.image_url}
+            name={stay.name}
+          />
         </div>
 
         <div className="mt-5">

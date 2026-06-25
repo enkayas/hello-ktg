@@ -28,6 +28,17 @@ export type Homestay = {
   created_at: string;
 };
 
+export type HomestayPhoto = {
+  storage_path: string;
+  is_cover: boolean | null;
+  sort_order: number | null;
+};
+
+// A stay joined with its gallery photos (public reads).
+export type StayWithPhotos = Homestay & {
+  homestay_photos: HomestayPhoto[] | null;
+};
+
 export type BookingStatus =
   | "requested"
   | "approved"

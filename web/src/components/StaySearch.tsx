@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { Homestay } from "@/lib/types";
+import type { StayWithPhotos } from "@/lib/types";
 import StayCard from "@/components/StayCard";
 
-export default function StaySearch({ stays }: { stays: Homestay[] }) {
+export default function StaySearch({ stays }: { stays: StayWithPhotos[] }) {
   const [q, setQ] = useState("");
   const [type, setType] = useState("all");
 

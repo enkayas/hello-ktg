@@ -1,17 +1,19 @@
 import Link from "next/link";
-import type { Homestay } from "@/lib/types";
+import type { StayWithPhotos } from "@/lib/types";
+import { coverPhotoUrl } from "@/lib/storage";
 
-export default function StayCard({ stay }: { stay: Homestay }) {
+export default function StayCard({ stay }: { stay: StayWithPhotos }) {
+  const cover = coverPhotoUrl(stay.homestay_photos, stay.image_url);
   return (
     <Link
       href={`/stays/${stay.slug}`}
       className="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-forest/5 transition hover:-translate-y-1 hover:shadow-md"
     >
       <div className="relative aspect-[4/3] bg-mist">
-        {stay.image_url ? (
+        {cover ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={stay.image_url}
+            src={cover}
             alt={stay.name}
             className="h-full w-full object-cover"
             loading="lazy"

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { photoUrl } from "@/lib/storage";
 
 type Photo = {
   id: string;
@@ -11,11 +12,6 @@ type Photo = {
 };
 
 const BUCKET = "property-photos";
-
-function publicUrl(path: string): string {
-  const base = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  return `${base}/storage/v1/object/public/${BUCKET}/${path}`;
-}
 
 export default function PhotoManager({
   homestayId,
@@ -96,7 +92,7 @@ export default function PhotoManager({
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={publicUrl(photo.storage_path)}
+              src={photoUrl(photo.storage_path)}
               alt=""
               className="aspect-square w-full object-cover"
             />

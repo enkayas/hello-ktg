@@ -210,9 +210,28 @@ without that restriction (Vercel/Netlify).
 
 **Run locally:** `cd web && npm install && npm run dev`.
 
-**Still TODO:** owner admin panel (`/owner` — auth, property CRUD, photos,
-availability, approve/decline bookings), super-admin panel (`/admin`),
-`list-your-property` page (wire to `listing_submissions`), phase-2 Razorpay.
+**Auth:** email + password (Supabase native, no SMTP/SMS setup needed). Sessions
+refreshed via `src/proxy.ts` (Next 16 renamed middleware → **proxy**) using
+`src/lib/supabase/proxy-session.ts`. Phone-OTP is future work (needs an SMS
+provider configured in Supabase Auth).
+
+**Routes built:**
+- Public: `/`, `/stays`, `/stays/[slug]`, `/list-your-property` (→
+  `listing_submissions`).
+- Owner (`/owner/*`, guarded by `OwnerLayout`): `login`, dashboard, `bookings`
+  (approve/decline → WhatsApp), `properties/new`, `properties/[id]` (edit +
+  `PhotoManager` Storage upload + `AvailabilityManager` blocked dates).
+- Admin (`/admin/*`, guarded by role='admin'): listings approve/publish,
+  `leads` (submissions + enquiries).
+
+**Make the first admin** (after that user signs up at `/owner/login`):
+`update profiles set role='admin' where id = (select id from auth.users where
+email='enkayas@gmail.com');` (run via Supabase MCP `execute_sql`).
+
+**Still TODO:** phase-2 Razorpay payments; owner "claim an existing curated
+listing" flow; richer property detail (photo gallery wired into public page);
+email/WhatsApp automation via Edge Functions; deploy (Vercel/Netlify) +
+allowlist or remove the Supabase egress restriction.
 
 ---
 

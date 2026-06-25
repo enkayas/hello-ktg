@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* Travel Kotagiri brand — ported from the original static site.
+   Fraunces (headings) + Inter (body), green/tea palette. Mobile-first. */
+:root {
+  --forest: #1e3a2a;
+  --pine: #2d5240;
+  --leaf: #4a7c59;
+  --tea: #8fb996;
+  --mist: #eef3ee;
+  --cream: #faf8f2;
+  --sun: #d9a441;
+  --ink: #22302a;
+  --muted: #5d6f64;
+}
+
+@theme inline {
+  --color-forest: var(--forest);
+  --color-pine: var(--pine);
+  --color-leaf: var(--leaf);
+  --color-tea: var(--tea);
+  --color-mist: var(--mist);
+  --color-cream: var(--cream);
+  --color-sun: var(--sun);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-fraunces);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .serif {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
+/* Larger tap targets on touch devices (mobile-first). */
+@media (pointer: coarse) {
+  button, a[role="button"], .tap {
+    min-height: 44px;
+  }
+}

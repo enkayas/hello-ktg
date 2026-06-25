@@ -173,6 +173,49 @@ legal pages (cancellation/T&C/privacy).
 
 ---
 
+## 7b. Build progress (as of 2026-06-25)
+
+**Supabase project `travelKTG`** (ref `lewhmonjzoznnqxtdkcn`, org "Silvertip
+Ventures", region ap-southeast-1) — was paused; **restored & live**. It already
+had a curated-directory schema; we **evolved** it (migration
+`supabase/migrations/0001_owner_accounts_and_bookings.sql` + `0002` hardening):
+- Added `profiles` (owner/admin accounts, auto-created on signup), `is_admin()`
+  SECURITY DEFINER helper, `homestay_photos`, `blocked_dates`, `bookings`
+  (request-to-book), and `owner_id`/`slug`/`base_price`/etc. columns on
+  `homestays` & `restaurants`. RLS throughout (owner isolation, public read of
+  published, guest enquiry/booking inserts). Storage bucket `property-photos`.
+- **14 curated stays** seeded (`supabase/seed.sql`), all `owner_id` null
+  (unowned), published. Includes first-party Silvertip Homestay + Sunset
+  Camping & Glamping (host `919381107922`, silvertipcafe.com).
+- Model split: **curated (unowned) listings use the WhatsApp/enquiry flow;
+  owner-claimed listings get request-to-book `bookings`.**
+
+**Next.js app lives in `web/`** (Next 16, React 19, Tailwind v4, App Router,
+TS). Read `web/AGENTS.md` — Next 16 has breaking changes; `params`/`searchParams`
+are Promises. Brand (Fraunces/Inter + green/tea palette) ported into
+`globals.css`. Supabase clients: `src/lib/supabase/{public,client,server}.ts`
+(public = cookieless, for build-time/SSG public reads; server = cookie-based for
+auth). Built so far: `/` home, `/stays` (search/filter), `/stays/[slug]`
+(SSG + SEO + request-to-book → WhatsApp + enquiry persistence). Build passes.
+
+**Env:** `web/.env.local` holds `NEXT_PUBLIC_SUPABASE_URL` +
+`NEXT_PUBLIC_SUPABASE_ANON_KEY` (publishable key `sb_publishable_...`).
+`.env.example` committed; `.env.local` gitignored.
+
+**⚠ Egress:** this remote sandbox's network policy blocks direct HTTPS to
+`*.supabase.co`, so `npm run build`/runtime renders with EMPTY data here (the
+Supabase MCP uses a separate channel and works). To run/build with live data,
+add the Supabase host to the environment's egress allowlist, or deploy to a host
+without that restriction (Vercel/Netlify).
+
+**Run locally:** `cd web && npm install && npm run dev`.
+
+**Still TODO:** owner admin panel (`/owner` — auth, property CRUD, photos,
+availability, approve/decline bookings), super-admin panel (`/admin`),
+`list-your-property` page (wire to `listing_submissions`), phase-2 Razorpay.
+
+---
+
 ## 8. Gotchas
 
 - `kotagiri_homestays.html` and `.csv` are **build artifacts** — hand-edits get

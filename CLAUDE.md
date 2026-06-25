@@ -114,7 +114,54 @@ number and have no Justdial link / reviews — they are first-party listings.
 
 ---
 
-## 7. Gotchas
+## 7. Roadmap — Booking engine + owner admin panel (decisions locked 2026-06-25)
+
+The site is moving from a static `localStorage` prototype to a real, backed
+product. **Owner self-listing + per-owner admin panel + guest bookings require a
+server-side backend** — `localStorage` cannot do multi-tenant, multi-device data.
+
+**Locked decisions:**
+- **Backend:** a **NEW Supabase project** dedicated to Travel Kotagiri (separate
+  from the Silvertip Ventures Supabase project). Postgres + Auth + Storage +
+  Row-Level Security + Edge Functions.
+- **Frontend:** **enhance the existing static HTML pages** with the Supabase JS
+  client (CDN, no build system). Preserve the current Fraunces/Inter brand and
+  CSS-variable palette. No React rebuild for the MVP.
+- **Payments:** **WhatsApp/offline confirmation for now** (keep the existing
+  `wa.me` flow); add Razorpay (UPI/cards) in a later phase.
+- **Booking model:** **request-to-book** — guest requests dates, owner approves or
+  declines from their admin panel.
+- **MOBILE-FIRST is a hard requirement.** Design and build every new
+  surface (guest booking flow, owner admin panel) mobile-first: single-column
+  layouts, large tap targets, bottom-anchored primary actions, test at ~360px
+  width first and scale up. Most hosts and guests will be on phones.
+
+**Planned Supabase schema (core tables):** `profiles` (owner accounts ↔ auth
+users), `properties` (owner-scoped: name, type, location, description, amenities,
+base price, status draft→pending-review→published), `property_photos` (Storage),
+`availability`/`blocked_dates`, `bookings` (property, guest, dates, guests,
+amount, status), later `reviews` + `inquiries`. **RLS:** owners read/write only
+their own rows; public reads only `published` properties; guests insert bookings
+that only the property's owner can read.
+
+**Two new surfaces:** owner admin panel (`owner.html` — phone-OTP/email login,
+CRUD properties, upload photos, set pricing/availability, manage bookings) and a
+super-admin step (approve listings before they go public).
+
+**Future integration:** `hellokotagiri.com` (existing site — stack TBD) to be
+wired in once the booking functionality is complete.
+
+**"What else" backlog to make the site meaningful:** property photos/galleries
+(biggest current gap — listings have no images), real availability calendar,
+search/filter by dates/guests/price/type + map view, real reviews & ratings,
+automated WhatsApp/email booking notifications (Edge Function), per-property SEO
+pages, Razorpay payments/deposits, owner onboarding/verification + payout/
+commission tracking (feeds Silvertip analytics), Tamil/English toggle, PWA polish,
+legal pages (cancellation/T&C/privacy).
+
+---
+
+## 8. Gotchas
 
 - `kotagiri_homestays.html` and `.csv` are **build artifacts** — hand-edits get
   overwritten the next time `compile_homestays.py` runs.

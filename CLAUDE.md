@@ -124,13 +124,20 @@ server-side backend** — `localStorage` cannot do multi-tenant, multi-device da
 - **Backend:** a **NEW Supabase project** dedicated to Travel Kotagiri (separate
   from the Silvertip Ventures Supabase project). Postgres + Auth + Storage +
   Row-Level Security + Edge Functions.
-- **Frontend:** **enhance the existing static HTML pages** with the Supabase JS
-  client (CDN, no build system). Preserve the current Fraunces/Inter brand and
-  CSS-variable palette. No React rebuild for the MVP.
-- **Payments:** **WhatsApp/offline confirmation for now** (keep the existing
-  `wa.me` flow); add Razorpay (UPI/cards) in a later phase.
+- **Frontend:** **React / Next.js app** (supersedes the earlier "enhance static
+  pages" decision, revised 2026-06-25). Chosen for mobile-first UX, component
+  reuse, routing, and **SSR/SSG so each property gets an SEO-indexable page**.
+  Carry over the Fraunces/Inter brand and the green/tea CSS-variable palette into
+  the design system. This introduces a build system — a deliberate departure from
+  the repo's previous no-build, static-HTML ethos.
+- **Payments:** **hybrid** — v1 ships **request-to-book confirmed over WhatsApp**
+  (no online payment); **Razorpay (UPI/cards) added in phase 2**.
 - **Booking model:** **request-to-book** — guest requests dates, owner approves or
   declines from their admin panel.
+- **v1 milestone scope (all four):** public search + listings (with per-property
+  detail pages), owner admin panel, availability calendar (blocked dates +
+  double-booking prevention), and a super-admin panel (approve owners/listings,
+  view all bookings, manage commission).
 - **MOBILE-FIRST is a hard requirement.** Design and build every new
   surface (guest booking flow, owner admin panel) mobile-first: single-column
   layouts, large tap targets, bottom-anchored primary actions, test at ~360px
@@ -144,9 +151,14 @@ amount, status), later `reviews` + `inquiries`. **RLS:** owners read/write only
 their own rows; public reads only `published` properties; guests insert bookings
 that only the property's owner can read.
 
-**Two new surfaces:** owner admin panel (`owner.html` — phone-OTP/email login,
-CRUD properties, upload photos, set pricing/availability, manage bookings) and a
-super-admin step (approve listings before they go public).
+**App surfaces (Next.js routes):** public site (`/`, `/stays`, `/stays/[slug]`
+SEO property pages, search/filter), owner admin (`/owner` — phone-OTP/email login,
+CRUD properties, upload photos, set pricing/availability, approve/decline booking
+requests), and super-admin (`/admin` — approve owners/listings before publish,
+view all bookings, commission). Legacy static pages
+(`travel-kotagiri-landing.html`, `book.html`, `hosts.html`,
+`kotagiri_homestays.html`) become the design reference / fallback during the
+migration, not the production surface.
 
 **Future integration:** `hellokotagiri.com` (existing site — stack TBD) to be
 wired in once the booking functionality is complete.

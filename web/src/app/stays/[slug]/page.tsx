@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import SiteHeader from "@/components/SiteHeader";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 import BookingForm from "@/components/BookingForm";
 import StayGallery from "@/components/StayGallery";
 import { getPublishedStays, getStayBySlug } from "@/lib/queries";
@@ -41,8 +42,8 @@ export default async function StayPage({
 
   return (
     <>
-      <SiteHeader />
-      <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-6">
+      <SiteNav variant="solid" />
+      <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-24 md:py-28">
         <Link href="/stays" className="text-sm font-semibold text-leaf">
           ← All stays
         </Link>
@@ -116,6 +117,7 @@ export default async function StayPage({
           </p>
         ) : null}
       </main>
+      <SiteFooter />
     </>
   );
 }

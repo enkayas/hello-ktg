@@ -29,7 +29,7 @@ export default function StayCard({ stay }: { stay: StayWithPhotos }) {
       </div>
       <div className="p-4">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="font-serif text-lg font-semibold text-forest group-hover:text-leaf">
+          <h3 className="display text-lg font-semibold text-forest group-hover:text-leaf">
             {stay.name}
           </h3>
           {stay.rating ? (

@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import SiteHeader from "@/components/SiteHeader";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 
 export default function ListYourPropertyPage() {
   const [done, setDone] = useState(false);
@@ -41,8 +42,8 @@ export default function ListYourPropertyPage() {
 
   return (
     <>
-      <SiteHeader />
-      <main className="mx-auto w-full max-w-lg flex-1 px-5 py-8">
+      <SiteNav variant="solid" />
+      <main className="mx-auto w-full max-w-lg flex-1 px-5 py-24 md:py-28">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-leaf">
           For hosts
         </p>
@@ -122,6 +123,7 @@ export default function ListYourPropertyPage() {
           </form>
         )}
       </main>
+      <SiteFooter />
     </>
   );
 }

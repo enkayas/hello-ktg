@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import SiteHeader from "@/components/SiteHeader";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 import StaySearch from "@/components/StaySearch";
 import { getPublishedStays } from "@/lib/queries";
 
@@ -17,8 +18,8 @@ export default async function StaysPage() {
 
   return (
     <>
-      <SiteHeader />
-      <main className="mx-auto w-full max-w-5xl flex-1 px-5 py-8">
+      <SiteNav variant="solid" />
+      <main className="mx-auto w-full max-w-5xl flex-1 px-5 py-24 md:py-28">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-leaf">
           Where to stay
         </p>
@@ -33,6 +34,7 @@ export default async function StaysPage() {
           <StaySearch stays={stays} />
         </div>
       </main>
+      <SiteFooter />
     </>
   );
 }

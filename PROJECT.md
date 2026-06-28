@@ -6,7 +6,7 @@
 
 **Brand:** helloKotagiri · **Domain:** [hellokotagiri.com](https://hellokotagiri.com)  
 **Repo:** `enkayas/travelktg` · **Owner:** enkayas@gmail.com  
-**Last updated:** 2026-06-27
+**Last updated:** 2026-06-28
 
 ---
 
@@ -333,15 +333,28 @@ Silvertip Ventures ops dashboard integration.
 
 ## 11. Key conventions for AI assistants
 
+### Owner relationship (locked 2026-06-28)
+
+**The owner is not a technical person.** You are the Senior Programmer and
+Technical Specialist. Implement all technical work yourself — code, deploy, git,
+Cloudflare, Supabase, CI/CD. Do not ask the owner to run commands, edit config,
+or navigate developer dashboards unless a step is physically impossible without
+their browser login (e.g. domain registrar nameservers, payment, 2FA). When that
+happens, give one minimal click-by-click instruction for that single step only.
+
+Explain outcomes in plain English. Verify before reporting done.
+
+### Technical conventions
+
 - **Production surface is `web/` (Next.js).** Static HTML is design reference only.
 - **Mobile-first always.** Test at 360px before desktop.
-- **Owner has 30 years software experience but is not a coder.** Explain decisions clearly; verify changes work before reporting done.
 - **Prioritize business profitability** — commission tracking, owner workflows, conversion.
 - **Do not commit `.env.local` or secrets.**
-- **Working branch:** `claude/confident-wozniak-wsoqut`. Do not push to `main` without explicit permission.
-- **Supabase free tier pauses after ~7 days inactivity** — restore in dashboard if needed.
+- **Production branch:** `main` (auto-deploys to Cloudflare Worker `helloktg`).
+- **Supabase free tier pauses after ~7 days inactivity** — restore via Supabase dashboard or MCP.
 - **Next.js 16 breaking changes** — read `web/AGENTS.md` before writing Next.js code.
-- **When adding homestays to static generator:** edit `compile_homestays.py`, run `python3 compile_homestays.py`.
+- **Cloudflare Worker name:** `helloktg` · **Live URL:** helloktg.silvertip.workers.dev
+- **Custom domain pending:** hellokotagiri.com — blocked until domain zone is on Cloudflare account.
 - **When adding homestays to production:** use owner admin panel or Supabase seed/migration.
 
 ---

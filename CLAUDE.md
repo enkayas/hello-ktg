@@ -221,7 +221,7 @@ Auth).
   (or if we move off Cloudflare).
 
 **Deploy target: Cloudflare Workers via `@opennextjs/cloudflare` (OpenNext).**
-Config: `web/wrangler.jsonc` (name `travelktg`, `nodejs_compat`, assets in
+Config: `web/wrangler.jsonc` (name `helloktg`, `nodejs_compat`, assets in
 `.open-next/`), `web/open-next.config.ts`, and `initOpenNextCloudflareForDev()`
 in `next.config.ts`. Scripts: `npm run preview` (local Workers runtime),
 `npm run deploy` (build + `wrangler deploy`). `opennextjs-cloudflare build`

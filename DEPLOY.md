@@ -88,7 +88,7 @@ When it succeeds, your app is live at a `*.workers.dev` URL (shown in the Action
 
 In Cloudflare dashboard:
 
-1. **Workers & Pages → travelktg → Settings → Domains & Routes**
+1. **Workers & Pages → helloktg → Settings → Domains & Routes**
 2. Add custom domain: `hellokotagiri.com` (and `www.hellokotagiri.com`)
 3. If hellokotagiri.com is already on Cloudflare, DNS updates automatically.
    If not, point your domain's nameservers to Cloudflare first, then add the route.

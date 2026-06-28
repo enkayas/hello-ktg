@@ -7,7 +7,7 @@
   "workers_dev": true,
   "routes": [
     { "pattern": "hellokotagiri.com", "custom_domain": true },
-    { "pattern": "www.hellokotagiri.com", "custom_domain": true }
+    { "pattern": "www.hellokotagiri.com/*", "zone_name": "hellokotagiri.com" }
   ],
   "assets": {
     "directory": ".open-next/assets",

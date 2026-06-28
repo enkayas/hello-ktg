@@ -6,7 +6,8 @@
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
   "routes": [
-    { "pattern": "hellokotagiri.com", "custom_domain": true }
+    { "pattern": "hellokotagiri.com", "custom_domain": true },
+    { "pattern": "www.hellokotagiri.com", "custom_domain": true }
   ],
   "assets": {
     "directory": ".open-next/assets",

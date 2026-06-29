@@ -10,6 +10,7 @@ import type {
 } from "./types";
 import { coordsFor } from "./coordinates";
 import { haversineKm } from "@/lib/geo";
+import type { PublishedRestaurant } from "@/lib/queries";
 
 const DEFAULT_WHATSAPP = "919962541214";
 
@@ -164,6 +165,57 @@ export function getListingBySlug(
 
 export function getAllHiddenGems(): HiddenGemListing[] {
   return gems;
+}
+
+const DEFAULT_RESTAURANT_IMAGE =
+  "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80";
+
+/** Map a Supabase restaurant row to the unified listing shape for detail pages. */
+export function restaurantFromDb(row: PublishedRestaurant): RestaurantListing {
+  const slug = row.slug ?? row.id;
+  return {
+    id: row.id,
+    slug,
+    name: row.name,
+    category: "Restaurant",
+    subcategory: row.cuisine ?? undefined,
+    description:
+      row.description ??
+      `${row.name} in ${row.area ?? "Kotagiri"}. Listed on HelloKotagiri.`,
+    shortDescription: row.cuisine ?? "Restaurant",
+    locationName: row.area ?? "Kotagiri",
+    latitude: row.latitude ?? 11.42,
+    longitude: row.longitude ?? 76.87,
+    images: [row.image_url ?? DEFAULT_RESTAURANT_IMAGE],
+    tags: [row.cuisine ?? "Restaurant", "Verified"],
+    badges: row.is_featured ? (["Featured"] as BadgeType[]) : (["Local Pick"] as BadgeType[]),
+    bestFor: row.cuisine ?? "dining",
+    openingHours: "Hours vary — call ahead",
+    phone: row.host_phone ?? undefined,
+    whatsapp: row.host_phone ?? DEFAULT_WHATSAPP,
+    priceRange: "₹₹",
+    isVerified: true,
+    isFeatured: !!row.is_featured,
+    highlights: [row.cuisine ?? "Restaurant", row.area ?? "Kotagiri"].filter(Boolean),
+    amenities: [],
+    notes: {},
+    kind: "restaurant",
+    openNow: true,
+    gradient: "steel",
+  };
+}
+
+export async function getRestaurantForDetail(
+  slugOrId: string,
+): Promise<RestaurantListing | null> {
+  const fromCatalog = getRestaurantBySlug(slugOrId);
+  if (fromCatalog) return fromCatalog;
+
+  const { getPublishedRestaurantBySlugOrId } = await import("@/lib/queries");
+  const fromDb = await getPublishedRestaurantBySlugOrId(slugOrId);
+  if (fromDb) return restaurantFromDb(fromDb);
+
+  return null;
 }
 
 

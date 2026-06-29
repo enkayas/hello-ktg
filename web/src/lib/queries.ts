@@ -77,3 +77,35 @@ export async function getPublishedRestaurants(): Promise<PublishedRestaurant[]> 
     return [];
   }
 }
+
+/** Lookup a published restaurant by curated slug or Supabase id. */
+export async function getPublishedRestaurantBySlugOrId(
+  slugOrId: string,
+): Promise<PublishedRestaurant | null> {
+  try {
+    const supabase = createPublicClient();
+    const select =
+      "id, slug, name, cuisine, area, description, image_url, host_phone, latitude, longitude, is_featured, is_published";
+
+    const { data: bySlug, error: slugErr } = await supabase
+      .from("restaurants")
+      .select(select)
+      .eq("is_published", true)
+      .eq("slug", slugOrId)
+      .maybeSingle();
+    if (slugErr) throw slugErr;
+    if (bySlug) return bySlug as PublishedRestaurant;
+
+    const { data: byId, error: idErr } = await supabase
+      .from("restaurants")
+      .select(select)
+      .eq("is_published", true)
+      .eq("id", slugOrId)
+      .maybeSingle();
+    if (idErr) throw idErr;
+    return (byId as PublishedRestaurant) ?? null;
+  } catch (err) {
+    console.error("getPublishedRestaurantBySlugOrId failed:", err);
+    return null;
+  }
+}

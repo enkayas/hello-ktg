@@ -4,15 +4,16 @@ import { useMemo, useState } from "react";
 import FilterChips, { toggleFilter } from "./FilterChips";
 import { ThingCard } from "./Cards";
 import { thingFilters, things } from "@/data/handoff";
+import type { ThingItem } from "@/data/handoff/types";
 
-export function ThingsGrid() {
+export function ThingsGrid({ items = things }: { items?: ThingItem[] }) {
   const [active, setActive] = useState<Record<string, boolean>>({});
 
   const filtered = useMemo(() => {
     const on = Object.keys(active);
-    if (on.length === 0) return things;
-    return things.filter((r) => on.every((f) => r.filters.includes(f)));
-  }, [active]);
+    if (on.length === 0) return items;
+    return items.filter((r) => on.every((f) => r.filters.includes(f)));
+  }, [active, items]);
 
   return (
     <>

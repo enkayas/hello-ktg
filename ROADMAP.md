@@ -92,16 +92,17 @@ These exist today in `web/` + Supabase. Phase 2/3 **extend** this; do not remove
 
 ### 9. SEO and metadata
 
-- [~] Some pages have metadata
-- [~] Title + description + OpenGraph on every public page (detail, routes, saved, eat, legal — more hub pages TBD)
-- [~] Destination-specific titles
+- [x] Basic metadata on hub and detail pages
+- [x] Title + description + OpenGraph on eat, stay, things, gems, near-me, plan, routes, legal
+- [x] Destination-specific titles
+- [x] `/sitemap.xml` generated from live + mock listings
 
 ### 10. UI polish
 
 - [x] White cards, shadows, light heroes (recent pass)
 - [~] Loading skeletons (saved page)
 - [x] Empty states (saved, near-me filters, trip planner)
-- [~] Error states (trip planner partial)
+- [x] Polished `/not-found` page
 - [x] Location-denied states
 - [~] Mobile spacing + a11y labels + responsive grids
 
@@ -153,8 +154,9 @@ These exist today in `web/` + Supabase. Phase 2/3 **extend** this; do not remove
 
 - [x] `/stays` + `/stays/[slug]` from Supabase
 - [x] `/eat` loads approved restaurants from Supabase (mock fallback)
-- [ ] `/things-to-do` loads approved places
-- [ ] `/hidden-gems` loads approved hidden gems
+- [x] `/things-to-do` loads approved places from Supabase (mock fallback)
+- [x] `/hidden-gems` loads approved hidden gems from Supabase (mock fallback)
+- [x] Detail pages resolve catalog slug OR Supabase id for all listing types
 - [x] Graceful mock fallback when Supabase empty or unreachable
 
 ### 7. Location-aware search (PostGIS)

@@ -1,11 +1,22 @@
+import type { Metadata } from "next";
 import HKShell from "@/components/hk/Shell";
 import PageHero from "@/components/hk/PageHero";
 import { StayGrid } from "@/components/hk/StayPage";
+import { stays as mockStays } from "@/data/handoff";
+import type { StayItem } from "@/data/handoff/types";
 import { getPublishedStays } from "@/lib/queries";
 import { coverPhotoUrl } from "@/lib/storage";
 import { images } from "@/lib/images";
-import type { StayItem } from "@/data/handoff/types";
-import { stays as mockStays } from "@/data/handoff";
+
+export const metadata: Metadata = {
+  title: "Stays in Kotagiri — homestays & cottages",
+  description:
+    "Tea-view homestays, family cottages and glamping in Kotagiri and the Nilgiris — book direct with hosts on WhatsApp.",
+  openGraph: {
+    title: "Find your stay in the Nilgiris",
+    description: "Homestays, resorts and cottages in Kotagiri, Ooty and Coonoor.",
+  },
+};
 
 export const revalidate = 300;
 

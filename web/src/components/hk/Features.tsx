@@ -22,6 +22,7 @@ import {
   benefits,
 } from "@/data/handoff";
 import type { GemCollection } from "@/data/handoff/types";
+import type { HiddenGemListing } from "@/lib/listings/types";
 import { getAllHiddenGems } from "@/lib/listings/catalog";
 import { gradients } from "@/lib/images";
 import { useTranslations } from "@/components/LocaleProvider";
@@ -867,8 +868,7 @@ function FormInput({
   );
 }
 
-export function GemsGrid() {
-  const gems = getAllHiddenGems();
+export function GemsGrid({ gems }: { gems: HiddenGemListing[] }) {
   return (
     <>
       <section className="mx-auto max-w-[1240px] px-6 pb-8 pt-12">

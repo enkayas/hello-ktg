@@ -10,7 +10,8 @@ import type {
 } from "./types";
 import { coordsFor } from "./coordinates";
 import { haversineKm } from "@/lib/geo";
-import type { PublishedRestaurant } from "@/lib/queries";
+import type { PublishedHiddenGem, PublishedPlace, PublishedRestaurant } from "@/lib/queries";
+import { mapHiddenGemRow } from "@/lib/directory-mappers";
 
 const DEFAULT_WHATSAPP = "919962541214";
 
@@ -214,6 +215,65 @@ export async function getRestaurantForDetail(
   const { getPublishedRestaurantBySlugOrId } = await import("@/lib/queries");
   const fromDb = await getPublishedRestaurantBySlugOrId(slugOrId);
   if (fromDb) return restaurantFromDb(fromDb);
+
+  return null;
+}
+
+export function placeFromDb(row: PublishedPlace): PlaceListing {
+  const slug = row.slug ?? row.id;
+  return {
+    id: row.id,
+    slug,
+    name: row.name,
+    category: "Experience",
+    subcategory: row.place_type ?? undefined,
+    description:
+      row.description ??
+      `${row.name} in ${row.area ?? "the Nilgiris"}. Listed on HelloKotagiri.`,
+    shortDescription: `${row.place_type ?? "Place"} · ${row.area ?? "Kotagiri"}`,
+    locationName: row.area ?? "Kotagiri",
+    latitude: row.latitude ?? 11.42,
+    longitude: row.longitude ?? 76.87,
+    images: [row.image_url ?? "https://images.unsplash.com/photo-1464822759023-fed622ff2f3b?w=800&q=80"],
+    tags: row.filters ?? [],
+    badges: (row.badges?.length ? row.badges : ["Guide Recommended"]) as BadgeType[],
+    bestFor: row.suits ?? "All ages",
+    whatsapp: row.host_phone ?? DEFAULT_WHATSAPP,
+    priceRange: "Free–₹₹",
+    isVerified: true,
+    isFeatured: !!row.is_featured,
+    highlights: [row.best_time, row.difficulty, ...(row.filters ?? []).slice(0, 2)].filter(
+      Boolean,
+    ) as string[],
+    amenities: row.filters ?? [],
+    notes: notesFromFilters(row.filters ?? [], row.difficulty ?? undefined),
+    kind: "place",
+    difficulty: row.difficulty ?? undefined,
+    bestTime: row.best_time ?? undefined,
+    gradient: "steel",
+  };
+}
+
+export async function getPlaceForDetail(slugOrId: string): Promise<PlaceListing | null> {
+  const fromCatalog = getPlaceBySlug(slugOrId);
+  if (fromCatalog) return fromCatalog;
+
+  const { getPublishedPlaceBySlugOrId } = await import("@/lib/queries");
+  const fromDb = await getPublishedPlaceBySlugOrId(slugOrId);
+  if (fromDb) return placeFromDb(fromDb);
+
+  return null;
+}
+
+export async function getHiddenGemForDetail(
+  slugOrId: string,
+): Promise<HiddenGemListing | null> {
+  const fromCatalog = getHiddenGemBySlug(slugOrId);
+  if (fromCatalog) return fromCatalog;
+
+  const { getPublishedHiddenGemBySlugOrId } = await import("@/lib/queries");
+  const fromDb = await getPublishedHiddenGemBySlugOrId(slugOrId);
+  if (fromDb) return mapHiddenGemRow(fromDb);
 
   return null;
 }

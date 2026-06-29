@@ -3,17 +3,28 @@ import { notFound } from "next/navigation";
 import HKDetailShell from "@/components/hk/DetailShell";
 import ListingDetail from "@/components/ListingDetail";
 import { things } from "@/data/handoff";
-import { getPlaceBySlug } from "@/lib/listings/catalog";
+import { getPlaceForDetail } from "@/lib/listings/catalog";
+import { getPublishedPlaces } from "@/lib/queries";
 
 type Props = { params: Promise<{ id: string }> };
 
+export const dynamicParams = true;
+export const revalidate = 300;
+
 export async function generateStaticParams() {
-  return things.map((t) => ({ id: t.id }));
+  const catalog = things.map((t) => ({ id: t.id }));
+  try {
+    const fromDb = await getPublishedPlaces();
+    const dbParams = fromDb.map((p) => ({ id: p.slug ?? p.id }));
+    return [...catalog, ...dbParams];
+  } catch {
+    return catalog;
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const listing = getPlaceBySlug(id);
+  const listing = await getPlaceForDetail(id);
   if (!listing) return { title: "Activity not found" };
   return {
     title: `${listing.name} — Things to do in the Nilgiris`,
@@ -28,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ThingDetailPage({ params }: Props) {
   const { id } = await params;
-  const listing = getPlaceBySlug(id);
+  const listing = await getPlaceForDetail(id);
   if (!listing) notFound();
 
   return (

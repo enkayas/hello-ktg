@@ -49,6 +49,8 @@ export type NearItem = {
   tags: string[];
   gradient: GradientKey;
   image: string;
+  latitude: number;
+  longitude: number;
 };
 
 export type ThingItem = {

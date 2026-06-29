@@ -13,6 +13,8 @@ export const nearbyItems: NearbyItem[] = [
     tags: ["Open Now", "Food", "Cafés", "Parking"],
     image: img("1495474473367-a7fedd892b71"),
     openNow: true,
+    latitude: 11.4212,
+    longitude: 76.8648,
   },
   {
     id: "n2",
@@ -22,6 +24,8 @@ export const nearbyItems: NearbyItem[] = [
     bestFor: "Morning birding walk",
     tags: ["Viewpoints", "Family Friendly", "Senior Friendly"],
     image: img("1441974231531-c6227db76b6e"),
+    latitude: 11.454,
+    longitude: 76.842,
   },
   {
     id: "n3",
@@ -31,6 +35,8 @@ export const nearbyItems: NearbyItem[] = [
     bestFor: "Family weekend stay",
     tags: ["Stays", "Family Friendly", "Food"],
     image: img("1582719478250-c89cae4dc85b"),
+    latitude: 11.415,
+    longitude: 76.872,
   },
   {
     id: "n4",
@@ -40,6 +46,8 @@ export const nearbyItems: NearbyItem[] = [
     bestFor: "Safe daytime parking",
     tags: ["Parking", "Family Friendly", "Clean Restrooms"],
     image: img("1590366841952-962297e3ee0b"),
+    latitude: 11.4208,
+    longitude: 76.8662,
   },
   {
     id: "n5",
@@ -50,6 +58,8 @@ export const nearbyItems: NearbyItem[] = [
     tags: ["Cafés", "Open Now", "Food"],
     image: img("1509042239860-f550ce710b93"),
     openNow: true,
+    latitude: 11.4235,
+    longitude: 76.861,
   },
   {
     id: "n6",
@@ -59,6 +69,8 @@ export const nearbyItems: NearbyItem[] = [
     bestFor: "Half-day waterfall trip",
     tags: ["Viewpoints", "Family Friendly"],
     image: img("1439069582845-503a2728edca"),
+    latitude: 11.464,
+    longitude: 76.7858,
   },
   {
     id: "n7",
@@ -69,6 +81,8 @@ export const nearbyItems: NearbyItem[] = [
     tags: ["Parking", "Open Now"],
     image: img("1590366841952-962297e3ee0b"),
     openNow: true,
+    latitude: 11.4185,
+    longitude: 76.868,
   },
   {
     id: "n8",
@@ -78,6 +92,8 @@ export const nearbyItems: NearbyItem[] = [
     bestFor: "Agro-tourism & tasting",
     tags: ["Family Friendly", "Senior Friendly"],
     image: img("1558618666-fcd25c85cd64"),
+    latitude: 11.435,
+    longitude: 76.858,
   },
 ];
 

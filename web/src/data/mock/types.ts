@@ -63,6 +63,8 @@ export type NearbyItem = {
   tags: string[];
   image: string;
   openNow?: boolean;
+  latitude: number;
+  longitude: number;
 };
 
 export type FeaturedPick = {

@@ -104,7 +104,14 @@ export function EatCard({ item }: { item: EatItem }) {
 }
 
 /* ── Near Me card ── */
-export function NearCard({ item }: { item: NearItem }) {
+export function NearCard({
+  item,
+  distanceLabel,
+}: {
+  item: NearItem;
+  distanceLabel?: string;
+}) {
+  const dist = distanceLabel ?? item.dist;
   return (
     <article className="card-hover flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(29,58,88,0.1)]">
       <CardImage image={item.image} gradient={item.gradient} height="h-40">
@@ -125,7 +132,7 @@ export function NearCard({ item }: { item: NearItem }) {
           </h3>
           <span className="inline-flex shrink-0 items-center gap-1 font-mono text-[12.5px] font-semibold text-steel">
             <MapPin className="h-3 w-3" strokeWidth={2.1} />
-            {item.dist}
+            {dist}
           </span>
         </div>
         <p className="mt-1 text-[13px] text-muted">

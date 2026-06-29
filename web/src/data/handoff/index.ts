@@ -355,6 +355,8 @@ export const nearItems: NearItem[] = [
     tags: ["Estate Tea", "Brownies", "★ 4.5"],
     gradient: "tea",
     image: images.cafe,
+    latitude: 11.4212,
+    longitude: 76.8648,
   },
   {
     id: "n2",
@@ -367,6 +369,8 @@ export const nearItems: NearItem[] = [
     tags: ["Dosas", "Family", "★ 4.4"],
     gradient: "gold",
     image: images.bakery,
+    latitude: 11.4195,
+    longitude: 76.8672,
   },
   {
     id: "n3",
@@ -379,6 +383,8 @@ export const nearItems: NearItem[] = [
     tags: ["Pastries", "Brownies", "★ 4.5"],
     gradient: "valley",
     image: images.cafe,
+    latitude: 11.4225,
+    longitude: 76.8625,
   },
   {
     id: "n4",
@@ -391,6 +397,8 @@ export const nearItems: NearItem[] = [
     tags: ["Garden", "Family", "Veg"],
     gradient: "dawn",
     image: images.garden,
+    latitude: 11.418,
+    longitude: 76.8695,
   },
   {
     id: "n5",
@@ -403,6 +411,8 @@ export const nearItems: NearItem[] = [
     tags: ["Tea View", "★ 4.7", "Parking"],
     gradient: "tea",
     image: images.homestay,
+    latitude: 11.4085,
+    longitude: 76.878,
   },
   {
     id: "n6",
@@ -415,6 +425,8 @@ export const nearItems: NearItem[] = [
     tags: ["Glamping", "Bonfire"],
     gradient: "mist",
     image: images.glamping,
+    latitude: 11.432,
+    longitude: 76.852,
   },
   {
     id: "n7",
@@ -427,6 +439,8 @@ export const nearItems: NearItem[] = [
     tags: ["Photo Spot", "Trek"],
     gradient: "valley",
     image: images.catherine,
+    latitude: 11.464,
+    longitude: 76.7858,
   },
   {
     id: "n8",
@@ -439,6 +453,8 @@ export const nearItems: NearItem[] = [
     tags: ["Free", "Early AM"],
     gradient: "dawn",
     image: images.kodanad,
+    latitude: 11.4489,
+    longitude: 76.8936,
   },
 ];
 

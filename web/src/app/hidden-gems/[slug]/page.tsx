@@ -2,21 +2,20 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import HKShell from "@/components/hk/Shell";
 import ListingDetail from "@/components/ListingDetail";
-import { things } from "@/data/handoff";
-import { getPlaceBySlug } from "@/lib/listings/catalog";
+import { getAllHiddenGems, getHiddenGemBySlug } from "@/lib/listings/catalog";
 
-type Props = { params: Promise<{ id: string }> };
+type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return things.map((t) => ({ id: t.id }));
+  return getAllHiddenGems().map((g) => ({ slug: g.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
-  const listing = getPlaceBySlug(id);
-  if (!listing) return { title: "Activity not found" };
+  const { slug } = await params;
+  const listing = getHiddenGemBySlug(slug);
+  if (!listing) return { title: "Hidden gem not found" };
   return {
-    title: `${listing.name} — Things to do in the Nilgiris`,
+    title: `${listing.name} — Hidden Gem near Kotagiri`,
     description: listing.description,
     openGraph: {
       title: listing.name,
@@ -26,15 +25,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ThingDetailPage({ params }: Props) {
-  const { id } = await params;
-  const listing = getPlaceBySlug(id);
+export default async function HiddenGemDetailPage({ params }: Props) {
+  const { slug } = await params;
+  const listing = getHiddenGemBySlug(slug);
   if (!listing) notFound();
 
   return (
     <HKShell>
       <div className="mx-auto max-w-3xl px-6 py-8">
-        <ListingDetail listing={listing} backHref="/things-to-do" backLabel="Things to do" />
+        <ListingDetail listing={listing} backHref="/hidden-gems" backLabel="Hidden Gems" />
       </div>
     </HKShell>
   );

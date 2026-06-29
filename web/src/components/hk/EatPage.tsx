@@ -4,19 +4,20 @@ import { useMemo, useState } from "react";
 import FilterChips, { toggleFilter } from "./FilterChips";
 import { EatCard } from "./Cards";
 import { eatFilters, eatItems } from "@/data/handoff";
+import type { EatItem } from "@/data/handoff/types";
 import { useTranslations } from "@/components/LocaleProvider";
 
-export function EatGrid() {
+export function EatGrid({ items = eatItems }: { items?: EatItem[] }) {
   const t = useTranslations();
   const [active, setActive] = useState<Record<string, boolean>>({});
 
   const filtered = useMemo(() => {
     const onlyOpen = !!active["Open Now"];
     const on = Object.keys(active).filter((k) => k !== "Open Now");
-    let results = eatItems.filter((r) => on.every((f) => r.filters.includes(f)));
+    let results = items.filter((r) => on.every((f) => r.filters.includes(f)));
     if (onlyOpen) results = results.filter((r) => r.open);
     return results;
-  }, [active]);
+  }, [active, items]);
 
   return (
     <>

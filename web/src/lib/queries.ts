@@ -43,3 +43,37 @@ export async function getStayBySlug(
     return null;
   }
 }
+
+export type PublishedRestaurant = {
+  id: string;
+  slug: string | null;
+  name: string;
+  cuisine: string | null;
+  area: string | null;
+  description: string | null;
+  image_url: string | null;
+  host_phone: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  is_featured: boolean | null;
+  is_published: boolean | null;
+};
+
+export async function getPublishedRestaurants(): Promise<PublishedRestaurant[]> {
+  try {
+    const supabase = createPublicClient();
+    const { data, error } = await supabase
+      .from("restaurants")
+      .select(
+        "id, slug, name, cuisine, area, description, image_url, host_phone, latitude, longitude, is_featured, is_published",
+      )
+      .eq("is_published", true)
+      .order("is_featured", { ascending: false })
+      .order("name", { ascending: true });
+    if (error) throw error;
+    return (data ?? []) as PublishedRestaurant[];
+  } catch (err) {
+    console.error("getPublishedRestaurants failed:", err);
+    return [];
+  }
+}

@@ -33,7 +33,19 @@ export default function HKFooter({ assets }: { assets: SiteAsset[] }) {
           <div className="flex flex-col gap-2.5 text-sm text-[#BCC9D4]">
             <Link href="/plan-my-trip" className="hover:text-white">Plan My Trip</Link>
             <Link href="/near-me" className="hover:text-white">Near Me</Link>
-            <Link href="/" className="hover:text-white">Explore</Link>
+            <Link href="/routes" className="hover:text-white">Scenic Routes</Link>
+            <Link href="/saved" className="hover:text-white">Saved</Link>
+          </div>
+        </div>
+        <div>
+          <div className="mb-3.5 text-xs font-semibold uppercase tracking-[0.07em] text-accent">
+            Legal
+          </div>
+          <div className="flex flex-col gap-2.5 text-sm text-[#BCC9D4]">
+            <Link href="/privacy" className="hover:text-white">Privacy</Link>
+            <Link href="/terms" className="hover:text-white">Terms</Link>
+            <Link href="/responsible-travel" className="hover:text-white">Responsible Travel</Link>
+            <Link href="/contact" className="hover:text-white">Contact</Link>
           </div>
         </div>
         <div>
@@ -41,6 +53,7 @@ export default function HKFooter({ assets }: { assets: SiteAsset[] }) {
             Partners
           </div>
           <div className="flex flex-col gap-2.5 text-sm text-[#BCC9D4]">
+            <Link href="/list-your-business" className="hover:text-white">List your business</Link>
             <a
               href="https://console.hellokotagiri.com/owner/login"
               className="hover:text-white"

@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, MapPin, MessageCircle, Navigation } from "lucide-react";
+import { MapPin, MessageCircle, Navigation } from "lucide-react";
+import SaveButton from "@/components/SaveButton";
+import { nearItemDetailHref } from "@/lib/near-detail";
 import { CardImage, TagChip } from "./PageHero";
 import { diffStyles } from "@/data/handoff";
 import type { EatItem, NearItem, StayItem, ThingItem } from "@/data/handoff/types";
@@ -47,6 +48,9 @@ export function StayCard({ item }: { item: StayItem }) {
           >
             View Details
           </Link>
+          {item.slug ? (
+            <SaveButton kind="stay" slug={item.slug} className="!w-auto !px-3" />
+          ) : null}
         </div>
       </div>
     </article>
@@ -82,12 +86,13 @@ export function EatCard({ item }: { item: EatItem }) {
           ))}
         </div>
         <div className="mt-4 flex gap-2">
-          <button
-            type="button"
-            className="tap flex flex-1 rounded-[11px] border border-grey py-2.5 text-[13.5px] font-semibold text-primary hover:border-steel"
+          <Link
+            href={`/eat/${item.id}`}
+            className="tap flex flex-1 items-center justify-center rounded-[11px] border border-grey py-2.5 text-[13.5px] font-semibold text-primary hover:border-steel"
           >
-            View Menu
-          </button>
+            View Details
+          </Link>
+          <SaveButton kind="restaurant" slug={item.id} className="!w-auto !px-3" />
           <a
             href={`https://maps.google.com/?q=${encodeURIComponent(item.name + " Kotagiri")}`}
             target="_blank"
@@ -112,6 +117,7 @@ export function NearCard({
   distanceLabel?: string;
 }) {
   const dist = distanceLabel ?? item.dist;
+  const detailHref = nearItemDetailHref(item);
   return (
     <article className="card-hover flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(29,58,88,0.1)]">
       <CardImage image={item.image} gradient={item.gradient} height="h-40">
@@ -144,12 +150,18 @@ export function NearCard({
           ))}
         </div>
         <div className="mt-4 flex gap-2">
-          <button
-            type="button"
-            className="tap flex flex-1 rounded-[11px] border border-grey py-2.5 text-[13.5px] font-semibold text-primary hover:border-steel"
-          >
-            View Details
-          </button>
+          {detailHref ? (
+            <Link
+              href={detailHref}
+              className="tap flex flex-1 items-center justify-center rounded-[11px] border border-grey py-2.5 text-[13.5px] font-semibold text-primary hover:border-steel"
+            >
+              View Details
+            </Link>
+          ) : (
+            <span className="flex flex-1 items-center justify-center rounded-[11px] border border-dashed border-grey py-2.5 text-[13.5px] text-muted">
+              No detail page
+            </span>
+          )}
           <a
             href={`https://maps.google.com/?q=${encodeURIComponent(item.name + " Kotagiri")}`}
             target="_blank"
@@ -197,12 +209,13 @@ export function ThingCard({ item }: { item: ThingItem }) {
           <DetailRow label="Suits" value={item.suits} />
         </div>
         <div className="mt-4 flex gap-2">
-          <button
-            type="button"
-            className="tap flex flex-1 rounded-[11px] border border-grey py-2.5 text-[13.5px] font-semibold text-primary hover:border-steel"
+          <Link
+            href={`/things-to-do/${item.id}`}
+            className="tap flex flex-1 items-center justify-center rounded-[11px] border border-grey py-2.5 text-[13.5px] font-semibold text-primary hover:border-steel"
           >
             View Details
-          </button>
+          </Link>
+          <SaveButton kind="place" slug={item.id} className="!w-auto !px-3" />
           <a
             href={`https://maps.google.com/?q=${encodeURIComponent(item.name + " Kotagiri Nilgiris")}`}
             target="_blank"

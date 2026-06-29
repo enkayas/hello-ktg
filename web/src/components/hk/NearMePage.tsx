@@ -16,6 +16,12 @@ import {
 } from "@/lib/geo";
 
 const CAT_CHIPS = ["Food", "Stays", "Viewpoints", "Cafés"] as const;
+const RADIUS_OPTIONS = [
+  { km: 1, label: "1 km" },
+  { km: 5, label: "5 km" },
+  { km: 15, label: "15 km" },
+  { km: 30, label: "30 km" },
+] as const;
 
 type NearItemWithDist = NearItem & { computedDist: string; distanceKm: number };
 
@@ -27,6 +33,7 @@ type LocationState =
 
 export function NearMeContent() {
   const [active, setActive] = useState<Record<string, boolean>>({});
+  const [radiusKm, setRadiusKm] = useState(30);
   const [location, setLocation] = useState<LocationState>({
     status: "idle",
     reference: {
@@ -111,13 +118,13 @@ export function NearMeContent() {
   const filtered = useMemo(() => {
     const activeCats = CAT_CHIPS.filter((c) => active[c]);
     const onlyOpen = !!active["Open Now"];
-    let results = sortedItems.slice();
+    let results = sortedItems.filter((r) => r.distanceKm <= radiusKm);
     if (activeCats.length) {
       results = results.filter((r) => activeCats.includes(r.cat));
     }
     if (onlyOpen) results = results.filter((r) => r.open);
     return results;
-  }, [active, sortedItems]);
+  }, [active, sortedItems, radiusKm]);
 
   const isGps = location.status === "gps";
   const isDetecting = location.status === "detecting";
@@ -217,6 +224,23 @@ export function NearMeContent() {
       </section>
 
       <section className="mx-auto max-w-[1240px] px-6 pt-8">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <span className="text-sm font-semibold text-primary">Within</span>
+          {RADIUS_OPTIONS.map((r) => (
+            <button
+              key={r.km}
+              type="button"
+              onClick={() => setRadiusKm(r.km)}
+              className={`tap rounded-full px-3.5 py-2 text-[13px] font-semibold ${
+                radiusKm === r.km
+                  ? "border border-primary bg-primary text-white"
+                  : "border border-line bg-white text-muted hover:border-steel"
+              }`}
+            >
+              {r.label}
+            </button>
+          ))}
+        </div>
         <FilterChips
           filters={nearFilters}
           active={active}

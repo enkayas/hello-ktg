@@ -28,15 +28,32 @@ export type Homestay = {
   created_at: string;
 };
 
+export type PropertyUnit = {
+  id: string;
+  homestay_id: string;
+  name: string;
+  unit_type: string;
+  description: string | null;
+  max_guests: number;
+  bedrooms: number | null;
+  bathrooms: number | null;
+  base_price: number | null;
+  is_active: boolean;
+  sort_order: number;
+};
+
 export type HomestayPhoto = {
+  id?: string;
   storage_path: string;
   is_cover: boolean | null;
   sort_order: number | null;
+  unit_id?: string | null;
 };
 
-// A stay joined with its gallery photos (public reads).
+// A stay joined with its gallery photos and bookable units (public reads).
 export type StayWithPhotos = Homestay & {
   homestay_photos: HomestayPhoto[] | null;
+  property_units?: PropertyUnit[] | null;
 };
 
 export type BookingStatus =
@@ -49,6 +66,7 @@ export type BookingStatus =
 export type Booking = {
   id: string;
   homestay_id: string;
+  unit_id: string | null;
   owner_id: string;
   guest_name: string;
   guest_phone: string;

@@ -11,13 +11,29 @@ This guide covers two things:
 
 | Item | Status |
 |---|---|
-| Local git remote | Connected → `https://github.com/enkayas/travelktg.git` |
+| Local git remote | Connected → `https://github.com/enkayas/hello-ktg.git` |
 | GitHub account | `enkayas` (authenticated via `gh`) |
-| Production code branch | `claude/confident-wozniak-wsoqut` (8 commits ahead of `main`, **not yet on GitHub**) |
-| CI/CD workflow | `.github/workflows/deploy-cloudflare.yml` (deploys on push to `main`) |
+| Production branch | `main` (auto-deploys on push to `web/`) |
+| GitHub Actions secrets | Configured (Cloudflare + Supabase) |
+| CI/CD workflow | `.github/workflows/deploy-cloudflare.yml` — **active, passing** |
+| Live URLs | hellokotagiri.com · console.hellokotagiri.com · helloktg.silvertip.workers.dev |
 | Supabase backend | Live at `lewhmonjzoznnqxtdkcn.supabase.co` |
 
+**Important:** Uncommitted local changes are invisible to Cloud Agents and CI.
+Agents must **commit and push** after work so the repo stays the source of truth.
+
 ---
+
+## Agent deploy rule (read every session)
+
+**AI assistants must deploy after every live-site change — without asking.**
+
+1. `cd web && npm run build` — fix errors
+2. `cd web && npm run deploy` — or push to `main` and verify Actions passed
+3. Report "live at hellokotagiri.com" to the owner
+
+Do not end a task with "you can deploy if you want" or "shall I deploy?"
+
 
 ## Part 1 — Push code to GitHub
 
@@ -60,7 +76,7 @@ The Next.js app is already configured for **Cloudflare Workers** via OpenNext.
 
 ### 2b. Add secrets to GitHub
 
-Go to **github.com/enkayas/travelktg → Settings → Secrets and variables → Actions**
+Go to **github.com/enkayas/hello-ktg → Settings → Secrets and variables → Actions**
 and add:
 
 | Secret name | Value |
@@ -100,7 +116,7 @@ In Cloudflare dashboard:
 Instead of GitHub Actions, you can let Cloudflare build directly from GitHub:
 
 1. Cloudflare dashboard → **Workers & Pages → Create → Connect to Git**
-2. Select **enkayas/travelktg**
+2. Select **enkayas/hello-ktg**
 3. **Production branch:** `main`
 4. **Root directory:** `web`
 5. **Build command:** `npx opennextjs-cloudflare build`
@@ -113,30 +129,45 @@ This also deploys automatically on every push to `main`.
 
 ## Part 4 — Cursor Cloud Agents (work while laptop is closed)
 
-Cursor Cloud Agents run on Cursor's servers, not your laptop. They need your code
-on GitHub.
+This is the **primary way** the owner should develop without keeping a laptop open.
 
-### Setup (one time)
+### What you get
 
-1. **Push code to GitHub** (Part 1 above).
-2. In Cursor: **Settings → General → GitHub** → connect your `enkayas` account
-   and grant access to the `travelktg` repo.
-3. Use **Cloud** mode when starting an agent (not Local).
+- Agent runs on **Cursor's servers**, not your Mac
+- You can close the laptop, use a phone, or walk away
+- Agent edits code, commits, pushes to GitHub
+- **GitHub Actions auto-deploys** to hellokotagiri.com (~2 minutes)
 
-### How it works
+### Setup (one time — ~5 minutes)
 
-- You give the agent a task and pick **Cloud** as the environment.
-- Cursor spins up a VM, clones your repo branch, and works independently.
-- You can close your laptop; the agent keeps running.
-- When done, it commits to a branch and you can review/merge on GitHub.
+1. **GitHub connected in Cursor**
+   - Cursor → **Settings → General → GitHub**
+   - Sign in as `enkayas`, grant access to repo `hello-ktg`
+
+2. **Secrets already on GitHub** ✓ (Cloudflare + Supabase — configured 2026-06-28)
+
+3. **Ensure `main` has latest code** — merge or push so GitHub matches production
+
+### How to start a cloud task (owner)
+
+1. Open **Cursor** (desktop app or [cursor.com/agents](https://cursor.com/agents))
+2. Start a new agent
+3. Choose **Cloud** (not Local)
+4. Select repo: `enkayas/hello-ktg`, branch: `main`
+5. Describe the task in plain English, e.g. *"Add Tamil translations to the Eat page"*
+6. Close the laptop — the agent keeps working
+7. When done: review the commit on GitHub; site updates automatically
+
+### What the agent does automatically
+
+Per `AGENTS.md`: implement → build → deploy → report live. No commands for you.
 
 ### Tips
 
-- Push your working branch before starting a cloud agent so it has the latest code.
-- Cloud agents work best when `PROJECT.md` and `DEPLOY.md` are committed — they
-  give the agent full context without you re-explaining the project.
-- For deployment tasks, add the Cloudflare and Supabase secrets to GitHub first
-  so CI can deploy without your laptop.
+- `PROJECT.md`, `AGENTS.md`, and `DEPLOY.md` are committed so agents have full context
+- For database changes, agent applies Supabase migrations via CLI/MCP
+- Check deploy: GitHub → Actions → "Deploy to Cloudflare Workers"
+
 
 ---
 
@@ -167,19 +198,32 @@ Run in Supabase dashboard → SQL Editor.
 
 ## Part 6 — Day-to-day workflow
 
+### Owner (no laptop required)
+
 ```
-Edit locally in Cursor
+Describe task in Cursor Cloud Agent
     ↓
-git push to feature branch
+Agent implements on GitHub (main)
     ↓
-Open PR on GitHub → merge to main
+GitHub Actions auto-deploys (~2 min)
     ↓
-GitHub Actions (or Cloudflare Builds) auto-deploys
-    ↓
-hellokotagiri.com updates in ~2–3 minutes
+hellokotagiri.com updates — you get a summary in Cursor
 ```
 
-For long tasks while away: start a **Cursor Cloud Agent** on the same repo/branch.
+### Developer / agent (with laptop)
+
+```
+Edit in Cursor
+    ↓
+npm run build && npm run deploy   ← mandatory before "done"
+    ↓
+git commit + push to main
+    ↓
+CI deploys again (backup / team visibility)
+```
+
+For long tasks while away: start a **Cursor Cloud Agent** — same repo, branch `main`.
+
 
 ---
 
@@ -189,7 +233,7 @@ For long tasks while away: start a **Cursor Cloud Agent** on the same repo/branc
 |---|---|
 | Site loads but no stays | Build env vars missing — add Supabase secrets to GitHub/Cloudflare |
 | Deploy fails on OpenNext build | Check Actions log; run `cd web && npm run build` locally first |
-| Supabase project paused | Restore at supabase.com → project travelKTG |
+| Supabase project paused | Restore at supabase.com → project helloKTG |
 | Owner login redirect loop | Already fixed on feature branch — ensure that branch is deployed |
 | Domain not resolving | Confirm nameservers point to Cloudflare; wait up to 24 h for DNS |
 
@@ -211,6 +255,6 @@ git push -u origin claude/confident-wozniak-wsoqut
 git checkout main && git merge claude/confident-wozniak-wsoqut && git push
 ```
 
-**Repo:** https://github.com/enkayas/travelktg  
+**Repo:** https://github.com/enkayas/hello-ktg  
 **Supabase:** https://supabase.com/dashboard/project/lewhmonjzoznnqxtdkcn  
 **Domain:** https://hellokotagiri.com

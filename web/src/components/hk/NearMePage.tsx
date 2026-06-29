@@ -25,25 +25,25 @@ export function NearMeContent() {
 
   return (
     <>
-      <section className="hero-radial text-white">
-        <div className="mx-auto max-w-[1240px] px-6 pb-[60px] pt-[52px]">
-          <span className="mb-3.5 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[#C3D4E2]">
+      <section className="page-hero-light">
+        <div className="mx-auto max-w-[1240px] px-6 pb-10 pt-10 md:pb-12 md:pt-14">
+          <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#9a6b1a]">
             <span className="h-1.5 w-1.5 animate-hk-pulse rounded-full bg-accent" />
             Location-aware discovery
           </span>
-          <h1 className="text-[42px] font-bold leading-[1.05] tracking-[-0.03em]">
+          <h1 className="mt-4 text-[clamp(2rem,4.5vw,2.625rem)] font-bold leading-[1.05] tracking-[-0.03em] text-primary">
             What&apos;s Near You?
           </h1>
-          <p className="mt-3.5 max-w-[56ch] text-[17px] leading-relaxed text-white/78">
+          <p className="mt-3.5 max-w-[56ch] text-[17px] leading-relaxed text-muted">
             Stays, food, viewpoints and cafés around you — sorted by how far
             you&apos;d actually travel.
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1240px] px-6">
-        <div className="relative z-2 -mt-[30px] flex flex-col items-stretch gap-5 rounded-[18px] border border-line bg-surface p-5 shadow-[0_20px_50px_-30px_rgba(18,60,46,0.4)] md:flex-row md:items-center md:p-6">
-          <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-[14px] border border-line bg-canvas">
+      <section className="mx-auto max-w-[1240px] bg-white px-6">
+        <div className="relative z-2 -mt-6 flex flex-col items-stretch gap-5 rounded-2xl border border-line bg-white p-5 shadow-[0_8px_32px_-12px_rgba(29,58,88,0.12)] md:flex-row md:items-center md:p-6">
+          <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-2xl border border-line bg-canvas-subtle shadow-sm">
             <Crosshair className="h-6 w-6 text-steel" strokeWidth={1.7} />
           </div>
           <div className="min-w-0 flex-1">

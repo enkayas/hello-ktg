@@ -5,7 +5,7 @@
 > repo so it is shared with Cowork and any collaborator. Keep it current when the
 > structure, data, or contact details change.
 
-**Repo:** `enkayas/travelktg` · **Working branch:** `claude/confident-wozniak-wsoqut`
+**Repo:** `enkayas/hello-ktg` · **Working branch:** `claude/confident-wozniak-wsoqut`
 **Owner:** enkayas@gmail.com · **Last reviewed:** 2026-06-25
 
 ---
@@ -175,7 +175,7 @@ legal pages (cancellation/T&C/privacy).
 
 ## 7b. Build progress (as of 2026-06-25)
 
-**Supabase project `travelKTG`** (ref `lewhmonjzoznnqxtdkcn`, org "Silvertip
+**Supabase project `helloKTG`** (ref `lewhmonjzoznnqxtdkcn`, org "Silvertip
 Ventures", region ap-southeast-1) — was paused; **restored & live**. It already
 had a curated-directory schema; we **evolved** it (migration
 `supabase/migrations/0001_owner_accounts_and_bookings.sql` + `0002` hardening):

@@ -7,7 +7,6 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminHome() {
   const supabase = await createClient();
-  // is_admin() RLS lets admins see every listing.
   const { data } = await supabase
     .from("homestays")
     .select("*")
@@ -19,8 +18,8 @@ export default async function AdminHome() {
 
   return (
     <div className="space-y-10">
-      <div>
-        <h1 className="font-serif text-2xl font-semibold text-forest">
+      <div className="rounded-2xl border border-line bg-gradient-to-br from-white to-canvas-subtle p-6 shadow-[0_4px_24px_-8px_rgba(29,58,88,0.08)]">
+        <h1 className="text-2xl font-bold tracking-[-0.02em] text-primary">
           Listings
         </h1>
         <p className="mt-1 text-sm text-muted">
@@ -38,17 +37,17 @@ function Section({ title, stays }: { title: string; stays: Homestay[] }) {
   if (stays.length === 0) return null;
   return (
     <section>
-      <h2 className="mb-3 font-serif text-lg font-semibold text-forest">
+      <h2 className="mb-3 text-xs font-semibold uppercase tracking-[0.08em] text-muted">
         {title}
       </h2>
       <ul className="space-y-3">
         {stays.map((h) => (
           <li
             key={h.id}
-            className="flex items-center justify-between gap-3 rounded-2xl bg-white p-4 ring-1 ring-forest/5"
+            className="flex items-center justify-between gap-3 rounded-2xl border border-line bg-white p-5 shadow-[0_4px_20px_-8px_rgba(29,58,88,0.1)]"
           >
             <div>
-              <p className="font-semibold text-forest">{h.name}</p>
+              <p className="font-semibold text-primary">{h.name}</p>
               <p className="text-sm text-muted">
                 {h.type}
                 {h.area ? ` · ${h.area}` : ""}
@@ -56,7 +55,7 @@ function Section({ title, stays }: { title: string; stays: Homestay[] }) {
               </p>
               <Link
                 href={`/stays/${h.slug}`}
-                className="text-xs font-semibold text-leaf"
+                className="text-xs font-semibold text-steel hover:text-primary"
               >
                 View public page →
               </Link>

@@ -11,9 +11,9 @@ import type { EatItem, NearItem, StayItem, ThingItem } from "@/data/handoff/type
 export function StayCard({ item }: { item: StayItem }) {
   const href = item.slug ? `/stays/${item.slug}` : "/stay";
   return (
-    <article className="card-hover flex flex-col overflow-hidden rounded-[18px] border border-line bg-surface shadow-[0_1px_2px_rgba(18,40,60,0.05)]">
+    <article className="card-hover flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(29,58,88,0.1)]">
       <CardImage image={item.image} gradient={item.gradient}>
-        <span className="absolute right-3 top-3 rounded-full bg-white/95 px-3 py-1.5 font-mono text-[13px] font-semibold text-primary">
+        <span className="absolute right-3 top-3 rounded-full bg-white px-3 py-1.5 font-mono text-[13px] font-semibold text-primary shadow-[0_2px_8px_-2px_rgba(29,58,88,0.15)]">
           {item.price}
         </span>
       </CardImage>
@@ -43,7 +43,7 @@ export function StayCard({ item }: { item: StayItem }) {
           ) : null}
           <Link
             href={href}
-            className="tap flex flex-1 items-center justify-center rounded-[11px] border border-grey bg-surface py-2.5 text-[13.5px] font-semibold text-primary hover:border-steel"
+            className="tap flex flex-1 items-center justify-center rounded-xl border border-line bg-white py-2.5 text-[13.5px] font-semibold text-primary shadow-sm transition hover:border-steel hover:shadow-md"
           >
             View Details
           </Link>
@@ -57,7 +57,7 @@ export function StayCard({ item }: { item: StayItem }) {
 export function EatCard({ item }: { item: EatItem }) {
   const color = item.open ? "#128A4F" : "#C9610B";
   return (
-    <article className="card-hover flex flex-col overflow-hidden rounded-[18px] border border-line bg-surface shadow-[0_1px_2px_rgba(18,40,60,0.05)]">
+    <article className="card-hover flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(29,58,88,0.1)]">
       <CardImage image={item.image} gradient={item.gradient} height="h-40">
         <span
           className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1.5 text-[11px] font-semibold backdrop-blur-sm"
@@ -106,7 +106,7 @@ export function EatCard({ item }: { item: EatItem }) {
 /* ── Near Me card ── */
 export function NearCard({ item }: { item: NearItem }) {
   return (
-    <article className="card-hover flex flex-col overflow-hidden rounded-[18px] border border-line bg-surface shadow-[0_1px_2px_rgba(18,40,60,0.05)]">
+    <article className="card-hover flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(29,58,88,0.1)]">
       <CardImage image={item.image} gradient={item.gradient} height="h-40">
         <span className="absolute left-3 top-3 rounded-full bg-white/92 px-2.5 py-1 text-[11px] font-semibold text-primary backdrop-blur-sm">
           {item.category}
@@ -162,7 +162,7 @@ export function NearCard({ item }: { item: NearItem }) {
 export function ThingCard({ item }: { item: ThingItem }) {
   const diff = diffStyles[item.difficulty];
   return (
-    <article className="card-hover flex flex-col overflow-hidden rounded-[18px] border border-line bg-surface shadow-[0_1px_2px_rgba(18,40,60,0.05)]">
+    <article className="card-hover flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(29,58,88,0.1)]">
       <CardImage image={item.image} gradient={item.gradient} height="h-[166px]">
         <span className="absolute left-3 top-3 rounded-full bg-white/92 px-2.5 py-1 text-[11px] font-semibold text-primary backdrop-blur-sm">
           {item.type}

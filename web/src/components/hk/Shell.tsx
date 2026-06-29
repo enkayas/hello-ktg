@@ -1,13 +1,16 @@
 import type { ReactNode } from "react";
+import { getSiteAssets } from "@/lib/queries/brand";
 import HKFooter from "./Footer";
 import HKHeader from "./Header";
 
-export default function HKShell({ children }: { children: ReactNode }) {
+export default async function HKShell({ children }: { children: ReactNode }) {
+  const brandAssets = await getSiteAssets();
+
   return (
     <>
-      <HKHeader />
-      <main className="flex-1">{children}</main>
-      <HKFooter />
+      <HKHeader assets={brandAssets} />
+      <main className="flex-1 bg-white">{children}</main>
+      <HKFooter assets={brandAssets} />
     </>
   );
 }

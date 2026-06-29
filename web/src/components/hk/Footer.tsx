@@ -1,19 +1,14 @@
 import Link from "next/link";
-import { GaurLogo } from "./Logo";
+import { BrandLogo } from "./BrandLogo";
+import type { SiteAsset } from "@/lib/brand";
 
-export default function HKFooter() {
+export default function HKFooter({ assets }: { assets: SiteAsset[] }) {
   return (
     <footer className="mt-auto bg-primary text-[#D5DEE6]">
       <div className="mx-auto grid max-w-[1240px] grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-9 px-6 py-14">
         <div className="col-span-full max-w-[340px]">
-          <div className="mb-3.5 flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-[9px] bg-white/10">
-              <GaurLogo size={32} fill="#DDA23C" />
-            </span>
-            <span className="text-lg tracking-[-0.02em] text-white">
-              <span className="font-medium text-accent">Hello</span>
-              <span className="font-bold">Kotagiri</span>
-            </span>
+          <div className="mb-3.5">
+            <BrandLogo assets={assets} background="dark" height={32} />
           </div>
           <p className="max-w-[32ch] text-sm leading-relaxed text-[#A6B7C4]">
             Discover the Nilgiris like a local — smart stays, real food and the
@@ -43,18 +38,15 @@ export default function HKFooter() {
         </div>
         <div>
           <div className="mb-3.5 text-xs font-semibold uppercase tracking-[0.07em] text-accent">
-            For Business
+            Partners
           </div>
           <div className="flex flex-col gap-2.5 text-sm text-[#BCC9D4]">
-            <Link href="/list-your-business" className="hover:text-white">
-              List Your Business
-            </Link>
-            <Link href="/list-your-business#pricing" className="hover:text-white">
-              Pricing
-            </Link>
-            <Link href="/owner/login" className="hover:text-white">
-              Partner Login
-            </Link>
+            <a
+              href="https://console.hellokotagiri.com/owner/login"
+              className="hover:text-white"
+            >
+              Business Console
+            </a>
           </div>
         </div>
       </div>

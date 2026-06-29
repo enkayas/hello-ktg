@@ -1,6 +1,6 @@
 -- Canonical curated Kotagiri stays directory (14 listings).
 -- Curated = unowned (owner_id null), published. Idempotent on slug.
--- NOTE: the live travelKTG DB was seeded by evolving prior data; this file
+-- NOTE: the live helloKTG DB was seeded by evolving prior data; this file
 -- reproduces the canonical set on a fresh project. Keep in sync with the DB.
 insert into homestays (slug, name, type, area, rating, reviews_count, host_phone, website_url, is_published)
 values

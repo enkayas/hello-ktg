@@ -16,6 +16,7 @@ import {
 import type { CarouselSlide, FeaturedPick, IntentTile } from "@/data/handoff/types";
 import { gradients } from "@/lib/images";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslations } from "@/components/LocaleProvider";
 
 const intentIcons = {
   family: Users,
@@ -26,172 +27,235 @@ const intentIcons = {
   weekend: Calendar,
 };
 
-export function HomeHero() {
-  return (
-    <section className="home-hero-bg relative overflow-hidden">
-      <div
-        aria-hidden
-        className="animate-hk-mist absolute inset-0 bg-[radial-gradient(50%_42%_at_72%_16%,rgba(221,162,60,0.16),transparent_70%)]"
-      />
-      <div
-        aria-hidden
-        className="absolute -left-[30%] -right-[30%] bottom-[-150px] h-[360px] rounded-t-[50%] bg-steel opacity-30 blur-[6px]"
-      />
-      <div
-        aria-hidden
-        className="absolute -left-[30%] -right-[30%] bottom-[-185px] h-[360px] rounded-t-[50%] bg-[color-mix(in_srgb,var(--primary),#000_14%)] opacity-60"
-      />
-      <div
-        aria-hidden
-        className="absolute -left-[30%] -right-[30%] bottom-[-215px] h-[360px] rounded-t-[50%] bg-[color-mix(in_srgb,var(--primary),#000_38%)]"
-      />
+export function HeroCarousel({ slides }: { slides: CarouselSlide[] }) {
+  const t = useTranslations();
+  const [idx, setIdx] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-      <div className="relative mx-auto max-w-[1240px] px-6 pb-[104px] pt-20 text-center">
-        <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/16 bg-white/8 px-3.5 py-1.5 font-mono text-[11.5px] uppercase tracking-[0.12em] text-[#C3D4E2]">
-          <span className="h-1.5 w-1.5 animate-hk-pulse rounded-full bg-accent" />
-          Kotagiri · Ooty · Coonoor · Gudalur · Masinagudi
+  const go = (next: number) => setIdx((next + slides.length) % slides.length);
+
+  useEffect(() => {
+    if (paused) return;
+    const t = setInterval(
+      () => setIdx((i) => (i + 1) % slides.length),
+      6000,
+    );
+    return () => clearInterval(t);
+  }, [paused, slides.length]);
+
+  const slide = slides[idx];
+
+  return (
+    <section
+      className="relative min-h-[clamp(560px,82vh,760px)] bg-primary"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* Backgrounds — overflow hidden only here (ken burns), not the whole hero */}
+      <div className="absolute inset-0 overflow-hidden">
+        {slides.map((s, i) => (
+          <div
+            key={s.id}
+            className={`absolute inset-0 transition-opacity duration-[900ms] ease-in-out ${
+              i === idx ? "hero-slide-active opacity-100" : "opacity-0"
+            }`}
+            aria-hidden={i !== idx}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={s.image}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover object-[center_22%]"
+            />
+          </div>
+        ))}
+
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[rgba(11,28,45,0.55)] via-[rgba(11,28,45,0.25)] via-40% to-[rgba(11,28,45,0.92)]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_20%,rgba(221,162,60,0.12),transparent_65%)]"
+        />
+      </div>
+
+      {/* Hero copy */}
+      <div className="absolute inset-x-0 top-0 z-2 flex flex-col items-center px-6 pb-48 pt-[4.5rem] text-center md:pb-56">
+        <span className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 font-mono text-[11.5px] uppercase tracking-[0.12em] text-[#C3D4E2] backdrop-blur-md">
+          <span className="h-1.5 w-1.5 animate-hk-pulse rounded-full bg-[#DDA23C]" />
+          {t.home.regionPill}
         </span>
-        <h1 className="mx-auto max-w-[18ch] text-[clamp(38px,8vw,58px)] font-bold leading-[1.04] tracking-[-0.03em] text-[#FBFCFB]">
-          Discover Nilgiris Like a Local
+        <h1 className="mx-auto max-w-[18ch] text-[clamp(34px,6.5vw,56px)] font-bold leading-[1.05] tracking-[-0.03em] text-white drop-shadow-lg">
+          {t.home.title}
         </h1>
-        <p className="mx-auto mt-5 max-w-[60ch] text-lg leading-relaxed text-white/78">
-          Smart stays, local food, scenic routes, hidden gems and nearby
-          experiences across Kotagiri and the Nilgiris — curated by people who
-          actually live in these hills.
+        <p className="mx-auto mt-4 max-w-[56ch] text-base leading-relaxed text-white/85 md:text-lg">
+          {t.home.subtitle}
         </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3.5">
+        <div className="mt-7 flex flex-wrap justify-center gap-3">
           <Link
             href="/plan-my-trip"
-            className="tap inline-flex items-center gap-2 rounded-full bg-accent px-6 py-4 text-[15px] font-semibold text-[#2A2010] shadow-[0_10px_30px_-12px_rgba(200,155,60,0.6)] hover:bg-accent-hover"
+            className="tap inline-flex items-center gap-2 rounded-full bg-[#DDA23C] px-6 py-3.5 text-[15px] font-semibold text-[#2A2010] no-underline shadow-[0_8px_28px_-8px_rgba(221,162,60,0.7)] transition hover:bg-[#E7B255]"
           >
             <Map className="h-4 w-4" strokeWidth={1.9} />
-            Plan My Trip
+            {t.home.planTrip}
           </Link>
           <Link
             href="/near-me"
-            className="tap inline-flex items-center gap-2 rounded-full border border-white/28 bg-white/7 px-6 py-4 text-[15px] font-semibold text-white hover:bg-white/14"
+            className="tap inline-flex items-center gap-2 rounded-full bg-[#DDA23C] px-6 py-3.5 text-[15px] font-semibold text-[#2A2010] no-underline shadow-[0_8px_28px_-8px_rgba(221,162,60,0.7)] transition hover:bg-[#E7B255]"
           >
             <Crosshair className="h-4 w-4" strokeWidth={1.9} />
-            Explore Near Me
+            {t.home.exploreNearMe}
           </Link>
         </div>
       </div>
-    </section>
-  );
-}
 
-export function LocationBanner() {
-  return (
-    <section className="mx-auto max-w-[1240px] px-6">
-      <div className="relative z-2 -mt-[52px] flex flex-col items-stretch gap-6 rounded-[20px] border border-line bg-surface p-[26px] shadow-[0_24px_60px_-34px_rgba(18,60,46,0.4)] md:flex-row md:items-center md:gap-6 md:p-[26px_30px]">
-        <div className="flex h-[58px] w-[58px] shrink-0 items-center justify-center rounded-2xl border border-line bg-canvas">
-          <Crosshair className="h-[26px] w-[26px] text-steel" strokeWidth={1.7} />
+      {/* Bottom dock — destination picker strip (Pinterest-style countries carousel) */}
+      <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-[rgba(11,28,45,0.97)] via-[rgba(11,28,45,0.85)] to-transparent pt-16 pb-5 md:pt-20 md:pb-6">
+        <div className="mx-auto max-w-[1240px] px-4 md:px-6">
+          <div className="mb-3 flex items-end justify-between gap-4">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#DDA23C]">
+                {t.home.firstLook}
+              </p>
+              <h2
+                key={slide.id}
+                className="mt-1 text-xl font-bold tracking-[-0.02em] text-white md:text-2xl"
+              >
+                {slide.title}
+              </h2>
+              <p className="mt-1 hidden max-w-md text-sm text-white/65 md:block">
+                {slide.description}
+              </p>
+            </div>
+            <div className="flex shrink-0 items-center gap-3">
+              <span className="font-mono text-sm text-white/50">
+                <span className="text-2xl font-semibold text-white">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <span className="mx-1">/</span>
+                {String(slides.length).padStart(2, "0")}
+              </span>
+              <div className="flex gap-1.5">
+                <button
+                  type="button"
+                  aria-label={t.home.prev}
+                  onClick={() => go(idx - 1)}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20"
+                >
+                  <ChevronLeft className="h-4 w-4" strokeWidth={2.2} />
+                </button>
+                <button
+                  type="button"
+                  aria-label={t.home.next}
+                  onClick={() => go(idx + 1)}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20"
+                >
+                  <ChevronRight className="h-4 w-4" strokeWidth={2.2} />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="hero-thumb-scroll flex items-stretch gap-2.5 overflow-x-auto px-1 pt-4 pb-2 md:gap-3">
+            {slides.map((s, i) => {
+              const active = i === idx;
+              return (
+                <div
+                  key={s.id}
+                  className={`shrink-0 rounded-[14px] p-[2px] transition-all duration-500 md:rounded-2xl ${
+                    active ? "bg-[#DDA23C]" : "bg-transparent"
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setIdx(i)}
+                    aria-label={`View ${s.title}`}
+                    aria-current={active ? "true" : undefined}
+                    className={`group relative block overflow-hidden rounded-xl transition-all duration-500 ease-out md:rounded-[14px] ${
+                      active
+                        ? "w-[126px] md:w-[164px]"
+                        : "w-[84px] opacity-75 hover:opacity-100 md:w-[104px]"
+                    }`}
+                  >
+                    <div
+                      className="relative aspect-[4/3] w-full"
+                      style={{ background: gradients[s.gradient] }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={s.image}
+                        alt=""
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        onError={(e) => {
+                          e.currentTarget.style.visibility = "hidden";
+                        }}
+                      />
+                    <div
+                      className={`absolute inset-0 transition-colors ${
+                        active
+                          ? "bg-gradient-to-t from-[rgba(11,28,45,0.85)] via-transparent to-transparent"
+                          : "bg-gradient-to-t from-[rgba(11,28,45,0.75)] to-[rgba(11,28,45,0.2)]"
+                      }`}
+                    />
+                    <div className="absolute bottom-2 left-2 right-2 text-left">
+                      <p className="truncate font-mono text-[9px] uppercase tracking-wide text-[#DDA23C] md:text-[10px]">
+                        {s.eyebrow.split("·")[0]?.trim()}
+                      </p>
+                      <p
+                        className={`truncate font-semibold text-white ${active ? "text-xs md:text-sm" : "text-[10px] md:text-xs"}`}
+                      >
+                        {s.title}
+                      </p>
+                    </div>
+                    </div>
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Progress bar */}
+          <div className="mt-3 h-[3px] overflow-hidden rounded-full bg-white/15">
+            <div
+              className="h-full rounded-full bg-[#DDA23C] transition-all duration-500 ease-out"
+              style={{ width: `${((idx + 1) / slides.length) * 100}%` }}
+            />
+          </div>
         </div>
-        <div className="min-w-0 flex-1">
-          <h3 className="text-lg font-semibold tracking-[-0.01em] text-primary">
-            Discover what&apos;s around you
-          </h3>
-          <p className="mt-1.5 max-w-[62ch] text-[14.5px] leading-normal text-muted">
-            Allow location to surface stays, food, viewpoints, cafés, fuel stops
-            and local experiences near you — ranked by how far you&apos;d actually
-            travel.
-          </p>
-        </div>
-        <Link
-          href="/near-me"
-          className="tap inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-5 py-3.5 text-sm font-semibold text-canvas hover:bg-primary-mid"
-        >
-          <Crosshair className="h-4 w-4" strokeWidth={1.9} />
-          Enable Location
-        </Link>
       </div>
     </section>
   );
 }
 
 export function ImageCarousel({ slides }: { slides: CarouselSlide[] }) {
-  const [idx, setIdx] = useState(0);
+  return <HeroCarousel slides={slides} />;
+}
 
-  useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % slides.length), 5000);
-    return () => clearInterval(t);
-  }, [slides.length]);
-
+export function LocationBanner() {
+  const t = useTranslations();
   return (
-    <section className="mx-auto max-w-[1240px] px-6 pb-2 pt-16">
-      <div className="mb-5 flex flex-wrap items-end justify-between gap-5">
-        <div>
-          <span className="mb-2.5 block font-mono text-[11px] uppercase tracking-[0.12em] text-steel">
-            Postcards from the hills
-          </span>
-          <h2 className="text-[32px] font-bold leading-tight tracking-[-0.025em] text-primary">
-            A first look at Kotagiri
-          </h2>
+    <section className="relative z-10 mx-auto max-w-[1240px] px-6 pb-4 pt-0">
+      <div className="flex flex-col items-stretch gap-6 rounded-2xl border border-line bg-white p-7 shadow-[0_8px_40px_-12px_rgba(29,58,88,0.12)] md:flex-row md:items-center md:gap-8 md:p-8">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-line bg-canvas-subtle shadow-sm">
+          <Crosshair className="h-[26px] w-[26px] text-steel" strokeWidth={1.7} />
         </div>
-      </div>
-      <div className="relative h-[clamp(320px,46vw,500px)] overflow-hidden rounded-[22px] bg-primary shadow-[0_24px_60px_-34px_rgba(18,40,60,0.5)]">
-        <div
-          className="flex h-full transition-transform duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
-          style={{ transform: `translateX(-${idx * 100}%)` }}
-        >
-          {slides.map((s) => (
-            <div
-              key={s.id}
-              className="relative min-w-full"
-              style={{ background: gradients[s.gradient] }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={s.image}
-                alt={s.title}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent from-[38%] to-[rgba(11,28,45,0.74)]" />
-              <div className="pointer-events-none absolute bottom-[30px] left-[30px] right-[30px]">
-                <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">
-                  {s.eyebrow}
-                </span>
-                <div className="mt-1.5 text-[27px] font-bold tracking-[-0.02em] text-white">
-                  {s.title}
-                </div>
-                <p className="mt-1 max-w-[48ch] text-sm leading-normal text-white/84">
-                  {s.description}
-                </p>
-              </div>
-            </div>
-          ))}
+        <div className="min-w-0 flex-1">
+          <h3 className="text-lg font-semibold tracking-[-0.01em] text-primary">
+            {t.home.locationTitle}
+          </h3>
+          <p className="mt-1.5 max-w-[62ch] text-[14.5px] leading-normal text-muted">
+            {t.home.locationBody}
+          </p>
         </div>
-        <button
-          type="button"
-          aria-label="Previous slide"
-          onClick={() => setIdx((i) => (i + slides.length - 1) % slides.length)}
-          className="absolute left-4 top-1/2 z-3 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/92 shadow-md hover:bg-white"
+        <Link
+          href="/near-me"
+          className="tap inline-flex shrink-0 items-center gap-2 rounded-full bg-[#DDA23C] px-5 py-3.5 text-sm font-semibold text-[#2A2010] no-underline shadow-[0_4px_14px_-4px_rgba(221,162,60,0.5)] transition hover:bg-[#E7B255]"
         >
-          <ChevronLeft className="h-5 w-5 text-primary" strokeWidth={2.2} />
-        </button>
-        <button
-          type="button"
-          aria-label="Next slide"
-          onClick={() => setIdx((i) => (i + 1) % slides.length)}
-          className="absolute right-4 top-1/2 z-3 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/92 shadow-md hover:bg-white"
-        >
-          <ChevronRight className="h-5 w-5 text-primary" strokeWidth={2.2} />
-        </button>
-        <div className="absolute bottom-[18px] left-0 right-0 z-3 flex justify-center gap-1.5">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={`Go to slide ${i + 1}`}
-              onClick={() => setIdx(i)}
-              className="h-[9px] rounded-full border-none p-0 transition-all duration-200"
-              style={{
-                width: i === idx ? 26 : 9,
-                background: i === idx ? "var(--accent)" : "rgba(255,255,255,0.55)",
-              }}
-            />
-          ))}
-        </div>
+          <Crosshair className="h-4 w-4 text-[#2A2010]" strokeWidth={1.9} />
+          {t.home.enableLocation}
+        </Link>
       </div>
     </section>
   );
@@ -215,10 +279,10 @@ export function IntentGrid({ tiles }: { tiles: IntentTile[] }) {
             <Link
               key={it.id}
               href={it.href}
-              className="card-hover relative block min-h-[168px] overflow-hidden rounded-[18px] shadow-[0_1px_2px_rgba(18,60,46,0.06)]"
+              className="card-hover relative block min-h-[168px] overflow-hidden rounded-2xl border border-line shadow-[0_8px_32px_-12px_rgba(29,58,88,0.18)]"
               style={{ background: gradients[it.gradient] }}
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-[rgba(11,42,31,0.05)] to-[rgba(11,42,31,0.55)]" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[rgba(18,40,60,0.08)] to-[rgba(18,40,60,0.62)]" />
               <div className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-[11px] bg-white/16 text-white backdrop-blur-sm">
                 <Icon className="h-[22px] w-[22px]" strokeWidth={1.7} />
               </div>
@@ -261,7 +325,7 @@ export function FeaturedGrid({ picks }: { picks: FeaturedPick[] }) {
           <Link
             key={f.id}
             href={f.href}
-            className="card-hover flex flex-col overflow-hidden rounded-[18px] border border-line bg-surface shadow-[0_1px_2px_rgba(18,60,46,0.05)]"
+            className="card-hover flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(29,58,88,0.1)]"
           >
             <div
               className="relative h-[170px]"
@@ -290,7 +354,7 @@ export function FeaturedGrid({ picks }: { picks: FeaturedPick[] }) {
                 {f.tags.map((tg) => (
                   <span
                     key={tg}
-                    className="rounded-full border border-line bg-canvas px-2.5 py-1 text-[11.5px] font-medium text-muted"
+                    className="rounded-full border border-line bg-canvas-subtle px-2.5 py-1 text-[11.5px] font-medium text-muted shadow-sm"
                   >
                     {tg}
                   </span>
@@ -316,7 +380,7 @@ export function FeaturedGrid({ picks }: { picks: FeaturedPick[] }) {
 export function PlannerTeaser() {
   return (
     <section className="mx-auto max-w-[1240px] px-6 py-[72px]">
-      <div className="flex flex-col overflow-hidden rounded-3xl border border-line shadow-[0_24px_60px_-34px_rgba(18,60,46,0.45)] md:flex-row">
+      <div className="flex flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_12px_48px_-16px_rgba(29,58,88,0.14)] md:flex-row">
         <div className="flex-[1.15] bg-[radial-gradient(120%_130%_at_0%_0%,color-mix(in_srgb,var(--primary),#fff_16%)_0%,var(--primary)_55%,color-mix(in_srgb,var(--primary),#000_36%)_100%)] p-12 text-white">
           <span className="mb-3.5 block font-mono text-[11px] uppercase tracking-[0.12em] text-accent">
             Trip planner
@@ -336,14 +400,14 @@ export function PlannerTeaser() {
             <ArrowRight className="h-4 w-4" strokeWidth={2} />
           </Link>
         </div>
-        <div className="flex flex-[0.85] flex-col justify-center gap-4 bg-surface p-10">
+        <div className="flex flex-[0.85] flex-col justify-center gap-4 bg-canvas-subtle p-10">
           {[
             "Choose a base — Kotagiri, Ooty or Coonoor",
             "Set your days, pace and interests",
             "Get a ready-to-go local itinerary",
           ].map((step, i) => (
             <div key={step} className="flex items-center gap-3.5">
-              <span className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full border border-line bg-canvas font-mono text-sm font-semibold text-steel">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-canvas-subtle font-mono text-sm font-semibold text-steel shadow-sm">
                 {i + 1}
               </span>
               <span className="text-[15px] text-ink">{step}</span>
@@ -357,7 +421,7 @@ export function PlannerTeaser() {
 
 export function BusinessStrip() {
   return (
-    <section className="border-y border-line bg-surface">
+    <section className="border-y border-line bg-white">
       <div className="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-8 px-6 py-[60px]">
         <div className="max-w-[46ch]">
           <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.12em] text-accent">
@@ -371,13 +435,13 @@ export function BusinessStrip() {
             paid the most.
           </p>
         </div>
-        <Link
-          href="/list-your-business"
+        <a
+          href="https://console.hellokotagiri.com/owner/login"
           className="tap inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-6 py-4 text-[15px] font-semibold text-canvas hover:bg-primary-mid"
         >
-          List Your Business
+          Business Console
           <ArrowRight className="h-4 w-4" strokeWidth={2} />
-        </Link>
+        </a>
       </div>
     </section>
   );

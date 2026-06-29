@@ -18,10 +18,10 @@ export default function FilterChips({ filters, active, onToggle }: Props) {
             key={label}
             type="button"
             onClick={() => onToggle(label)}
-            className={`rounded-full px-4 py-2.5 text-[13px] font-semibold transition-all duration-160 ${
+            className={`rounded-full px-4 py-2.5 text-[13px] font-semibold transition-all duration-160 shadow-sm ${
               on
-                ? "border border-primary bg-primary text-canvas"
-                : "border border-grey bg-surface text-muted hover:border-steel/40"
+                ? "border border-primary bg-primary text-white shadow-[0_4px_12px_-4px_rgba(29,58,88,0.35)]"
+                : "border border-line bg-white text-muted hover:border-steel/50 hover:shadow-md"
             }`}
           >
             {label}

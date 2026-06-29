@@ -24,8 +24,8 @@ export function StayGrid({ items = stays }: { items?: StayItem[] }) {
           onToggle={(l) => setActive((a) => toggleFilter(a, l))}
         />
       </section>
-      <section className="mx-auto max-w-[1240px] px-6 pb-[72px] pt-[22px]">
-        <p className="mb-[18px] text-sm text-muted">
+      <section className="mx-auto max-w-[1240px] bg-white px-6 pb-[72px] pt-6">
+        <p className="mb-5 text-sm text-muted">
           <span className="font-mono font-semibold text-primary">{filtered.length}</span>{" "}
           stays
         </p>

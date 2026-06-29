@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import FilterChips, { toggleFilter } from "./FilterChips";
 import { EatCard } from "./Cards";
 import { eatFilters, eatItems } from "@/data/handoff";
+import { useTranslations } from "@/components/LocaleProvider";
 
 export function EatGrid() {
+  const t = useTranslations();
   const [active, setActive] = useState<Record<string, boolean>>({});
 
   const filtered = useMemo(() => {
@@ -28,7 +30,7 @@ export function EatGrid() {
       <section className="mx-auto max-w-[1240px] px-6 pb-[72px] pt-[22px]">
         <p className="mb-[18px] text-sm text-muted">
           <span className="font-mono font-semibold text-primary">{filtered.length}</span>{" "}
-          places to eat
+          {t.eat.placesCount}
         </p>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-[22px]">
           {filtered.map((r) => (

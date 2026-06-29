@@ -1,9 +1,7 @@
 import HKShell from "@/components/hk/Shell";
 import {
-  BusinessStrip,
   FeaturedGrid,
-  HomeHero,
-  ImageCarousel,
+  HeroCarousel,
   IntentGrid,
   LocationBanner,
   PlannerTeaser,
@@ -17,13 +15,11 @@ import {
 export default function HomePage() {
   return (
     <HKShell>
-      <HomeHero />
+      <HeroCarousel slides={carouselSlides} />
       <LocationBanner />
-      <ImageCarousel slides={carouselSlides} />
       <IntentGrid tiles={intentTiles} />
       <FeaturedGrid picks={featuredPicks} />
       <PlannerTeaser />
-      <BusinessStrip />
     </HKShell>
   );
 }

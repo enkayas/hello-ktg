@@ -9,20 +9,27 @@ type Photo = {
   homestay_id: string;
   storage_path: string;
   is_cover: boolean | null;
+  unit_id?: string | null;
 };
 
 const BUCKET = "property-photos";
 
 export default function PhotoManager({
   homestayId,
+  unitId = null,
   initialPhotos,
+  title,
 }: {
   homestayId: string;
+  unitId?: string | null;
   initialPhotos: Photo[];
+  title?: string;
 }) {
   const [photos, setPhotos] = useState<Photo[]>(initialPhotos);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const scopeKey = unitId ?? "property";
 
   async function onUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -31,7 +38,10 @@ export default function PhotoManager({
     setError(null);
     const supabase = createClient();
     const ext = file.name.split(".").pop();
-    const path = `${homestayId}/${Date.now().toString(36)}.${ext}`;
+    const folder = unitId
+      ? `${homestayId}/units/${unitId}`
+      : `${homestayId}/property`;
+    const path = `${folder}/${Date.now().toString(36)}.${ext}`;
 
     const { error: upErr } = await supabase.storage
       .from(BUCKET)
@@ -45,6 +55,7 @@ export default function PhotoManager({
       .from("homestay_photos")
       .insert({
         homestay_id: homestayId,
+        unit_id: unitId,
         storage_path: path,
         is_cover: photos.length === 0,
         sort_order: photos.length,
@@ -69,10 +80,24 @@ export default function PhotoManager({
 
   async function makeCover(photo: Photo) {
     const supabase = createClient();
-    await supabase
+    const scopeFilter = unitId
+      ? { homestay_id: homestayId, unit_id: unitId }
+      : { homestay_id: homestayId, unit_id: null };
+
+    const { data: scoped } = await supabase
       .from("homestay_photos")
-      .update({ is_cover: false })
-      .eq("homestay_id", homestayId);
+      .select("id")
+      .match(scopeFilter);
+
+    if (scoped?.length) {
+      await supabase
+        .from("homestay_photos")
+        .update({ is_cover: false })
+        .in(
+          "id",
+          scoped.map((p) => p.id),
+        );
+    }
     await supabase
       .from("homestay_photos")
       .update({ is_cover: true })
@@ -84,6 +109,9 @@ export default function PhotoManager({
 
   return (
     <div>
+      {title ? (
+        <p className="mb-3 text-sm font-semibold text-primary">{title}</p>
+      ) : null}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {photos.map((photo) => (
           <div
@@ -102,6 +130,7 @@ export default function PhotoManager({
               </span>
             ) : (
               <button
+                type="button"
                 onClick={() => makeCover(photo)}
                 className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-xs font-semibold text-forest"
               >
@@ -109,6 +138,7 @@ export default function PhotoManager({
               </button>
             )}
             <button
+              type="button"
               onClick={() => remove(photo)}
               className="absolute right-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-xs font-semibold text-red-600"
             >

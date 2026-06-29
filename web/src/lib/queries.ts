@@ -1,7 +1,8 @@
 import { createPublicClient } from "@/lib/supabase/public";
 import type { StayWithPhotos } from "@/lib/types";
 
-const SELECT = "*, homestay_photos(storage_path, is_cover, sort_order)";
+const SELECT =
+  "*, homestay_photos(id, storage_path, is_cover, sort_order, unit_id), property_units(*)";
 
 // Public, published stays — ordered featured-first then by sort_order.
 // Degrades to an empty list if Supabase is unreachable (e.g. egress blocked at

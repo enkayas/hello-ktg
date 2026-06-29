@@ -5,7 +5,7 @@
 > when decisions, scope, or deployment details change.
 
 **Brand:** helloKotagiri · **Domain:** [hellokotagiri.com](https://hellokotagiri.com)  
-**Repo:** `enkayas/travelktg` · **Owner:** enkayas@gmail.com  
+**Repo:** `enkayas/hello-ktg` · **Owner:** enkayas@gmail.com  
 **Last updated:** 2026-06-28
 
 ---
@@ -143,7 +143,7 @@ Login as admin → Review listing submissions & enquiries (/admin/leads)
 
 ### Supabase project
 
-- **Name:** travelKTG · **Ref:** `lewhmonjzoznnqxtdkcn`
+- **Name:** helloKTG · **Ref:** `lewhmonjzoznnqxtdkcn`
 - **URL:** https://lewhmonjzoznnqxtdkcn.supabase.co
 - **Region:** ap-southeast-1 (Singapore)
 - **Org:** Silvertip Ventures (separate from Silvertip ops Supabase)
@@ -340,9 +340,21 @@ Technical Specialist. Implement all technical work yourself — code, deploy, gi
 Cloudflare, Supabase, CI/CD. Do not ask the owner to run commands, edit config,
 or navigate developer dashboards unless a step is physically impossible without
 their browser login (e.g. domain registrar nameservers, payment, 2FA). When that
-happens, give one minimal click-by-click instruction for that single step only.
+happens, give **one step only**, wait for confirmation, then give the next step.
+Never send a multi-step checklist in a single message.
 
 Explain outcomes in plain English. Verify before reporting done.
+
+### Deploy rule (mandatory)
+
+After any `web/` change, **deploy before saying done** — run `cd web && npm run deploy`
+(or push to `main` and confirm GitHub Actions succeeded). **Never ask the owner
+whether to deploy.** See `AGENTS.md` and `DEPLOY.md`.
+
+### Cloud development (mandatory direction)
+
+Work should be doable with the laptop closed: commit + push to `main`, CI deploys,
+Cursor **Cloud Agents** on GitHub. See `DEPLOY.md` Part 4.
 
 ### Technical conventions
 

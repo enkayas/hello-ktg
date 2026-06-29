@@ -4,17 +4,18 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { Homestay } from "@/lib/types";
+import { PROPERTY_TYPES } from "@/lib/property-taxonomy";
 
-const TYPES = [
-  "Homestay",
-  "Home Stay",
-  "Cottage",
-  "Resort",
-  "Villa",
-  "B&B",
-  "Camping",
-];
+const TYPES = [...PROPERTY_TYPES];
 
+function mapPropertyTypeToUnit(type: string): string {
+  const t = type.toLowerCase();
+  if (t.includes("villa")) return "villa";
+  if (t.includes("cottage")) return "cottage";
+  if (t.includes("camp")) return "tent";
+  if (t.includes("resort") || t.includes("hotel")) return "suite";
+  return "room";
+}
 function slugify(name: string): string {
   return (
     name
@@ -26,7 +27,13 @@ function slugify(name: string): string {
   );
 }
 
-export default function PropertyForm({ property }: { property?: Homestay }) {
+export default function PropertyForm({
+  property,
+  redirectTo = "/owner",
+}: {
+  property?: Homestay;
+  redirectTo?: string;
+}) {
   const router = useRouter();
   const editing = Boolean(property);
   const [busy, setBusy] = useState(false);
@@ -78,19 +85,35 @@ export default function PropertyForm({ property }: { property?: Homestay }) {
         return;
       }
       // New owner listings start unpublished → admin reviews before going live.
-      const { error } = await supabase.from("homestays").insert({
-        ...payload,
-        slug: slugify(name),
-        owner_id: user.id,
-        is_published: false,
-      });
+      const { data: created, error } = await supabase
+        .from("homestays")
+        .insert({
+          ...payload,
+          slug: slugify(name),
+          owner_id: user.id,
+          is_published: false,
+        })
+        .select("id")
+        .single();
       if (error) {
         setError(error.message);
         setBusy(false);
         return;
       }
+      if (created) {
+        await supabase.from("property_units").insert({
+          homestay_id: created.id,
+          name,
+          unit_type: mapPropertyTypeToUnit(String(f.get("type"))),
+          max_guests: payload.max_guests ?? 2,
+          bedrooms: payload.bedrooms,
+          bathrooms: payload.bathrooms,
+          base_price: payload.base_price,
+          sort_order: 0,
+        });
+      }
     }
-    router.push("/owner");
+    router.push(redirectTo);
     router.refresh();
   }
 
@@ -111,7 +134,10 @@ export default function PropertyForm({ property }: { property?: Homestay }) {
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className={label}>Type</label>
+          <label className={label}>Property type</label>
+          <p className="mb-1 text-xs text-muted">
+            Resort, homestay, estate — the overall property classification
+          </p>
           <select
             name="type"
             defaultValue={property?.type ?? "Homestay"}

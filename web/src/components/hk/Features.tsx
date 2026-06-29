@@ -24,6 +24,7 @@ import {
 } from "@/data/handoff";
 import type { GemCollection } from "@/data/handoff/types";
 import { gradients } from "@/lib/images";
+import { useTranslations } from "@/components/LocaleProvider";
 
 const benefitIcons = {
   pin: Map,
@@ -37,12 +38,12 @@ const benefitIcons = {
 export function GemCard({ gem }: { gem: GemCollection }) {
   const badge = badgeStyles[gem.badge] ?? badgeStyles["Local Pick"];
   return (
-    <article className="gem-card-hover card-hover flex flex-col overflow-hidden rounded-[20px] border border-line bg-surface shadow-[0_1px_2px_rgba(18,40,60,0.05)]">
+    <article className="gem-card-hover card-hover flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_4px_24px_-8px_rgba(29,58,88,0.1)]">
       <div
         className="relative h-[200px]"
         style={{ background: gradients[gem.gradient] }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(11,42,31,0.15)] via-[rgba(11,42,31,0.05)] from-0% via-35% to-[rgba(11,42,31,0.4)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(18,40,60,0.12)] via-[rgba(18,40,60,0.04)] from-0% via-35% to-[rgba(18,40,60,0.38)]" />
         <span
           className="absolute left-[15px] top-[15px] rounded-full px-3 py-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em]"
           style={{ background: badge.bg, color: badge.fg }}
@@ -84,6 +85,7 @@ export function GemCard({ gem }: { gem: GemCollection }) {
 }
 
 export function TripPlanner() {
+  const t = useTranslations();
   const [base, setBase] = useState("Kotagiri");
   const [days, setDays] = useState(2);
   const [traveller, setTraveller] = useState("Family");
@@ -95,16 +97,26 @@ export function TripPlanner() {
   const [generated, setGenerated] = useState(false);
 
   const bases = ["Kotagiri", "Ooty", "Coonoor", "Gudalur", "Masinagudi"];
-  const travellers = ["Family", "Couple", "Friends", "Senior Citizens", "Solo"];
-  const interestList = [
-    "Nature",
-    "Food",
-    "Relaxation",
-    "Adventure",
-    "Workcation",
-    "Photography",
+  const travellers = [
+    { id: "Family", label: t.plan.travellerFamily },
+    { id: "Couple", label: t.plan.travellerCouple },
+    { id: "Friends", label: t.plan.travellerFriends },
+    { id: "Senior Citizens", label: t.plan.travellerSenior },
+    { id: "Solo", label: t.plan.travellerSolo },
   ];
-  const budgets = ["Budget", "Mid-range", "Premium"];
+  const interestList = [
+    { id: "Nature", label: t.plan.interestNature },
+    { id: "Food", label: t.plan.interestFood },
+    { id: "Relaxation", label: t.plan.interestRelaxation },
+    { id: "Adventure", label: t.plan.interestAdventure },
+    { id: "Workcation", label: t.plan.interestWorkcation },
+    { id: "Photography", label: t.plan.interestPhotography },
+  ];
+  const budgets = [
+    { id: "Budget", label: t.plan.budgetLow },
+    { id: "Mid-range", label: t.plan.budgetMid },
+    { id: "Premium", label: t.plan.budgetPremium },
+  ];
 
   const key = planBaseKey[base] ?? "kotagiri";
   const src = plans[key];
@@ -112,8 +124,11 @@ export function TripPlanner() {
     const d = src[i % src.length];
     return { day: i + 1, ...d };
   });
-  const chosen = interestList.filter((i) => interests[i]);
-  const summary = `${days} days · ${base} · ${traveller} · ${budget}${
+  const chosen = interestList.filter((i) => interests[i.id]).map((i) => i.label);
+  const travellerLabel =
+    travellers.find((x) => x.id === traveller)?.label ?? traveller;
+  const budgetLabel = budgets.find((b) => b.id === budget)?.label ?? budget;
+  const summary = `${days} days · ${base} · ${travellerLabel} · ${budgetLabel}${
     chosen.length ? ` · ${chosen.join(", ")}` : ""
   }`;
 
@@ -122,17 +137,17 @@ export function TripPlanner() {
       <section className="mx-auto max-w-[1080px] px-6 pb-4 pt-10">
         <div className="rounded-[22px] border border-line bg-surface p-[34px] shadow-[0_18px_50px_-34px_rgba(18,60,46,0.35)]">
           <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-[26px]">
-            <Field label="Starting from">
+            <Field label={t.plan.startingFrom}>
               <div className="flex items-center gap-2 rounded-xl border border-grey px-3.5 py-2.5">
                 <Building2 className="h-[17px] w-[17px] text-steel" strokeWidth={1.8} />
                 <input
                   type="text"
-                  placeholder="Your city — e.g. Bangalore, Coimbatore"
+                  placeholder={t.plan.cityPlaceholder}
                   className="min-w-0 flex-1 border-none bg-transparent text-[14.5px] text-ink outline-none"
                 />
               </div>
             </Field>
-            <Field label="Number of days">
+            <Field label={t.plan.numberOfDays}>
               <div className="inline-flex overflow-hidden rounded-xl border border-grey">
                 <button
                   type="button"
@@ -155,7 +170,7 @@ export function TripPlanner() {
             </Field>
           </div>
 
-          <SegField label="Destination base">
+          <SegField label={t.plan.destinationBase}>
             {bases.map((b) => (
               <SegBtn key={b} active={base === b} onClick={() => setBase(b)}>
                 {b}
@@ -163,37 +178,37 @@ export function TripPlanner() {
             ))}
           </SegField>
 
-          <SegField label="Who's travelling">
-            {travellers.map((t) => (
-              <SegBtn key={t} active={traveller === t} onClick={() => setTraveller(t)}>
-                {t}
+          <SegField label={t.plan.whosTravelling}>
+            {travellers.map((tr) => (
+              <SegBtn key={tr.id} active={traveller === tr.id} onClick={() => setTraveller(tr.id)}>
+                {tr.label}
               </SegBtn>
             ))}
           </SegField>
 
-          <SegField label="Interests · pick a few">
+          <SegField label={t.plan.interests}>
             {interestList.map((i) => (
               <SegBtn
-                key={i}
-                active={!!interests[i]}
+                key={i.id}
+                active={!!interests[i.id]}
                 onClick={() =>
                   setInterests((prev) => {
                     const n = { ...prev };
-                    if (n[i]) delete n[i];
-                    else n[i] = true;
+                    if (n[i.id]) delete n[i.id];
+                    else n[i.id] = true;
                     return n;
                   })
                 }
               >
-                {i}
+                {i.label}
               </SegBtn>
             ))}
           </SegField>
 
-          <SegField label="Budget">
+          <SegField label={t.plan.budget}>
             {budgets.map((b) => (
-              <SegBtn key={b} active={budget === b} onClick={() => setBudget(b)}>
-                {b}
+              <SegBtn key={b.id} active={budget === b.id} onClick={() => setBudget(b.id)}>
+                {b.label}
               </SegBtn>
             ))}
           </SegField>
@@ -204,7 +219,7 @@ export function TripPlanner() {
             className="tap mt-[30px] flex w-full items-center justify-center gap-2.5 rounded-[14px] bg-accent py-4 text-base font-bold text-[#2A2010] hover:bg-accent-hover"
           >
             <Sparkles className="h-[18px] w-[18px]" strokeWidth={1.9} />
-            Generate My Plan
+            {t.plan.generate}
           </button>
         </div>
       </section>
@@ -214,7 +229,8 @@ export function TripPlanner() {
           <>
             <div className="mb-5 mt-4 flex flex-wrap items-center gap-3">
               <h2 className="text-[26px] font-bold tracking-[-0.02em] text-primary">
-                Your {days}-day plan
+                {t.plan.yourPlan} {days}
+                {t.plan.dayPlan}
               </h2>
               <span className="font-mono text-[12.5px] text-muted">{summary}</span>
             </div>
@@ -232,7 +248,9 @@ export function TripPlanner() {
                       <div className="text-[17px] font-semibold tracking-[-0.01em] text-primary">
                         {d.title}
                       </div>
-                      <div className="text-[12.5px] text-muted">Day {d.day}</div>
+                      <div className="text-[12.5px] text-muted">
+                        {t.plan.day} {d.day}
+                      </div>
                     </div>
                   </div>
                   <div className="pl-1.5">
@@ -260,14 +278,14 @@ export function TripPlanner() {
                 href="/stay"
                 className="tap inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-canvas hover:bg-primary-mid"
               >
-                Add stays to this plan
+                {t.plan.addStays}
                 <ArrowRight className="h-[15px] w-[15px]" strokeWidth={2} />
               </Link>
               <button
                 type="button"
                 className="tap inline-flex items-center gap-2 rounded-full border border-grey bg-surface px-5 py-3 text-sm font-semibold text-primary hover:border-steel"
               >
-                Share plan
+                {t.plan.sharePlan}
               </button>
             </div>
           </>
@@ -277,11 +295,10 @@ export function TripPlanner() {
               <Map className="h-[26px] w-[26px] text-steel" strokeWidth={1.6} />
             </div>
             <div className="text-[17px] font-semibold text-primary">
-              Your itinerary will appear here
+              {t.plan.emptyTitle}
             </div>
             <p className="mx-auto mt-2 max-w-[42ch] text-sm text-muted">
-              Set your base, days and interests above, then hit Generate My Plan for
-              a day-by-day preview.
+              {t.plan.emptyBody}
             </p>
           </div>
         )}
@@ -296,32 +313,31 @@ export function BusinessPageContent() {
 
   return (
     <>
-      <section className="hero-radial relative overflow-hidden text-white">
-        <div
-          aria-hidden
-          className="absolute -left-[25%] -right-[25%] bottom-[-150px] h-[320px] rounded-t-[50%] bg-primary-dark"
-        />
-        <div className="relative mx-auto max-w-[1240px] px-6 pb-[72px] pt-[60px]">
-          <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-accent">
+      <section className="page-hero-light">
+        <div className="relative mx-auto max-w-[1240px] px-6 pb-12 pt-10 md:pb-14 md:pt-14">
+          <span className="inline-flex rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#9a6b1a]">
             For homestays, cafés, taxis & shops
           </span>
-          <h1 className="mt-3.5 max-w-[20ch] text-[46px] font-bold leading-[1.06] tracking-[-0.03em]">
+          <h1 className="mt-4 max-w-[20ch] text-[clamp(2rem,4.5vw,2.875rem)] font-bold leading-[1.06] tracking-[-0.03em] text-primary">
             Grow Your Local Business with HelloKotagiri
           </h1>
-          <p className="mt-4 max-w-[60ch] text-[17.5px] leading-relaxed text-white/80">
+          <p className="mt-4 max-w-[60ch] text-[17.5px] leading-relaxed text-muted">
             Reach travellers actively looking for trusted stays, restaurants,
             cafés, taxis, local stores and experiences across the Nilgiris — found
             by location, not by ad budget.
           </p>
-          <div className="mt-[26px] flex flex-wrap gap-7">
+          <div className="mt-7 flex flex-wrap gap-6">
             {[
               { v: "0%", l: "Booking commission" },
               { v: "5", l: "Towns live" },
               { v: "WhatsApp", l: "Direct leads" },
             ].map((s) => (
-              <div key={s.l}>
-                <div className="font-mono text-[26px] font-semibold">{s.v}</div>
-                <div className="text-[13px] text-white/65">{s.l}</div>
+              <div
+                key={s.l}
+                className="rounded-2xl border border-line bg-white px-5 py-3 shadow-[0_4px_20px_-8px_rgba(29,58,88,0.1)]"
+              >
+                <div className="font-mono text-2xl font-semibold text-primary">{s.v}</div>
+                <div className="text-[13px] text-muted">{s.l}</div>
               </div>
             ))}
           </div>
@@ -345,7 +361,7 @@ export function BusinessPageContent() {
                 p.popular
                   ? "border-2 border-primary shadow-[0_22px_50px_-28px_rgba(18,40,60,0.45)]"
                   : "border border-line shadow-[0_1px_2px_rgba(18,40,60,0.05)]"
-              } bg-surface`}
+              } bg-white`}
             >
               {p.popular ? (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3.5 py-1 text-[11px] font-bold tracking-wide text-[#2A2010]">

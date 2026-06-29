@@ -13,11 +13,11 @@ export const images = {
   sholaGrass: wiki("Shola_forest_and_grassland.jpg", 1600),
   nmrTrain: wiki("NMR_train_at_Ketti_05-02-26_75.jpeg", 1600),
   cafe:
-    "https://images.unsplash.com/photo-1495474473367-a7fedd892b71?w=900&q=80&auto=format&fit=crop",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Nilgiritea.jpg/960px-Nilgiritea.jpg",
   homestay:
     "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80&auto=format&fit=crop",
   glamping:
-    "https://images.unsplash.com/photo-1478134347167-52561ae399af?w=900&q=80&auto=format&fit=crop",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Shola_forest_and_grassland.jpg/960px-Shola_forest_and_grassland.jpg",
   garden:
     "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80&auto=format&fit=crop",
   bakery:

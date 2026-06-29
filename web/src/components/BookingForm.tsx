@@ -2,14 +2,17 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { useTranslations } from "@/components/LocaleProvider";
 import { toWhatsappNumber, whatsappLink, HOUSE_WHATSAPP } from "@/lib/whatsapp";
 
 type Props = {
   stayName: string;
   hostPhone: string | null;
+  unitLabel?: string;
 };
 
-export default function BookingForm({ stayName, hostPhone }: Props) {
+export default function BookingForm({ stayName, hostPhone, unitLabel }: Props) {
+  const t = useTranslations();
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
 
@@ -26,7 +29,6 @@ export default function BookingForm({ stayName, hostPhone }: Props) {
     const guests = Number(data.get("guests") || 2);
     const message = String(data.get("notes") || "");
 
-    // Persist the request as an enquiry (RLS allows anonymous insert).
     const supabase = createClient();
     await supabase.from("enquiries").insert({
       kind: "stay",
@@ -37,14 +39,16 @@ export default function BookingForm({ stayName, hostPhone }: Props) {
       check_out: check_out || null,
       guests,
       party_size: guests,
-      message,
+      message: unitLabel
+        ? `Unit: ${unitLabel}${message ? `\n${message}` : ""}`
+        : message,
       status: "new",
     });
 
-    // Open WhatsApp to the host with a pre-filled request.
     const number = toWhatsappNumber(hostPhone) ?? HOUSE_WHATSAPP;
     const text =
-      `Hi! I'd like to request a stay at *${stayName}* via Travel Kotagiri.\n\n` +
+      `Hi! I'd like to request a stay at *${stayName}* via HelloKotagiri.\n\n` +
+      (unitLabel ? `Unit: ${unitLabel}\n` : "") +
       `Name: ${guest_name}\nCheck-in: ${check_in}\nCheck-out: ${check_out}\n` +
       `Guests: ${guests}` +
       (message ? `\nNotes: ${message}` : "");
@@ -57,45 +61,46 @@ export default function BookingForm({ stayName, hostPhone }: Props) {
 
   if (done) {
     return (
-      <div className="rounded-2xl bg-mist p-5 text-center">
-        <p className="font-serif text-lg font-semibold text-forest">
-          Request sent 🎉
-        </p>
-        <p className="mt-1 text-sm text-muted">
-          We opened WhatsApp so you can confirm with the host. They&apos;ll reply
-          to approve your dates.
-        </p>
+      <div className="rounded-2xl border border-open/20 bg-open/5 p-6 text-center shadow-sm">
+        <p className="text-lg font-bold text-primary">{t.booking.sentTitle}</p>
+        <p className="mt-1 text-sm text-muted">{t.booking.sentBody}</p>
         <button
+          type="button"
           onClick={() => setDone(false)}
-          className="tap mt-4 text-sm font-semibold text-leaf"
+          className="tap mt-4 text-sm font-semibold text-steel"
         >
-          Send another request
+          {t.booking.sendAnother}
         </button>
       </div>
     );
   }
 
   const inputCls =
-    "w-full rounded-xl border border-forest/15 bg-white px-4 py-3 text-base outline-none focus:border-leaf";
+    "w-full rounded-xl border border-line bg-white px-4 py-3 text-base text-ink shadow-sm outline-none transition focus:border-steel focus:shadow-md";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
-      <input name="name" required placeholder="Your name" className={inputCls} />
+      <input
+        name="name"
+        required
+        placeholder={t.booking.yourName}
+        className={inputCls}
+      />
       <input
         name="phone"
         required
         inputMode="tel"
-        placeholder="WhatsApp number (with country code)"
+        placeholder={t.booking.whatsapp}
         className={inputCls}
       />
       <div className="grid grid-cols-2 gap-3">
-        <label className="text-sm text-muted">
-          Check-in
-          <input name="check_in" type="date" required className={inputCls} />
+        <label className="text-sm font-medium text-muted">
+          {t.booking.checkIn}
+          <input name="check_in" type="date" required className={`mt-1 ${inputCls}`} />
         </label>
-        <label className="text-sm text-muted">
-          Check-out
-          <input name="check_out" type="date" required className={inputCls} />
+        <label className="text-sm font-medium text-muted">
+          {t.booking.checkOut}
+          <input name="check_out" type="date" required className={`mt-1 ${inputCls}`} />
         </label>
       </div>
       <input
@@ -109,19 +114,17 @@ export default function BookingForm({ stayName, hostPhone }: Props) {
       <textarea
         name="notes"
         rows={3}
-        placeholder="Anything the host should know?"
+        placeholder={t.booking.notes}
         className={inputCls}
       />
       <button
         type="submit"
         disabled={submitting}
-        className="tap w-full rounded-full bg-leaf px-6 py-3.5 font-semibold text-white hover:bg-pine disabled:opacity-60"
+        className="tap w-full rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_14px_-4px_rgba(29,58,88,0.35)] hover:bg-primary-mid disabled:opacity-60"
       >
-        {submitting ? "Sending…" : "Request to book via WhatsApp"}
+        {submitting ? t.booking.sending : t.booking.submit}
       </button>
-      <p className="text-center text-xs text-muted">
-        No payment now — the host confirms your dates first.
-      </p>
+      <p className="text-center text-xs text-muted">{t.booking.noPayment}</p>
     </form>
   );
 }

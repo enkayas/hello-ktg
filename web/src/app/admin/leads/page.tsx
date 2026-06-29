@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import AdminClaimActions from "@/components/AdminClaimActions";
 
 export const dynamic = "force-dynamic";
 
@@ -37,14 +38,63 @@ export default async function AdminLeadsPage() {
     .from("enquiries")
     .select("*")
     .order("created_at", { ascending: false });
+  const { data: claims } = await supabase
+    .from("listing_claim_requests")
+    .select(
+      "*, profiles(full_name, phone, email), homestays(name), restaurants(name)",
+    )
+    .eq("status", "pending")
+    .order("created_at", { ascending: false });
 
   const submissions = (subs ?? []) as Submission[];
   const enquiries = (enqs ?? []) as Enquiry[];
+  const pendingClaims = claims ?? [];
 
   return (
     <div className="space-y-10">
+      <div className="rounded-2xl border border-line bg-gradient-to-br from-white to-canvas-subtle p-6 shadow-[0_4px_24px_-8px_rgba(29,58,88,0.08)]">
+        <h1 className="text-2xl font-bold tracking-[-0.02em] text-primary">Leads & claims</h1>
+        <p className="mt-1 text-sm text-muted">
+          Ownership claims, listing submissions, and guest enquiries.
+        </p>
+      </div>
+
       <section>
-        <h2 className="mb-3 font-serif text-lg font-semibold text-forest">
+        <h2 className="mb-3 text-xs font-semibold uppercase tracking-[0.08em] text-muted">
+          Ownership claims ({pendingClaims.length})
+        </h2>
+        {pendingClaims.length === 0 ? (
+          <p className="text-sm text-muted">No pending claims.</p>
+        ) : (
+          <ul className="space-y-3">
+            {pendingClaims.map((c) => (
+              <li
+                key={c.id}
+                className="flex items-center justify-between gap-3 rounded-2xl border border-line bg-white p-5 shadow-[0_4px_20px_-8px_rgba(29,58,88,0.1)]"
+              >
+                <div>
+                  <p className="font-semibold text-primary">
+                    {c.homestays?.name ?? c.restaurants?.name ?? "Listing"}
+                  </p>
+                  <p className="text-sm text-muted">
+                    {c.profiles?.full_name ?? "Partner"} ·{" "}
+                    {c.verification_phone}
+                    {c.profiles?.email ? ` · ${c.profiles.email}` : ""}
+                  </p>
+                  <p className="mt-1 text-xs text-muted">
+                    {c.listing_type} · {c.status}
+                    {c.otp_verified ? " · WhatsApp OTP verified" : ""}
+                  </p>
+                </div>
+                <AdminClaimActions claim={c} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section>
+        <h2 className="mb-3 text-xs font-semibold uppercase tracking-[0.08em] text-muted">
           Listing submissions ({submissions.length})
         </h2>
         {submissions.length === 0 ? (
@@ -54,9 +104,9 @@ export default async function AdminLeadsPage() {
             {submissions.map((s) => (
               <li
                 key={s.id}
-                className="rounded-2xl bg-white p-4 ring-1 ring-forest/5"
+                className="rounded-2xl border border-line bg-white p-5 shadow-[0_4px_20px_-8px_rgba(29,58,88,0.1)]"
               >
-                <p className="font-semibold text-forest">{s.property_name}</p>
+                <p className="font-semibold text-primary">{s.property_name}</p>
                 <p className="text-sm text-muted">
                   {s.owner_name} · {s.phone}
                   {s.location ? ` · ${s.location}` : ""}
@@ -72,7 +122,7 @@ export default async function AdminLeadsPage() {
       </section>
 
       <section>
-        <h2 className="mb-3 font-serif text-lg font-semibold text-forest">
+        <h2 className="mb-3 text-xs font-semibold uppercase tracking-[0.08em] text-muted">
           Enquiries ({enquiries.length})
         </h2>
         {enquiries.length === 0 ? (
@@ -82,9 +132,9 @@ export default async function AdminLeadsPage() {
             {enquiries.map((e) => (
               <li
                 key={e.id}
-                className="rounded-2xl bg-white p-4 ring-1 ring-forest/5"
+                className="rounded-2xl border border-line bg-white p-5 shadow-[0_4px_20px_-8px_rgba(29,58,88,0.1)]"
               >
-                <p className="font-semibold text-forest">
+                <p className="font-semibold text-primary">
                   {e.target_name}{" "}
                   <span className="text-xs font-normal text-muted">
                     ({e.kind})

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import SiteNav from "@/components/SiteNav";
-import SiteFooter from "@/components/SiteFooter";
+import HKDetailShell from "@/components/hk/DetailShell";
 import StayDetailClient from "@/components/StayDetailClient";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { getPublishedStays, getStayBySlug } from "@/lib/queries";
 
 export const revalidate = 300;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const stays = await getPublishedStays();
@@ -39,15 +39,13 @@ export default async function StayPage({
   if (!stay) notFound();
 
   return (
-    <div className="flex min-h-screen flex-col bg-white">
-      <SiteNav variant="solid" />
-      <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-24 md:py-28">
+    <HKDetailShell>
+      <div className="mx-auto w-full max-w-3xl px-5 py-8 md:py-10">
         <div className="mb-4 flex justify-end">
           <LanguageSwitcher />
         </div>
         <StayDetailClient stay={stay} />
-      </main>
-      <SiteFooter />
-    </div>
+      </div>
+    </HKDetailShell>
   );
 }

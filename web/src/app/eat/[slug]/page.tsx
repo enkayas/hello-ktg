@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import HKShell from "@/components/hk/Shell";
+import HKDetailShell from "@/components/hk/DetailShell";
 import ListingDetail from "@/components/ListingDetail";
 import { eatItems } from "@/data/handoff";
 import { getRestaurantForDetail } from "@/lib/listings/catalog";
@@ -43,10 +43,10 @@ export default async function EatDetailPage({ params }: Props) {
   if (!listing) notFound();
 
   return (
-    <HKShell>
+    <HKDetailShell>
       <div className="mx-auto max-w-3xl px-6 py-8">
         <ListingDetail listing={listing} backHref="/eat" backLabel="Eat" />
       </div>
-    </HKShell>
+    </HKDetailShell>
   );
 }

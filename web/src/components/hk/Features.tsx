@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import HardNavLink from "@/components/hk/HardNavLink";
 import { useState } from "react";
 import {
   ArrowRight,
@@ -881,7 +882,7 @@ export function GemsGrid() {
         <h2 className="mb-6 text-xl font-bold text-primary">Every hidden gem</h2>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-5">
           {gems.map((gem) => (
-            <Link
+            <HardNavLink
               key={gem.slug}
               href={`/hidden-gems/${gem.slug}`}
               className="card-hover overflow-hidden rounded-2xl border border-line bg-white shadow-sm"
@@ -893,7 +894,7 @@ export function GemsGrid() {
                 <h3 className="mt-1 font-semibold text-primary">{gem.name}</h3>
                 <p className="mt-1 line-clamp-2 text-sm text-muted">{gem.description}</p>
               </div>
-            </Link>
+            </HardNavLink>
           ))}
         </div>
       </section>

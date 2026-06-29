@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import HardNavLink from "@/components/hk/HardNavLink";
 import { MapPin, MessageCircle, Navigation, Phone } from "lucide-react";
 import { gradients } from "@/lib/images";
 import type { AnyListing } from "@/lib/listings/types";
@@ -25,9 +25,9 @@ export default function ListingDetail({ listing, backHref, backLabel }: Props) {
 
   return (
     <div className="pb-16">
-      <Link href={backHref} className="text-sm font-semibold text-steel hover:text-primary">
+      <HardNavLink href={backHref} className="text-sm font-semibold text-steel hover:text-primary">
         ← {backLabel}
-      </Link>
+      </HardNavLink>
 
       <div
         className="relative mt-4 overflow-hidden rounded-2xl shadow-[0_12px_48px_-16px_rgba(29,58,88,0.18)]"
@@ -194,7 +194,7 @@ export default function ListingDetail({ listing, backHref, backLabel }: Props) {
           <ul className="mt-3 space-y-2">
             {nearby.map((n) => (
               <li key={n.slug}>
-                <Link
+                <HardNavLink
                   href={
                     n.kind === "restaurant"
                       ? `/eat/${n.slug}`
@@ -206,7 +206,7 @@ export default function ListingDetail({ listing, backHref, backLabel }: Props) {
                 >
                   {n.name}
                   <span className="ml-2 text-muted">· {n.shortDescription}</span>
-                </Link>
+                </HardNavLink>
               </li>
             ))}
           </ul>

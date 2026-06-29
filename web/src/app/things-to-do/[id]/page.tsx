@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import HKShell from "@/components/hk/Shell";
+import HKDetailShell from "@/components/hk/DetailShell";
 import ListingDetail from "@/components/ListingDetail";
 import { things } from "@/data/handoff";
 import { getPlaceBySlug } from "@/lib/listings/catalog";
@@ -32,10 +32,10 @@ export default async function ThingDetailPage({ params }: Props) {
   if (!listing) notFound();
 
   return (
-    <HKShell>
+    <HKDetailShell>
       <div className="mx-auto max-w-3xl px-6 py-8">
         <ListingDetail listing={listing} backHref="/things-to-do" backLabel="Things to do" />
       </div>
-    </HKShell>
+    </HKDetailShell>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { MapPin, MessageCircle, Navigation } from "lucide-react";
 import SaveButton from "@/components/SaveButton";
+import HardNavLink from "@/components/hk/HardNavLink";
 import { nearItemDetailHref } from "@/lib/near-detail";
 import { CardImage, TagChip } from "./PageHero";
 import { diffStyles } from "@/data/handoff";
@@ -42,12 +42,12 @@ export function StayCard({ item }: { item: StayItem }) {
               WhatsApp
             </a>
           ) : null}
-          <Link
+          <HardNavLink
             href={href}
             className="tap flex flex-1 items-center justify-center rounded-xl border border-line bg-white py-2.5 text-[13.5px] font-semibold text-primary shadow-sm transition hover:border-steel hover:shadow-md"
           >
             View Details
-          </Link>
+          </HardNavLink>
           {item.slug ? (
             <SaveButton kind="stay" slug={item.slug} className="!w-auto !px-3" />
           ) : null}
@@ -86,12 +86,12 @@ export function EatCard({ item }: { item: EatItem }) {
           ))}
         </div>
         <div className="mt-4 flex gap-2">
-          <Link
+          <HardNavLink
             href={`/eat/${item.id}`}
             className="tap flex flex-1 items-center justify-center rounded-[11px] border border-grey py-2.5 text-[13.5px] font-semibold text-primary hover:border-steel"
           >
             View Details
-          </Link>
+          </HardNavLink>
           <SaveButton kind="restaurant" slug={item.id} className="!w-auto !px-3" />
           <a
             href={`https://maps.google.com/?q=${encodeURIComponent(item.name + " Kotagiri")}`}
@@ -151,12 +151,12 @@ export function NearCard({
         </div>
         <div className="mt-4 flex gap-2">
           {detailHref ? (
-            <Link
+            <HardNavLink
               href={detailHref}
               className="tap flex flex-1 items-center justify-center rounded-[11px] border border-grey py-2.5 text-[13.5px] font-semibold text-primary hover:border-steel"
             >
               View Details
-            </Link>
+            </HardNavLink>
           ) : (
             <span className="flex flex-1 items-center justify-center rounded-[11px] border border-dashed border-grey py-2.5 text-[13.5px] text-muted">
               No detail page
@@ -209,12 +209,12 @@ export function ThingCard({ item }: { item: ThingItem }) {
           <DetailRow label="Suits" value={item.suits} />
         </div>
         <div className="mt-4 flex gap-2">
-          <Link
+          <HardNavLink
             href={`/things-to-do/${item.id}`}
             className="tap flex flex-1 items-center justify-center rounded-[11px] border border-grey py-2.5 text-[13.5px] font-semibold text-primary hover:border-steel"
           >
             View Details
-          </Link>
+          </HardNavLink>
           <SaveButton kind="place" slug={item.id} className="!w-auto !px-3" />
           <a
             href={`https://maps.google.com/?q=${encodeURIComponent(item.name + " Kotagiri Nilgiris")}`}

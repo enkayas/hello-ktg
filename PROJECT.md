@@ -270,19 +270,33 @@ migrating static content into Next.js.**
 - [x] Listing tier pricing model designed into site copy
 
 ### In progress / not yet done
-- [ ] **Deploy to hellokotagiri.com** — wire Cloudflare Workers or Vercel to domain
-- [ ] **Migrate static content into Next.js** — attractions, restaurants, trip planner pages
-- [ ] **Unify design system** — blue/gold palette across Next.js app
-- [ ] **Owner "claim curated listing" flow** — let existing listed properties be claimed
-- [ ] **Restaurant owner admin** — CRUD for restaurant listings
-- [ ] **Razorpay integration** — booking deposits, subscription tiers, commission collection
-- [ ] **WhatsApp/email automation** — Edge Functions for instant notifications
-- [ ] **Reviews & ratings** — guest feedback on stays/restaurants
-- [ ] **Tamil/English toggle**
-- [ ] **Legal pages** — cancellation policy, T&C, privacy
-- [ ] **PWA polish** — offline-friendly, add-to-home-screen
-- [ ] **Map view** — property/attraction locations on interactive map
-- [ ] **Commission tracking dashboard** — admin view of revenue per booking/owner
+
+> **Full checklist:** see [`ROADMAP.md`](ROADMAP.md) — Phase 2 (smart discovery) and
+> Phase 3 (backend, AI, monetisation) with per-item status. Agents pick the next
+> unchecked item from the suggested build order.
+
+Summary of what remains:
+
+- [ ] **Phase 2** — geolocation + Haversine, unified mock models, detail pages,
+  recommendations, saved items, routes, business form, SEO, UI states
+- [ ] **Phase 3 additions** — PostGIS near-me, AI trip planner, lead logging,
+  Razorpay placeholder, full Supabase wiring for eat/places/gems, production pages
+
+Legacy items (superseded by ROADMAP.md where noted):
+
+- [x] Deploy to hellokotagiri.com
+- [~] Migrate static content into Next.js
+- [x] Unify design system (white/cards polish — ongoing)
+- [x] Owner claim curated listing flow (OTP + admin review)
+- [ ] Restaurant owner admin
+- [ ] Razorpay integration
+- [ ] WhatsApp/email automation
+- [ ] Reviews & ratings
+- [~] Tamil/English toggle
+- [ ] Legal pages
+- [ ] PWA polish
+- [ ] Map view
+- [ ] Commission tracking dashboard
 
 ---
 
@@ -317,15 +331,15 @@ while the laptop is closed.
 Public site + owner admin + admin console + request-to-book. Deploy to
 hellokotagiri.com. Commission tracked manually.
 
-### Phase 2 — Revenue & automation
-Razorpay payments (deposits, subscriptions, commission). WhatsApp/email
-notifications. Owner claim-listing flow. Restaurant owner admin.
+### Phase 2 — Smart discovery (mock data)
+See [`ROADMAP.md`](ROADMAP.md) § Phase 2. Geolocation, recommendations, saved items,
+routes, detail pages, trip planner upgrade. **No new backend.**
 
-### Phase 3 — Growth
-Reviews & ratings. Map view. Tamil/English. SEO content expansion. PWA.
-Analytics dashboard (commission, occupancy, lead conversion).
+### Phase 3 — Backend, AI, monetisation
+See [`ROADMAP.md`](ROADMAP.md) § Phase 3. PostGIS, AI trip planner, lead logging,
+partner plans. **Extends existing Supabase + `/owner` + `/admin`.**
 
-### Phase 4 — Platform
+### Phase 4 — Platform (future)
 Multi-destination expansion (other Nilgiri towns). API for third-party integrations.
 Silvertip Ventures ops dashboard integration.
 
@@ -378,7 +392,8 @@ Cursor **Cloud Agents** on GitHub. See `DEPLOY.md` Part 4.
 | `PROJECT.md` | **This file** — product vision, architecture, status |
 | `CLAUDE.md` | Detailed technical reference (file map, gotchas, build progress) |
 | `BACKEND-README.md` | Supabase setup guide for non-technical owner |
-| `PHASE-2-PLAN.md` | Phase 2 capabilities and revenue model detail |
+| `ROADMAP.md` | **Phase 2 & 3 task checklist** — what to build next |
+| `PHASE-2-PLAN.md` | Legacy notes (see ROADMAP.md instead) |
 | `web/AGENTS.md` | Next.js 16 agent rules |
 | `AGENTS.md` | General AI assistant context |
 | `research/kotagiri-deep-dive.md` | Local research and content sources |

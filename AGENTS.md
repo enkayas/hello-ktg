@@ -113,13 +113,13 @@ for input** and **notify when done**:
 ### Task prompt template (owner or agent can paste)
 
 ```
-Read PROJECT.md and PHASE-2-PLAN.md. Work through [specific scope] autonomously.
-Do not stop to ask me questions unless you are physically blocked (missing secret,
-ambiguous business decision). When done: commit, push, deploy via CI, and give me
-a plain-English summary of what shipped and what to test on hellokotagiri.com.
+Read ROADMAP.md and AGENTS.md. Complete [specific ROADMAP item or next unchecked
+item in suggested build order]. Work autonomously. Update ROADMAP.md checkboxes
+when done. Commit, push, deploy. Plain-English summary + what to test on
+hellokotagiri.com.
 ```
 
-**Scope one deliverable per agent run** (e.g. "Razorpay deposit flow" not "all of
+**Scope one deliverable per agent run** (e.g. "ROADMAP Phase 2 item 1" not "all of
 Phase 2") — better results, same autonomy.
 
 ### Agents must not
@@ -127,7 +127,10 @@ Phase 2") — better results, same autonomy.
 - End with "shall I continue?" when the task scope was already defined
 - Dump multi-step setup lists to the owner (one step, wait, next step)
 
+---
 
-This application provides a 360-degree view of a hospitality business and
-produces actionable insights to grow it profitably — starting with helloKotagiri,
-a one-stop travel platform for Kotagiri (stays, sightseeing, food, bookings).
+## Product backlog
+
+**[`ROADMAP.md`](ROADMAP.md)** — Phase 2 & 3 checklists with `[ ]` / `[~]` / `[x]`
+status. Read at session start. Pick the next item from "Suggested build order"
+unless the owner names a specific item.

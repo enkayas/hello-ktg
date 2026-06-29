@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where to Eat in Kotagiri — Restaurants, Cafés &amp; Local Cuisine</title>
+<meta name="description" content="A directory of Kotagiri's best restaurants and cafés — Silvertip Cafe, Dosapoint, Silvertip Cafe Select, Hobbit Garden and local Badaga & South Indian favourites.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#1f3a5c;--pine:#2e5a86;--leaf:#3f6f9e;--tea:#9db4ce;--mist:#eef4f9;--cream:#fbfcfe;--sun:#c79348;--gold-soft:#e8c583;--ink:#1e2a38;--muted:#5e6b7c;}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Inter Tight',sans-serif;letter-spacing:-.01em}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+a{color:inherit}
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:50;width:min(1180px,calc(100% - 28px));background:rgba(20,38,28,.28);backdrop-filter:blur(16px) saturate(140%);border:1px solid rgba(255,255,255,.16);border-radius:999px;transition:.3s}
+nav.scrolled{top:8px;background:rgba(251,252,254,.95);border-color:rgba(31,58,92,.08);box-shadow:0 8px 30px rgba(31,58,92,.12)}
+.nav-in{padding:11px 14px 11px 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Inter Tight';font-weight:700;font-size:21px;color:#fff;text-decoration:none}
+.logo em{font-family:'Caveat',cursive;font-weight:700;font-size:27px;color:var(--gold-soft);font-style:normal;margin-right:2px}
+nav.scrolled .logo{color:var(--forest)}nav.scrolled .logo em{color:var(--leaf)}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a:not(.btn){color:rgba(255,255,255,.92);text-decoration:none;font-size:14.5px;font-weight:500;padding:8px 14px;border-radius:999px;transition:.2s}
+.nav-links a:not(.btn):hover{background:rgba(255,255,255,.12)}
+nav.scrolled .nav-links a:not(.btn){color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:7px;background:var(--leaf);color:#fff;padding:11px 20px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 2px 8px rgba(63,111,158,.3);transition:.25s}
+.btn:hover{background:var(--pine);transform:translateY(-2px)}
+.btn.light{background:#fff;color:var(--forest)}
+.btn.outline{background:transparent;color:var(--forest);border:1.5px solid rgba(31,58,92,.25);box-shadow:none}
+@media(max-width:820px){.nav-links a:not(.btn){display:none}}
+.hero{position:relative;min-height:46vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:linear-gradient(180deg,rgba(20,32,52,.42),rgba(20,32,52,.8)),url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiritea.jpg?width=1600') center/cover}
+.hero .wrap{position:relative;z-index:2;padding:120px 24px 46px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:14px}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:var(--gold-soft)}
+.hero h1{font-size:clamp(32px,5.5vw,52px);font-weight:700;line-height:1.06;text-shadow:0 2px 30px rgba(0,0,0,.45)}
+.hero p{margin-top:14px;max-width:62ch;font-size:clamp(15px,1.9vw,18px);color:rgba(255,255,255,.94);text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.breadcrumb{font-size:13px;color:rgba(255,255,255,.8);margin-bottom:10px}
+.breadcrumb a{color:var(--gold-soft);text-decoration:none;font-weight:600}
+.section{padding:48px 0 72px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.chip{border:1.5px solid rgba(31,58,92,.15);background:#fff;color:var(--ink);padding:9px 18px;border-radius:999px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.18s}
+.chip:hover{border-color:var(--leaf)}
+.chip.active{background:var(--leaf);color:#fff;border-color:var(--leaf)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:880px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.card{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(31,58,92,.07);box-shadow:0 8px 24px rgba(20,32,52,.07);transition:.35s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-8px);box-shadow:0 28px 56px rgba(20,32,52,.18)}
+.card .ph{height:172px;background-size:cover;background-position:center;background-color:#7fa6cc;position:relative}
+.card .ph .tag{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.92);color:var(--forest);font-size:10.5px;font-weight:800;letter-spacing:.5px;padding:5px 11px;border-radius:999px;backdrop-filter:blur(4px)}
+.card .body{padding:18px;display:flex;flex-direction:column;flex:1}
+.badges{display:flex;gap:6px;margin-bottom:8px}
+.badge{font-size:10px;font-weight:800;letter-spacing:.6px;padding:3px 9px;border-radius:999px}
+.badge.f{background:var(--sun);color:#2a1d05}.badge.v{background:var(--leaf);color:#fff}
+.card h3{font-size:18.5px;color:var(--forest);margin-bottom:6px}
+.card .meta{font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:8px}
+.card p{font-size:13.5px;color:var(--muted);flex:1;line-height:1.55}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.link{color:var(--leaf);font-weight:700;font-size:13px;text-decoration:none}.link:hover{color:var(--pine)}
+.note{background:#fff;border:1px solid rgba(31,58,92,.1);border-left:4px solid var(--sun);border-radius:12px;padding:18px 22px;margin-top:30px;font-size:14.5px}
+.note b{color:var(--forest)}
+.empty{display:none;text-align:center;color:var(--muted);padding:50px 0}
+footer{background:#15263a;color:#a9bccf;padding:48px 0 26px;font-size:13.5px;margin-top:20px}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+@media(max-width:760px){.foot{grid-template-columns:1fr 1fr}}
+footer h4{color:#fff;font-size:14px;margin-bottom:12px}
+footer a{display:block;color:#a9bccf;text-decoration:none;margin-bottom:8px}footer a:hover{color:#fff}
+.foot-logo{font-family:'Inter Tight';font-size:20px;color:#fff;font-weight:700}
+.foot-logo em{font-family:'Caveat',cursive;font-weight:700;font-size:26px;color:var(--gold-soft);font-style:normal;margin-right:2px}
+.copy{border-top:1px solid rgba(255,255,255,.1);margin-top:30px;padding-top:18px;text-align:center;font-size:12px;color:#7f93a8}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><em>hello</em>Kotagiri</a>
+    <div class="nav-links">
+      <a href="index.html#explore">Explore</a>
+      <a href="hidden-kotagiri.html">Hidden Kotagiri</a>
+      <a href="nature-birding.html">Sholas &amp; Birding</a>
+      <a href="index.html#stays">Stays</a>
+      <a href="restaurants.html">Eat</a>
+      <a href="index.html#list" class="btn light" style="padding:9px 18px">List Your Property</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Where to Eat</div>
+    <span class="eyebrow">Eat &amp; drink</span>
+    <h1>Where to eat in Kotagiri</h1>
+    <p>From single-estate Nilgiri tea and specialty coffee to crisp dosas, Badaga home-cooking and whimsical garden dining — the town's best tables, in one place.</p>
+  </div>
+</header>
+
+<section class="section"><div class="wrap">
+  <div class="filters" id="filters">
+    <button class="chip active" data-f="all">All</button>
+    <button class="chip" data-f="cafe">Cafés &amp; coffee</button>
+    <button class="chip" data-f="southindian">South Indian</button>
+    <button class="chip" data-f="multicuisine">Multi-cuisine</button>
+    <button class="chip" data-f="veg">Pure veg</button>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <div class="card" data-cat="cafe">
+      <div class="ph" style="background-image:url('https://silvertipcafe.com/wp-content/uploads/2024/06/DB_1927.jpeg')"><span class="tag">CAFÉ</span></div>
+      <div class="body">
+        <div class="badges"><span class="badge f">FEATURED</span><span class="badge v">WEB VERIFIED</span></div>
+        <h3>Silvertip Cafe</h3>
+        <div class="meta">★ 4.5 · Aravenu, SH-15</div>
+        <p>A quaint café just before Aravenu — estate teas &amp; coffee, sandwiches, noodles, muffins and brownies, with a mini book-shop and plants for sale.</p>
+        <div class="row"><a class="btn" style="padding:9px 16px;font-size:13px" href="book.html?stay=Silvertip%20Cafe%20(table)&host=919381107922">Enquire</a><a class="link" href="https://silvertipcafe.com/" target="_blank" rel="noopener">Website →</a></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="southindian">
+      <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Masala_Dosa_from_Karnataka.jpg?width=900')"><span class="tag">SOUTH INDIAN</span></div>
+      <div class="body">
+        <div class="badges"><span class="badge f">FEATURED</span><span class="badge v">WEB VERIFIED</span></div>
+        <h3>Dosapoint by Silvertip</h3>
+        <div class="meta">★ 4.4 · Johnstone Square · opens 9 AM</div>
+        <p>Warm, cosy diner serving dosas and Tamil Nadu favourites. Dine-in &amp; delivery, with a kids' menu — a great early breakfast stop.</p>
+        <div class="row"><a class="btn" style="padding:9px 16px;font-size:13px" href="book.html?stay=Dosapoint%20by%20Silvertip%20(table)&host=919381107922">Enquire</a><a class="link" href="https://silvertipcafe.com/dosapoint/" target="_blank" rel="noopener">Website →</a></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="cafe">
+      <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/A_cup_of_coffee_with_latte_art.jpg?width=900')"><span class="tag">SPECIALTY COFFEE</span></div>
+      <div class="body">
+        <div class="badges"><span class="badge f">FEATURED</span><span class="badge v">WEB VERIFIED</span></div>
+        <h3>Silvertip Cafe Select</h3>
+        <div class="meta">★ 4.5 (306 reviews) · Johnstone Square</div>
+        <p>An elevated coffee experience in town — artisanal blends, gourmet pastries and contemporary plates. Famed brownies and lemon tea.</p>
+        <div class="row"><a class="btn" style="padding:9px 16px;font-size:13px" href="book.html?stay=Silvertip%20Cafe%20Select%20(table)&host=919381107922">Enquire</a><a class="link" href="https://silvertipcafe.com/silvertip-select/" target="_blank" rel="noopener">Website →</a></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="multicuisine">
+      <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Shola_forest_and_grassland.jpg?width=900')"><span class="tag">GARDEN DINING</span></div>
+      <div class="body">
+        <div class="badges"><span class="badge f">FEATURED</span><span class="badge v">WEB VERIFIED</span></div>
+        <h3>Hobbit Garden Restaurant</h3>
+        <div class="meta">Open daily 12–8:30 PM · Kesalada Rd, Aravenu</div>
+        <p>A whimsical, hobbit-inspired garden restaurant — international dishes and local specialities made with fresh, locally-sourced produce.</p>
+        <div class="row"><a class="btn" style="padding:9px 16px;font-size:13px" href="book.html?stay=Hobbit%20Garden%20Restaurant%20(table)&host=919381107922">Enquire</a><a class="link" href="https://www.thehobbitrestaurant.in/" target="_blank" rel="noopener">Website →</a></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="multicuisine">
+      <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiritea.jpg?width=900')"><span class="tag">TEA &amp; DINING</span></div>
+      <div class="body">
+        <div class="badges"><span class="badge v">LOCAL FAVOURITE</span></div>
+        <h3>Tea County Restaurant</h3>
+        <div class="meta">★ 4.2 · Kotagiri town</div>
+        <p>A well-loved spot for its ambience and food — and tea brewed from the finest Nilgiri leaves. A reliable sit-down meal in town.</p>
+        <div class="row"><a class="btn" style="padding:9px 16px;font-size:13px" href="book.html?stay=Tea%20County%20Restaurant%20(table)&host=919962541214">Enquire</a><a class="link" href="https://www.tripadvisor.in/Restaurants-g1162479-Kotagiri_The_Nilgiris_District_Tamil_Nadu.html" target="_blank" rel="noopener">Reviews →</a></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="veg southindian">
+      <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Masala_Dosa_from_Karnataka.jpg?width=900')"><span class="tag">PURE VEG</span></div>
+      <div class="body">
+        <div class="badges"><span class="badge v">LOCAL FAVOURITE</span></div>
+        <h3>Manna JSP Restaurant</h3>
+        <div class="meta">★ 4.1 · near Johnston Square</div>
+        <p>Popular vegetarian multi-cuisine — South Indian, North Indian, Chinese and tandoori — dependable and value-friendly.</p>
+        <div class="row"><a class="btn" style="padding:9px 16px;font-size:13px" href="book.html?stay=Manna%20JSP%20Restaurant%20(table)&host=919962541214">Enquire</a><a class="link" href="https://www.tripadvisor.in/Restaurants-g1162479-Kotagiri_The_Nilgiris_District_Tamil_Nadu.html" target="_blank" rel="noopener">Reviews →</a></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="cafe">
+      <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/A_cup_of_coffee_with_latte_art.jpg?width=900')"><span class="tag">CAFÉ</span></div>
+      <div class="body">
+        <div class="badges"><span class="badge v">LOCAL FAVOURITE</span></div>
+        <h3>High Grown</h3>
+        <div class="meta">Kotagiri town</div>
+        <p>Cosy café for good coffee and comfort food — coffee drinks alongside sandwiches, pizza and easy bites.</p>
+        <div class="row"><a class="btn" style="padding:9px 16px;font-size:13px" href="book.html?stay=High%20Grown%20(table)&host=919962541214">Enquire</a><a class="link" href="https://www.tripadvisor.in/Restaurants-g1162479-Kotagiri_The_Nilgiris_District_Tamil_Nadu.html" target="_blank" rel="noopener">Reviews →</a></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="veg multicuisine">
+      <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiritea.jpg?width=900')"><span class="tag">PURE VEG</span></div>
+      <div class="body">
+        <div class="badges"><span class="badge v">LOCAL FAVOURITE</span></div>
+        <h3>Hill-town veg messes</h3>
+        <div class="meta">Around the bus stand &amp; Johnston Square</div>
+        <p>Kotagiri's no-frills vegetarian messes serve generous South Indian thalis and tiffin at the best value in town — ask your host for today's pick.</p>
+        <div class="row"><a class="link" href="https://www.holidify.com/places/kotagiri/restaurants-places-to-eat-local-cuisine.html" target="_blank" rel="noopener">Local food guide →</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="empty" id="empty">No restaurants in this category yet — try another filter.</div>
+
+  <div class="note">
+    <b>Taste the local flavour.</b> Kotagiri is Badaga country — ask your homestay host about home-cooked Badaga meals, and don't leave without a cup of single-estate Nilgiri tea (chocolate, cardamom and ginger varieties are local favourites). Most sit-down places cluster around <b>Johnston Square</b> and <b>Donnington Road</b>, with Silvertip's venues out toward <b>Aravenu</b>.
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="foot">
+    <div><div class="foot-logo"><em>hello</em>Kotagiri</div>
+      <p style="margin-top:10px;max-width:300px">A local guide to the oldest hill station in the Nilgiris — its tables, its tea, and the people who cook here.</p></div>
+    <div><h4>Discover</h4><a href="index.html#explore">Places to visit</a><a href="hidden-kotagiri.html">Hidden Kotagiri</a><a href="nature-birding.html">Sholas &amp; Birding</a><a href="restaurants.html">Where to eat</a></div>
+    <div><h4>Plan</h4><a href="index.html#stays">Where to stay</a><a href="index.html#plan">Plan your trip</a><a href="index.html#list">List your property</a></div>
+  </div>
+  <div class="copy">© 2026 helloKotagiri · Made in the Nilgiris · Listings via official sites, Tripadvisor &amp; Zomato</div>
+</div></footer>
+
+<script>
+const nav=document.querySelector('nav');
+const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>20);
+onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+const chips=document.querySelectorAll('.chip');
+const cards=document.querySelectorAll('#grid .card');
+const empty=document.getElementById('empty');
+chips.forEach(c=>c.addEventListener('click',()=>{
+  chips.forEach(x=>x.classList.remove('active'));
+  c.classList.add('active');
+  const f=c.dataset.f;
+  let shown=0;
+  cards.forEach(card=>{
+    const cats=(card.dataset.cat||'').split(' ');
+    const match=(f==='all'||cats.includes(f));
+    card.style.display=match?'flex':'none';
+    if(match)shown++;
+  });
+  empty.style.display=shown?'none':'block';
+}));
+</script>
+</body>
+</html>

@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Travel Kotagiri — The Nilgiris' Quiet Hill Station</title>
+<meta name="description" content="The one-stop guide to Kotagiri: attractions, viewpoints, treks, homestays, B&Bs and restaurants. Plan your trip and book your stay." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --green-900:#10331f; --green-800:#16442a; --green-700:#1f5d3a; --green-600:#2a7a4d;
+  --green-500:#359a61; --green-100:#e3f1e8; --green-50:#f1f8f4;
+  --gold:#c8922a; --gold-dark:#a6761c; --gold-light:#f6ecd6;
+  --ink:#1c2620; --muted:#5d6b62; --line:#e2e8e3; --bg:#fbfcfb; --white:#fff;
+  --mist:#f4f7f5; --shadow:0 4px 24px rgba(16,51,31,.08); --shadow-lg:0 14px 44px rgba(16,51,31,.14);
+  --radius:16px; --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;line-height:1.15;font-weight:600;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:15px;padding:12px 22px;border-radius:999px;transition:.18s;text-align:center}
+.btn-primary{background:var(--green-700);color:#fff}
+.btn-primary:hover{background:var(--green-800);transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:#2a1d05}
+.btn-gold:hover{background:var(--gold-dark);color:#fff}
+.btn-ghost{background:transparent;color:var(--green-800);border:1.5px solid var(--green-600)}
+.btn-ghost:hover{background:var(--green-50)}
+.btn-block{width:100%;justify-content:center}
+.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:5px 11px;border-radius:999px;background:var(--green-100);color:var(--green-800)}
+.tag.gold{background:var(--gold-light);color:var(--gold-dark)}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-600)}
+.section{padding:72px 0}
+.section-head{max-width:680px;margin-bottom:38px}
+.section-head h2{font-size:clamp(28px,4vw,42px);margin:12px 0 10px}
+.section-head p{color:var(--muted);font-size:17px}
+
+/* ---------- Header ---------- */
+header.nav{position:sticky;top:0;z-index:50;background:rgba(251,252,251,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces';font-weight:700;font-size:21px;color:var(--green-800)}
+.logo .mk{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--green-600),var(--green-800));display:grid;place-items:center;color:#fff;font-size:18px}
+.logo small{display:block;font-family:'Inter';font-weight:600;font-size:10px;letter-spacing:.18em;color:var(--gold-dark);text-transform:uppercase;margin-top:-2px}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{padding:9px 14px;border-radius:9px;font-weight:500;font-size:15px;color:var(--ink);transition:.15s}
+.nav-links a:hover{background:var(--green-50);color:var(--green-800)}
+.nav-links a.active{color:var(--green-800);font-weight:600}
+.nav-cta{display:flex;align-items:center;gap:10px}
+.burger{display:none;background:none;border:none;font-size:26px;cursor:pointer;color:var(--green-800)}
+@media(max-width:920px){
+  .nav-links{position:fixed;inset:68px 0 auto 0;flex-direction:column;align-items:stretch;background:#fff;border-bottom:1px solid var(--line);padding:10px 18px;gap:2px;display:none;box-shadow:var(--shadow)}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:13px 12px}
+  .burger{display:block}
+  .nav-cta .btn-ghost{display:none}
+}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;color:#fff;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#10331f 0%,#1f5d3a 55%,#2a7a4d 100%)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(900px 380px at 80% -10%,rgba(200,146,42,.28),transparent 60%),
+  radial-gradient(700px 500px at 10% 120%,rgba(53,154,97,.5),transparent 60%);}
+.hero-mist{position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to top,var(--bg),transparent)}
+.hero .wrap{position:relative;padding:84px 22px 110px;text-align:center}
+.hero h1{font-size:clamp(36px,6vw,68px);font-weight:600;max-width:14ch;margin:18px auto 0;text-shadow:0 2px 30px rgba(0,0,0,.2)}
+.hero .lede{font-size:clamp(17px,2.2vw,21px);max-width:60ch;margin:20px auto 0;color:#eaf5ee;opacity:.95}
+.hero-pill{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:7px 16px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.04em}
+/* search box */
+.searchbar{margin:34px auto 0;max-width:760px;background:#fff;border-radius:18px;box-shadow:var(--shadow-lg);padding:10px;display:flex;gap:8px;flex-wrap:wrap}
+.searchbar .field{flex:1;min-width:150px;text-align:left;padding:8px 14px;border-radius:12px}
+.searchbar .field label{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.searchbar .field select,.searchbar .field input{border:none;outline:none;font-family:inherit;font-size:15px;font-weight:500;color:var(--ink);width:100%;background:transparent;cursor:pointer}
+.searchbar .divider{width:1px;background:var(--line);align-self:stretch;margin:6px 0}
+.searchbar .btn{align-self:stretch}
+@media(max-width:620px){.searchbar .divider{display:none}.searchbar .btn{width:100%}}
+.hero-stats{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+.hero-stats div{text-align:center}
+.hero-stats b{font-family:'Fraunces';font-size:30px;display:block;font-weight:600}
+.hero-stats span{font-size:13px;opacity:.85;letter-spacing:.03em}
+
+/* ---------- Cards / grids ---------- */
+.grid{display:grid;gap:24px}
+.g-3{grid-template-columns:repeat(3,1fr)}
+.g-2{grid-template-columns:repeat(2,1fr)}
+.g-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g-3,.g-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.g-2,.g-3,.g-4{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.2s;display:flex;flex-direction:column}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:transparent}
+.card .thumb{aspect-ratio:16/11;position:relative;overflow:hidden}
+.card .thumb .ph{position:absolute;inset:0}
+.card .body{padding:18px;display:flex;flex-direction:column;gap:9px;flex:1}
+.card h3{font-size:20px}
+.card .meta{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.card p{font-size:14.5px;color:var(--muted);flex:1}
+.card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.price{font-family:'Fraunces';font-weight:600;font-size:19px;color:var(--green-800)}
+.price small{font-family:'Inter';font-weight:500;font-size:12px;color:var(--muted)}
+.rate{font-size:13px;font-weight:700;color:var(--gold-dark);display:inline-flex;align-items:center;gap:4px}
+.ribbon{position:absolute;top:12px;left:12px;z-index:2}
+.fav{position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,.92);border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;display:grid;place-items:center;box-shadow:var(--shadow)}
+
+/* image placeholder gradients (no external assets) */
+.ph-tea{background:linear-gradient(160deg,#3d7a4f,#1f5d3a 70%)}
+.ph-mist{background:linear-gradient(160deg,#6fa886,#2a7a4d)}
+.ph-peak{background:linear-gradient(160deg,#516f7e,#26414e)}
+.ph-fall{background:linear-gradient(160deg,#4a8fa8,#1f5d6a)}
+.ph-shola{background:linear-gradient(160deg,#2f5d3a,#10331f)}
+.ph-heritage{background:linear-gradient(160deg,#b08a4e,#7a5a24)}
+.ph-stay1{background:linear-gradient(160deg,#7a9b6c,#3d6b3a)}
+.ph-stay2{background:linear-gradient(160deg,#a87f52,#6b4a24)}
+.ph-stay3{background:linear-gradient(160deg,#6b8fa8,#2e4d6b)}
+.ph-food1{background:linear-gradient(160deg,#c8922a,#a6761c)}
+.ph-food2{background:linear-gradient(160deg,#a85252,#6b2424)}
+.ph-food3{background:linear-gradient(160deg,#5b8a6b,#2a5a3a)}
+.ph-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.34),transparent 55%)}
+.ph-label{position:absolute;left:14px;bottom:12px;color:#fff;font-family:'Fraunces';font-size:15px;font-weight:500;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+
+/* ---------- Category strip ---------- */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:760px){.cats{grid-template-columns:repeat(2,1fr)}}
+.cat{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4;color:#fff;display:flex;align-items:flex-end;padding:18px;cursor:pointer;transition:.2s}
+.cat:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.cat .c-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,26,16,.78),rgba(8,26,16,.05) 70%)}
+.cat span{position:relative;font-family:'Fraunces';font-size:21px;font-weight:600}
+.cat small{position:relative;display:block;font-family:'Inter';opacity:.85;font-size:13px;margin-top:2px}
+
+/* ---------- Filters ---------- */
+.page-head{background:linear-gradient(135deg,var(--green-800),var(--green-600));color:#fff;padding:54px 0 46px}
+.page-head h1{font-size:clamp(30px,5vw,46px)}
+.page-head p{color:#dcefe3;max-width:60ch;margin-top:10px;font-size:17px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;align-items:center}
+.chip{border:1.5px solid var(--line);background:#fff;color:var(--ink);padding:9px 16px;border-radius:999px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--green-500)}
+.chip.active{background:var(--green-700);color:#fff;border-color:var(--green-700)}
+.search-inline{margin-left:auto;display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:999px;padding:8px 16px;background:#fff}
+.search-inline input{border:none;outline:none;font-family:inherit;font-size:14px;width:180px}
+
+/* ---------- Detail/info blocks ---------- */
+.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:760px){.info-grid{grid-template-columns:repeat(2,1fr)}}
+.info-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
+.info-card .ic{font-size:24px;margin-bottom:8px}
+.info-card h4{font-size:16px;margin-bottom:4px}
+.info-card p{font-size:14px;color:var(--muted)}
+
+/* ---------- Pricing tiers ---------- */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
+@media(max-width:880px){.tiers{grid-template-columns:1fr}}
+.tier{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:6px;position:relative}
+.tier.feat{border-color:var(--gold);box-shadow:0 12px 40px rgba(200,146,42,.18)}
+.tier .bestseller{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:#2a1d05;font-size:12px;font-weight:700;padding:5px 14px;border-radius:999px;letter-spacing:.04em}
+.tier h3{font-size:22px}
+.tier .amt{font-family:'Fraunces';font-size:40px;font-weight:600;color:var(--green-800);margin:6px 0}
+.tier .amt small{font-family:'Inter';font-size:14px;color:var(--muted);font-weight:500}
+.tier ul{list-style:none;margin:14px 0 20px;display:flex;flex-direction:column;gap:11px}
+.tier li{font-size:14.5px;display:flex;gap:10px;align-items:flex-start;color:var(--ink)}
+.tier li::before{content:"✓";color:var(--green-600);font-weight:800;flex-shrink:0}
+.tier li.no{color:var(--muted)}
+.tier li.no::before{content:"–";color:var(--muted)}
+
+/* revenue model cards */
+.rev{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:760px){.rev{grid-template-columns:1fr}}
+.rev-card{background:var(--green-50);border:1px solid var(--green-100);border-radius:16px;padding:24px}
+.rev-card .ic{font-size:26px}
+.rev-card h4{font-size:18px;margin:10px 0 6px}
+.rev-card p{color:var(--muted);font-size:14.5px}
+
+/* ---------- Forms / modal ---------- */
+.form-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;box-shadow:var(--shadow)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:620px){.form-row{grid-template-columns:1fr}}
+.field-g{margin-bottom:16px}
+.field-g label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.field-g input,.field-g select,.field-g textarea{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:12px 14px;font-family:inherit;font-size:15px;outline:none;transition:.15s;background:#fdfdfd}
+.field-g input:focus,.field-g select:focus,.field-g textarea:focus{border-color:var(--green-500);background:#fff}
+.field-g textarea{resize:vertical;min-height:90px}
+.note{font-size:13px;color:var(--muted)}
+.modal-bg{position:fixed;inset:0;background:rgba(16,38,24,.55);backdrop-filter:blur(4px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:20px;max-width:520px;width:100%;max-height:90vh;overflow:auto;padding:30px;position:relative}
+.modal .close{position:absolute;top:16px;right:16px;background:var(--mist);border:none;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer}
+.success{text-align:center;padding:14px 0}
+.success .big{font-size:46px}
+
+/* ---------- Misc ---------- */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+@media(max-width:860px){.split{grid-template-columns:1fr}}
+.feature-img{border-radius:20px;aspect-ratio:4/3;position:relative;overflow:hidden;box-shadow:var(--shadow-lg)}
+.checklist{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.checklist li{display:flex;gap:12px;align-items:flex-start}
+.checklist .ck{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--green-100);color:var(--green-700);display:grid;place-items:center;font-weight:800;font-size:14px}
+.checklist b{display:block}
+.checklist span{font-size:14px;color:var(--muted)}
+.banner{background:linear-gradient(120deg,var(--green-800),var(--green-600));border-radius:24px;padding:48px;color:#fff;text-align:center;position:relative;overflow:hidden}
+.banner::after{content:"";position:absolute;inset:0;background:radial-gradient(500px 240px at 85% 0,rgba(200,146,42,.3),transparent 60%)}
+.banner h2{font-size:clamp(26px,4vw,38px);position:relative}
+.banner p{position:relative;max-width:54ch;margin:12px auto 24px;color:#e7f4ec;font-size:17px}
+.banner .btns{position:relative;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+footer{background:var(--green-900);color:#cfe2d6;padding:56px 0 28px;margin-top:40px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:34px}
+@media(max-width:780px){.foot-grid{grid-template-columns:1fr 1fr}}
+footer h5{font-family:'Inter';font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:14px}
+footer a{display:block;padding:5px 0;color:#a9c6b3;font-size:14.5px}
+footer a:hover{color:#fff}
+.foot-logo{font-family:'Fraunces';font-size:22px;color:#fff;font-weight:600}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:34px;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:#8fb09b}
+
+.breadcrumb{font-size:13px;color:var(--muted);margin-bottom:8px}
+.breadcrumb a{color:var(--green-600);font-weight:600}
+.detail-hero{aspect-ratio:21/9;border-radius:20px;position:relative;overflow:hidden;box-shadow:var(--shadow-lg)}
+@media(max-width:620px){.detail-hero{aspect-ratio:4/3}}
+.detail-meta{display:flex;gap:22px;flex-wrap:wrap;margin:18px 0;color:var(--muted);font-size:14.5px}
+.detail-meta b{color:var(--ink)}
+.amenities{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.amenity{background:var(--green-50);border:1px solid var(--green-100);padding:7px 13px;border-radius:10px;font-size:13.5px;font-weight:500}
+.booking-box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);position:sticky;top:88px}
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--green-800);color:#fff;padding:14px 22px;border-radius:12px;box-shadow:var(--shadow-lg);font-weight:600;font-size:14px;z-index:200;transition:.3s;opacity:0}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.testi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
+.testi p{font-size:15px;font-style:italic;color:var(--ink)}
+.testi .who{margin-top:14px;font-weight:600;font-size:14px}
+.testi .who small{display:block;color:var(--muted);font-weight:400}
+</style>
+</head>
+<body>
+
+<!-- ======= HEADER ======= -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#/" class="logo" onclick="closeMenu()">
+      <span class="mk">⛰</span>
+      <span>Travel Kotagiri<small>The Quiet Nilgiris</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#/attractions">Attractions</a>
+      <a href="#/things-to-do">Things to Do</a>
+      <a href="#/stays">Stays</a>
+      <a href="#/eat">Eat &amp; Drink</a>
+      <a href="#/plan">Plan Your Trip</a>
+      <a href="#/list-property" class="m-only">List Your Property</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#/plan" class="btn btn-ghost">Plan a Trip</a>
+      <a href="#/list-property" class="btn btn-gold" onclick="closeMenu()">List Your Property</a>
+      <button class="burger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<!-- ======= FOOTER ======= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">⛰ Travel Kotagiri</div>
+        <p style="margin-top:12px;max-width:34ch;color:#a9c6b3;font-size:14.5px">The one-stop guide to the Nilgiris' quietest hill station — misty tea estates, dramatic viewpoints, and warm homestays, minus the crowds.</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <a href="#/attractions">Attractions</a>
+        <a href="#/things-to-do">Things to Do</a>
+        <a href="#/plan">Plan Your Trip</a>
+        <a href="#/stays">Where to Stay</a>
+        <a href="#/eat">Where to Eat</a>
+      </div>
+      <div>
+        <h5>For Owners</h5>
+        <a href="#/list-property">List Your Property</a>
+        <a href="#/list-property">Pricing &amp; Plans</a>
+        <a href="#/list-property">Featured Placement</a>
+        <a href="#/list-property">Partner Login</a>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <a href="mailto:hello@travelkotagiri.in">hello@travelkotagiri.in</a>
+        <a href="#/">+91 90000 00000</a>
+        <a href="#/">Kotagiri, The Nilgiris, TN</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Travel Kotagiri. Built for travelers and local hosts.</span>
+      <span>Privacy · Terms · A demo prototype</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-bg" id="modalBg"><div class="modal" id="modalBox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   DATA  — researched real Kotagiri attractions + sample listings
+   ========================================================= */
+const ATTRACTIONS = [
+  {id:'kodanad',name:'Kodanad View Point',ph:'ph-mist',cat:'Viewpoint',blurb:'Panoramic views across the Nilgiri hills, the Moyar River and the plains of the Eastern Ghats, from 6,000 ft. A legendary sunrise spot.',distance:'16 km from town',time:'1.5–2 hrs',best:'Early morning for sunrise',
+    long:'Perched at roughly 6,000 feet at the edge of the plateau, Kodanad is where the Nilgiris drop away dramatically into the Moyar valley and the plains beyond. On clear mornings you can see the Moyar River snaking far below and ridge after ridge fading into haze. The drive there winds through tea estates and a meadow, and the final approach is a short walk to the watchtower.',tags:['Sunrise','Photography','Family']},
+  {id:'catherine',name:'Catherine Falls',ph:'ph-fall',cat:'Waterfall',blurb:'A spectacular two-tiered waterfall plunging around 250 feet through dense shola forest — one of the tallest in the Nilgiris.',distance:'8 km from town',time:'2–3 hrs',best:'Oct–May, morning to noon',
+    long:'Catherine Falls is a two-tiered cascade dropping about 250 feet, framed by tea estates and shola forest. There is a viewpoint that takes in the whole drop from a distance, and a steeper trail down for those who want to get closer. Best visited between morning and noon in the Oct–May window; it can be risky during the monsoon and in the evening.',tags:['Waterfall','Trek','Photography']},
+  {id:'elk',name:'Elk Falls',ph:'ph-fall',cat:'Waterfall',blurb:'A serene 80-ft waterfall tucked into greenery a short drive from town — quieter and more intimate than Catherine.',distance:'7 km from town',time:'1–2 hrs',best:'Oct–May',
+    long:'Smaller and far less visited than Catherine, Elk Falls drops around 80 feet into a calm pool surrounded by forest. It is the kind of place you can have largely to yourself on a weekday — ideal for a quiet picnic and the sound of falling water.',tags:['Waterfall','Quiet','Picnic']},
+  {id:'longwood',name:'Longwood Shola',ph:'ph-shola',cat:'Nature',blurb:'A protected pocket of ancient shola rainforest rich in birds and endemic flora — a gentle, beginner-friendly nature trail.',distance:'2 km from town',time:'1–2 hrs',best:'Morning, year-round',
+    long:'Longwood Shola is one of the last remaining patches of native shola forest right beside town. A well-marked, mostly easy trail loops through the canopy, and it is a haven for birdwatchers — the Nilgiri laughingthrush, flycatchers and more. Go with a local guide to spot the most and tread lightly; this is a fragile, protected ecosystem.',tags:['Birding','Easy trek','Family']},
+  {id:'rangasamy',name:'Rangasamy Peak & Pillar',ph:'ph-peak',cat:'Viewpoint',blurb:'A sacred peak rising to ~1,785 m with sweeping valley views and a natural rock pillar revered by local communities.',distance:'12 km from town',time:'Half day',best:'Dec–May',
+    long:'Rangasamy Peak and the nearby Rangasamy Pillar are both sacred to the indigenous communities of the Nilgiris and offer some of the most panoramic views in the region. The peak rises to around 1,785 metres. Reaching it is a moderate trek and best attempted in the clear, dry months.',tags:['Trek','Sacred site','Views']},
+  {id:'sullivan',name:'John Sullivan Memorial',ph:'ph-heritage',cat:'Heritage',blurb:"A restored colonial-era bungalow honouring Kotagiri's founder, now a small museum on Nilgiri history and tribal heritage.",distance:'4 km from town',time:'1 hr',best:'Year-round',
+    long:"Pethakal Bungalow, home of John Sullivan — the British collector credited with founding Kotagiri and opening the Nilgiris — has been restored into a memorial and museum by the Nilgiri Documentation Centre. It is a thoughtful stop on the area's colonial and tribal history, set on a hill with fine valley views.",tags:['Museum','History','Family']},
+];
+
+const TODO = [
+  {ic:'🥾',name:'Tea-estate & Kodanad trek',desc:'Walk through working tea gardens, a meadow and shola down toward the Moyar viewpoint. Half-day, moderate.'},
+  {ic:'🐦',name:'Birdwatching at Longwood Shola',desc:'Early-morning guided walk for endemic Nilgiri species. Easy, great for families.'},
+  {ic:'🍵',name:'Tea factory tour & tasting',desc:'See how Nilgiri tea is plucked, withered and rolled — finish with a tasting of estate-fresh leaf.'},
+  {ic:'💦',name:'Waterfall day (Catherine + Elk)',desc:'Pair the two falls in one morning. Carry water and grippy shoes; go before noon.'},
+  {ic:'📷',name:'Sunrise at Kodanad',desc:'Set out before dawn for the plateau-edge light show over the Moyar valley.'},
+  {ic:'🛕',name:'Rangasamy Peak pilgrimage trek',desc:'A moderate climb to a sacred peak with 360° Nilgiri views.'},
+];
+
+const STAYS = [
+  {id:'mistwood',name:'Mistwood Tea Estate Homestay',type:'Homestay',ph:'ph-stay1',price:3200,rate:4.9,reviews:128,area:'Kannerimukku',feat:true,
+    desc:'A colonial planter\'s cottage on a working tea estate, with valley-view verandahs, log fires and home-cooked Nilgiri meals.',
+    amenities:['Tea-estate views','Home-cooked meals','Wi-Fi','Bonfire','Free parking','Pet-friendly'],beds:'3 rooms · sleeps 8'},
+  {id:'cloudberry',name:'Cloudberry B&B',type:'B&B',ph:'ph-stay2',price:2400,rate:4.7,reviews:86,area:'Town centre',feat:false,
+    desc:'A cosy, modern bed-and-breakfast a 5-minute walk from the bus stand, with hearty breakfasts and a sunny garden.',
+    amenities:['Breakfast included','Wi-Fi','Hot water','Garden','Near town'],beds:'4 rooms · sleeps 8'},
+  {id:'shola-nest',name:'Shola Nest Eco-Cottage',type:'Cottage',ph:'ph-stay3',price:4100,rate:4.8,reviews:64,area:'Near Longwood Shola',feat:true,
+    desc:'An off-grid timber cottage at the forest edge — wake to birdsong, solar-warm showers and total quiet.',
+    amenities:['Forest setting','Solar power','Birdwatching','Wi-Fi','Breakfast'],beds:'2 rooms · sleeps 5'},
+  {id:'kodanad-view',name:'Kodanad Valley View Homestay',type:'Homestay',ph:'ph-stay1',price:2800,rate:4.6,reviews:51,area:'Kodanad road',feat:false,
+    desc:'Simple, spotless rooms with the best private sunrise view in the area, run by a warm local family.',
+    amenities:['Valley views','Home meals','Free parking','Guided treks'],beds:'3 rooms · sleeps 7'},
+  {id:'planters',name:"The Planter's Bungalow",type:'Heritage',ph:'ph-stay2',price:5600,rate:4.9,reviews:97,area:'Aravenu',feat:true,
+    desc:'A lovingly restored 1920s bungalow with antique interiors, fireplaces and a sweeping lawn for stargazing.',
+    amenities:['Heritage property','Fireplace','Full board available','Lawn','Wi-Fi','Butler service'],beds:'4 suites · sleeps 9'},
+  {id:'green-gables',name:'Green Gables B&B',type:'B&B',ph:'ph-stay3',price:2100,rate:4.5,reviews:73,area:'Bikkapathy',feat:false,
+    desc:'Budget-friendly and friendly, with clean rooms, filter coffee on tap and easy access to trek trailheads.',
+    amenities:['Budget','Breakfast','Wi-Fi','Trek access','Hot water'],beds:'5 rooms · sleeps 10'},
+];
+
+const EATS = [
+  {id:'kurinji',name:'Kurinji Kitchen',type:'South Indian',ph:'ph-food3',price:'₹₹',rate:4.8,reviews:204,area:'Town centre',feat:true,
+    desc:'Beloved local spot for crisp dosas, Nilgiri-style varuval and bottomless filter coffee. Always busy at breakfast.',
+    tagsx:['Pure veg','Breakfast','Filter coffee']},
+  {id:'estate-table',name:'The Estate Table',type:'Continental & Indian',ph:'ph-food1',price:'₹₹₹',rate:4.7,reviews:142,area:'Kannerimukku',feat:true,
+    desc:'Farm-to-table dining inside a tea estate — wood-fired pizzas, slow roasts and a valley-view deck.',
+    tagsx:['Valley view','Bar','Reserve ahead']},
+  {id:'spice-route',name:'Spice Route',type:'Chettinad',ph:'ph-food2',price:'₹₹',rate:4.6,reviews:118,area:'Bus stand road',feat:false,
+    desc:'Fiery Chettinad non-veg done right — pepper chicken, fish fry and biryani that locals queue for.',
+    tagsx:['Non-veg','Spicy','Family']},
+  {id:'misty-mug',name:'The Misty Mug Café',type:'Café & Bakery',ph:'ph-food1',price:'₹₹',rate:4.7,reviews:96,area:'Town centre',feat:false,
+    desc:'Hill-station café for fresh bakes, single-estate teas, pour-over coffee and a quiet corner to read.',
+    tagsx:['Café','Vegan options','Wi-Fi']},
+  {id:'amma-mess',name:"Amma's Mess",type:'Home-style',ph:'ph-food3',price:'₹',rate:4.5,reviews:167,area:'Bikkapathy',feat:false,
+    desc:'No-frills unlimited meals on a banana leaf — the cheapest, most generous lunch in town.',
+    tagsx:['Budget','Veg & non-veg','Lunch']},
+  {id:'tea-trails',name:'Tea Trails Bistro',type:'Multi-cuisine',ph:'ph-food1',price:'₹₹₹',rate:4.8,reviews:88,area:'Aravenu',feat:true,
+    desc:'Elegant multi-cuisine bistro with tasting menus built around Nilgiri produce and estate tea pairings.',
+    tagsx:['Fine dining','Bar','Reserve ahead']},
+];
+</script>
+
+<script>
+/* =========================================================
+   ROUTER + VIEWS
+   ========================================================= */
+const app = document.getElementById('app');
+const fav = new Set();
+
+function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('open')}
+function closeMenu(){document.getElementById('navLinks').classList.remove('open')}
+
+function setActive(){
+  const h=location.hash||'#/';
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('active', a.getAttribute('href')===h);
+  });
+}
+
+/* ---- reusable bits ---- */
+function attractionCard(a){
+  return `<a class="card" href="#/attraction/${a.id}">
+    <div class="thumb"><div class="ph ${a.ph}"></div><div class="ph-overlay"></div>
+      <span class="ribbon tag">${esc(a.cat)}</span>
+      <span class="ph-label">${esc(a.name)}</span>
+    </div>
+    <div class="body">
+      <div class="meta">📍 ${esc(a.distance)} · ⏱ ${esc(a.time)}</div>
+      <p>${esc(a.blurb)}</p>
+      <div class="foot"><span class="rate">★ Best: ${esc(a.best)}</span><span style="color:var(--green-700);font-weight:600;font-size:14px">Details →</span></div>
+    </div></a>`;
+}
+function stayCard(s){
+  return `<div class="card">
+    <div class="thumb"><div class="ph ${s.ph}"></div><div class="ph-overlay"></div>
+      ${s.feat?'<span class="ribbon tag gold">★ Featured</span>':''}
+      <button class="fav" onclick="toggleFav('${s.id}',this)">${fav.has(s.id)?'♥':'♡'}</button>
+      <span class="ph-label">${esc(s.type)} · ${esc(s.area)}</span>
+    </div>
+    <div class="body">
+      <h3>${esc(s.name)}</h3>
+      <div class="meta"><span class="rate">★ ${s.rate}</span> · ${s.reviews} reviews · 🛏 ${esc(s.beds)}</div>
+      <p>${esc(s.desc)}</p>
+      <div class="foot">
+        <span class="price">₹${s.price.toLocaleString('en-IN')} <small>/ night</small></span>
+        <a class="btn btn-primary" style="padding:9px 16px;font-size:14px" href="#/stay/${s.id}">View &amp; Book</a>
+      </div>
+    </div></div>`;
+}
+function eatCard(e){
+  return `<div class="card">
+    <div class="thumb"><div class="ph ${e.ph}"></div><div class="ph-overlay"></div>
+      ${e.feat?'<span class="ribbon tag gold">★ Featured</span>':''}
+      <span class="ph-label">${esc(e.type)} · ${esc(e.area)}</span>
+    </div>
+    <div class="body">
+      <h3>${esc(e.name)}</h3>
+      <div class="meta"><span class="rate">★ ${e.rate}</span> · ${e.reviews} reviews · ${esc(e.price)}</div>
+      <p>${esc(e.desc)}</p>
+      <div class="foot">
+        <span>${e.tagsx.map(t=>`<span class="amenity" style="padding:4px 9px;font-size:12px">${esc(t)}</span>`).join(' ')}</span>
+      </div>
+      <button class="btn btn-ghost btn-block" style="margin-top:6px" onclick="enquire('${esc(e.name)}','table')">Reserve a Table</button>
+    </div></div>`;
+}
+
+function toggleFav(id,btn){if(fav.has(id)){fav.delete(id);btn.textContent='♡'}else{fav.add(id);btn.textContent='♥';toast('Saved to your trip')}}
+
+/* ======= HOME ======= */
+function viewHome(){
+  return `
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="wrap">
+      <span class="hero-pill">🍃 The least-crowded of the three Nilgiri hill stations</span>
+      <h1>Discover Kotagiri, the quiet heart of the Nilgiris</h1>
+      <p class="lede">Misty tea estates, dramatic plateau-edge viewpoints, gentle shola treks and warm homestays — your complete one-stop guide to planning, exploring and staying in Kotagiri.</p>
+      <div class="searchbar">
+        <div class="field">
+          <label>Looking for</label>
+          <select id="hsType">
+            <option value="stays">Places to stay</option>
+            <option value="eat">Restaurants</option>
+            <option value="attractions">Attractions</option>
+            <option value="things-to-do">Things to do</option>
+          </select>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>Area</label>
+          <select id="hsArea">
+            <option>Any area</option><option>Town centre</option><option>Kannerimukku</option><option>Aravenu</option><option>Near Longwood Shola</option>
+          </select>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>Keyword</label>
+          <input id="hsKw" placeholder="e.g. valley view, veg, sunrise"/>
+        </div>
+        <button class="btn btn-primary" onclick="doHeroSearch()">Search →</button>
+      </div>
+      <div class="hero-stats">
+        <div><b>6,000 ft</b><span>plateau-edge views</span></div>
+        <div><b>30+</b><span>curated places</span></div>
+        <div><b>Dec–May</b><span>best season</span></div>
+        <div><b>75 km</b><span>from Coimbatore airport</span></div>
+      </div>
+    </div>
+    <div class="hero-mist"></div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cats">
+        <a class="cat" href="#/attractions"><div class="ph ph-mist"></div><div class="c-ov"></div><div><span>Attractions</span><small>Viewpoints, falls &amp; forests</small></div></a>
+        <a class="cat" href="#/things-to-do"><div class="ph ph-tea"></div><div class="c-ov"></div><div><span>Things to Do</span><small>Treks, tea tours &amp; birding</small></div></a>
+        <a class="cat" href="#/stays"><div class="ph ph-stay1"></div><div class="c-ov"></div><div><span>Where to Stay</span><small>Homestays &amp; B&amp;Bs</small></div></a>
+        <a class="cat" href="#/eat"><div class="ph ph-food1"></div><div class="c-ov"></div><div><span>Where to Eat</span><small>Cafés &amp; local kitchens</small></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Don't miss</span>
+        <h2>Kotagiri's signature sights</h2>
+        <p>From sunrise at the plateau edge to two-tiered waterfalls and ancient shola forest.</p>
+      </div>
+      <div class="grid g-3">${ATTRACTIONS.slice(0,3).map(attractionCard).join('')}</div>
+      <div style="margin-top:26px"><a class="btn btn-ghost" href="#/attractions">See all attractions →</a></div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--mist);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">Rest easy</span><h2>Stay among the tea gardens</h2><p>Hand-picked homestays, B&amp;Bs and heritage bungalows — book directly with local hosts.</p></div>
+      <div class="grid g-3">${STAYS.filter(s=>s.feat).map(stayCard).join('')}</div>
+      <div style="margin-top:26px"><a class="btn btn-ghost" href="#/stays">Browse all stays →</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">Eat local</span><h2>Where Kotagiri eats</h2><p>Filter-coffee breakfasts, fiery Chettinad and farm-to-table dining with a view.</p></div>
+      <div class="grid g-3">${EATS.filter(e=>e.feat).map(eatCard).join('')}</div>
+      <div style="margin-top:26px"><a class="btn btn-ghost" href="#/eat">Browse all restaurants →</a></div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="banner">
+        <h2>Own a homestay, B&amp;B or restaurant in Kotagiri?</h2>
+        <p>Reach thousands of travellers planning their Nilgiri trip. List your property, get direct enquiries and bookings, and grow with featured placement.</p>
+        <div class="btns">
+          <a class="btn btn-gold" href="#/list-property">List Your Property — from ₹0</a>
+          <a class="btn btn-ghost" style="color:#fff;border-color:#fff" href="#/list-property">See pricing</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">Loved by travellers</span><h2>From recent visitors</h2></div>
+      <div class="grid g-3">
+        <div class="testi"><p>"Kotagiri was the highlight of our Nilgiri trip — none of Ooty's crowds. This guide's homestay picks were spot on."</p><div class="who">Priya &amp; Arun<small>Bengaluru · stayed at Mistwood</small></div></div>
+        <div class="testi"><p>"Booked a tea-estate trek and a table at The Estate Table in ten minutes. Sunrise at Kodanad is unreal."</p><div class="who">Daniel R.<small>Mumbai · 3-day trip</small></div></div>
+        <div class="testi"><p>"As a homestay owner, the enquiries started coming within a week of listing. Featured placement was worth it."</p><div class="who">Lakshmi S.<small>Host · Shola Nest</small></div></div>
+      </div>
+    </div>
+  </section>
+  `;
+}
+
+/* ======= ATTRACTIONS ======= */
+let attrFilter='All';
+function viewAttractions(){
+  const cats=['All',...new Set(ATTRACTIONS.map(a=>a.cat))];
+  const list=ATTRACTIONS.filter(a=>attrFilter==='All'||a.cat===attrFilter);
+  return `
+  <div class="page-head"><div class="wrap">
+    <h1>Attractions &amp; viewpoints</h1>
+    <p>The plateau-edge lookouts, waterfalls, sacred peaks and shola forests that make Kotagiri special.</p>
+  </div></div>
+  <section class="section"><div class="wrap">
+    <div class="filters">
+      ${cats.map(c=>`<button class="chip ${attrFilter===c?'active':''}" onclick="attrFilter='${c}';render()">${esc(c)}</button>`).join('')}
+    </div>
+    <div class="grid g-3">${list.map(attractionCard).join('')}</div>
+  </div></section>`;
+}
+function viewAttraction(id){
+  const a=ATTRACTIONS.find(x=>x.id===id); if(!a) return notFound();
+  const more=ATTRACTIONS.filter(x=>x.id!==id).slice(0,3);
+  return `<section class="section"><div class="wrap">
+    <div class="breadcrumb"><a href="#/attractions">Attractions</a> / ${esc(a.name)}</div>
+    <div class="detail-hero"><div class="ph ${a.ph}"></div><div class="ph-overlay"></div>
+      <span class="ribbon tag">${esc(a.cat)}</span>
+      <span class="ph-label" style="font-size:22px">${esc(a.name)}</span></div>
+    <div class="split" style="margin-top:30px;align-items:flex-start">
+      <div>
+        <h1 style="font-size:34px">${esc(a.name)}</h1>
+        <div class="detail-meta"><span>📍 <b>${esc(a.distance)}</b></span><span>⏱ <b>${esc(a.time)}</b></span><span>🗓 Best: <b>${esc(a.best)}</b></span></div>
+        <p style="font-size:17px;color:var(--ink)">${esc(a.long)}</p>
+        <div class="amenities">${a.tags.map(t=>`<span class="amenity">${esc(t)}</span>`).join('')}</div>
+      </div>
+      <div class="booking-box">
+        <h3 style="font-size:20px">Plan your visit</h3>
+        <p class="note" style="margin:8px 0 14px">Want a local guide or transport to ${esc(a.name)}? Send an enquiry and a Kotagiri host will help.</p>
+        <button class="btn btn-primary btn-block" onclick="enquire('${esc(a.name)}','guide')">Enquire about a guided visit</button>
+        <a class="btn btn-ghost btn-block" style="margin-top:10px" href="#/plan">Build a full itinerary</a>
+      </div>
+    </div>
+    <div style="margin-top:54px"><h2 style="font-size:26px;margin-bottom:20px">More to explore</h2>
+      <div class="grid g-3">${more.map(attractionCard).join('')}</div></div>
+  </div></section>`;
+}
+
+/* ======= THINGS TO DO ======= */
+function viewTodo(){
+  return `
+  <div class="page-head"><div class="wrap"><h1>Things to do in Kotagiri</h1>
+    <p>Treks, tea tours, birding and slow mornings — how to actually spend your days.</p></div></div>
+  <section class="section"><div class="wrap">
+    <div class="grid g-3">
+      ${TODO.map(t=>`<div class="card"><div class="body">
+        <div style="font-size:34px">${t.ic}</div>
+        <h3>${esc(t.name)}</h3>
+        <p>${esc(t.desc)}</p>
+        <button class="btn btn-ghost btn-block" style="margin-top:8px" onclick="enquire('${esc(t.name)}','activity')">Enquire / Book</button>
+      </div></div>`).join('')}
+    </div>
+    <div class="banner" style="margin-top:48px">
+      <h2>Not sure how to fit it all in?</h2>
+      <p>Tell us your dates and pace — we'll suggest a 1, 2 or 3-day Kotagiri itinerary.</p>
+      <div class="btns"><a class="btn btn-gold" href="#/plan">Plan my trip →</a></div>
+    </div>
+  </div></section>`;
+}
+
+/* ======= STAYS ======= */
+let stayFilter='All', staySort='feat';
+function viewStays(){
+  const types=['All',...new Set(STAYS.map(s=>s.type))];
+  let list=STAYS.filter(s=>stayFilter==='All'||s.type===stayFilter);
+  if(staySort==='price') list=[...list].sort((a,b)=>a.price-b.price);
+  else if(staySort==='rate') list=[...list].sort((a,b)=>b.rate-a.rate);
+  else list=[...list].sort((a,b)=>(b.feat?1:0)-(a.feat?1:0));
+  return `
+  <div class="page-head"><div class="wrap"><h1>Where to stay in Kotagiri</h1>
+    <p>Homestays, B&amp;Bs, cottages and heritage bungalows — book directly with verified local hosts, no middleman markup.</p></div></div>
+  <section class="section"><div class="wrap">
+    <div class="filters">
+      ${types.map(t=>`<button class="chip ${stayFilter===t?'active':''}" onclick="stayFilter='${t}';render()">${esc(t)}</button>`).join('')}
+      <div class="search-inline" style="margin-left:auto">
+        <span>Sort</span>
+        <select onchange="staySort=this.value;render()" style="border:none;outline:none;font-family:inherit;font-weight:600;font-size:14px;background:transparent;cursor:pointer">
+          <option value="feat" ${staySort==='feat'?'selected':''}>Featured</option>
+          <option value="price" ${staySort==='price'?'selected':''}>Price: low to high</option>
+          <option value="rate" ${staySort==='rate'?'selected':''}>Top rated</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid g-3">${list.map(stayCard).join('')}</div>
+  </div></section>`;
+}
+function viewStay(id){
+  const s=STAYS.find(x=>x.id===id); if(!s) return notFound();
+  return `<section class="section"><div class="wrap">
+    <div class="breadcrumb"><a href="#/stays">Stays</a> / ${esc(s.name)}</div>
+    <div class="detail-hero"><div class="ph ${s.ph}"></div><div class="ph-overlay"></div>
+      ${s.feat?'<span class="ribbon tag gold">★ Featured</span>':''}
+      <span class="ph-label" style="font-size:22px">${esc(s.name)}</span></div>
+    <div class="split" style="margin-top:30px;align-items:flex-start">
+      <div>
+        <h1 style="font-size:34px">${esc(s.name)}</h1>
+        <div class="detail-meta"><span class="rate">★ ${s.rate}</span><span>${s.reviews} reviews</span><span>🏷 ${esc(s.type)}</span><span>📍 ${esc(s.area)}</span><span>🛏 ${esc(s.beds)}</span></div>
+        <p style="font-size:17px">${esc(s.desc)} Hosted by a local family, this is the kind of place that makes a Kotagiri trip memorable — slow mornings, home-cooked food and views that don't make it onto postcards.</p>
+        <h3 style="margin:22px 0 4px">What this place offers</h3>
+        <div class="amenities">${s.amenities.map(t=>`<span class="amenity">✓ ${esc(t)}</span>`).join('')}</div>
+        <h3 style="margin:22px 0 8px">Good to know</h3>
+        <p class="note">Check-in 1 PM · Check-out 11 AM · Children welcome · Confirm meal plans and trek add-ons directly with the host via your enquiry.</p>
+      </div>
+      <div class="booking-box">
+        <div class="price" style="font-size:26px">₹${s.price.toLocaleString('en-IN')} <small>/ night</small></div>
+        <div class="field-g" style="margin-top:14px"><label>Check-in</label><input type="date" id="bIn"></div>
+        <div class="field-g"><label>Check-out</label><input type="date" id="bOut"></div>
+        <div class="field-g"><label>Guests</label><select id="bGuests"><option>1 guest</option><option>2 guests</option><option selected>2 guests</option><option>3 guests</option><option>4 guests</option><option>5+ guests</option></select></div>
+        <button class="btn btn-primary btn-block" onclick="enquire('${esc(s.name)}','stay')">Request to Book</button>
+        <button class="btn btn-ghost btn-block" style="margin-top:10px" onclick="toggleFav('${s.id}',{textContent:''});toast('Saved to your trip')">♡ Save to trip</button>
+        <p class="note" style="margin-top:12px;text-align:center">You won't be charged yet — the host confirms availability first.</p>
+      </div>
+    </div>
+  </div></section>`;
+}
+
+/* ======= EAT ======= */
+let eatFilter='All';
+function viewEat(){
+  const types=['All',...new Set(EATS.map(e=>e.type))];
+  const list=EATS.filter(e=>eatFilter==='All'||e.type===eatFilter);
+  return `
+  <div class="page-head"><div class="wrap"><h1>Eat &amp; drink in Kotagiri</h1>
+    <p>From banana-leaf meals and filter coffee to farm-to-table dining with a valley view.</p></div></div>
+  <section class="section"><div class="wrap">
+    <div class="filters">${types.map(t=>`<button class="chip ${eatFilter===t?'active':''}" onclick="eatFilter='${t}';render()">${esc(t)}</button>`).join('')}</div>
+    <div class="grid g-3">${list.map(eatCard).join('')}</div>
+  </div></section>`;
+}
+
+/* ======= PLAN ======= */
+function viewPlan(){
+  return `
+  <div class="page-head"><div class="wrap"><h1>Plan your Kotagiri trip</h1>
+    <p>Everything you need to get here, when to come, and how to spend your time.</p></div></div>
+  <section class="section"><div class="wrap">
+    <div class="info-grid">
+      <div class="info-card"><div class="ic">🗓</div><h4>Best time</h4><p>December–May. Dec–Feb is crisp (5–12°C); Mar–May is ideal for trekking. Falls are best Oct–May.</p></div>
+      <div class="info-card"><div class="ic">✈️</div><h4>Nearest airport</h4><p>Coimbatore (CJB), ~75 km. Around a 2.5–3 hr drive up the hills.</p></div>
+      <div class="info-card"><div class="ic">🚆</div><h4>Nearest railway</h4><p>Mettupalayam, ~35 km. Buses and taxis connect onward to Kotagiri.</p></div>
+      <div class="info-card"><div class="ic">🚌</div><h4>Getting around</h4><p>Regular buses to Ooty &amp; Coonoor; taxis and autos for sights. A car helps for viewpoints.</p></div>
+    </div>
+
+    <div class="split" style="margin-top:54px;align-items:flex-start">
+      <div>
+        <span class="eyebrow">Sample itinerary</span>
+        <h2 style="font-size:30px;margin:8px 0 16px">The perfect 2 days</h2>
+        <ul class="checklist">
+          <li><span class="ck">1</span><div><b>Day 1 — Views &amp; heritage</b><span>Sunrise at Kodanad → tea-estate breakfast → John Sullivan Memorial → afternoon walk in Longwood Shola → dinner at The Estate Table.</span></div></li>
+          <li><span class="ck">2</span><div><b>Day 2 — Falls &amp; forest</b><span>Catherine Falls before noon → Elk Falls picnic → tea factory tour &amp; tasting → sunset and filter coffee in town.</span></div></li>
+          <li><span class="ck">+</span><div><b>Have a third day?</b><span>Trek to Rangasamy Peak, or take a slow day among the tea gardens at your homestay.</span></div></li>
+        </ul>
+        <a class="btn btn-primary" style="margin-top:20px" href="#/attractions">Explore the sights →</a>
+      </div>
+      <div class="form-card">
+        <h3 style="font-size:22px">Get a free trip plan</h3>
+        <p class="note" style="margin:6px 0 16px">Tell us your dates and interests — we'll send a tailored Kotagiri itinerary with stay &amp; food picks.</p>
+        <div class="form-row">
+          <div class="field-g"><label>Name</label><input id="pName" placeholder="Your name"></div>
+          <div class="field-g"><label>Email</label><input id="pEmail" placeholder="you@email.com"></div>
+        </div>
+        <div class="form-row">
+          <div class="field-g"><label>Arrival date</label><input type="date" id="pDate"></div>
+          <div class="field-g"><label>Trip length</label><select id="pLen"><option>1 day</option><option selected>2 days</option><option>3 days</option><option>4+ days</option></select></div>
+        </div>
+        <div class="field-g"><label>What are you into?</label><textarea id="pNotes" placeholder="e.g. easy treks, great food, sunrise views, with kids…"></textarea></div>
+        <button class="btn btn-primary btn-block" onclick="submitPlan()">Send me a plan →</button>
+      </div>
+    </div>
+  </div></section>`;
+}
+
+/* ======= LIST YOUR PROPERTY (revenue) ======= */
+function viewListProperty(){
+  return `
+  <section class="hero" style="color:#fff">
+    <div class="hero-bg"></div>
+    <div class="wrap" style="padding:70px 22px 86px;text-align:center">
+      <span class="hero-pill">💼 For homestay, B&amp;B &amp; restaurant owners</span>
+      <h1 style="max-width:18ch">Grow your Kotagiri business with travellers who are already looking</h1>
+      <p class="lede">Get found by people planning their Nilgiri trip. List free, take direct enquiries and bookings, and stand out with featured placement.</p>
+      <div class="btns" style="margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn-gold" href="#listForm">List your property free →</a>
+        <a class="btn btn-ghost" style="color:#fff;border-color:#fff" href="#pricing">Compare plans</a>
+      </div>
+    </div>
+    <div class="hero-mist"></div>
+  </section>
+
+  <section class="section"><div class="wrap">
+    <div class="section-head" style="margin-inline:auto;text-align:center"><span class="eyebrow">How you earn with us</span>
+      <h2>Four ways the platform works for owners</h2>
+      <p style="margin-inline:auto">Pick what fits — from a free listing to premium placement and booking partnerships.</p></div>
+    <div class="rev">
+      <div class="rev-card"><div class="ic">📋</div><h4>Paid listing tiers</h4><p>Start free, or upgrade to Featured/Premium for richer profiles, more photos, priority support and better visibility across the site.</p></div>
+      <div class="rev-card"><div class="ic">⭐</div><h4>Featured &amp; promoted placement</h4><p>Appear at the top of search results and on the homepage. Promoted slots put you in front of travellers at the moment they're deciding.</p></div>
+      <div class="rev-card"><div class="ic">🤝</div><h4>Commission per booking</h4><p>Prefer to pay only for results? Stay on a free listing and we take a small commission when a confirmed booking comes through us.</p></div>
+      <div class="rev-card"><div class="ic">📨</div><h4>Lead-generation</h4><p>Pay-per-enquiry option: only pay when we send you a genuine, contactable traveller lead for your dates.</p></div>
+    </div>
+  </div></section>
+
+  <section class="section" id="pricing" style="background:var(--mist);border-block:1px solid var(--line)"><div class="wrap">
+    <div class="section-head" style="margin-inline:auto;text-align:center"><span class="eyebrow">Pricing</span><h2>Listing plans</h2><p style="margin-inline:auto">Simple, transparent pricing. Cancel anytime. Commission &amp; lead-gen options available on every plan.</p></div>
+    <div class="tiers">
+      <div class="tier">
+        <h3>Free</h3><div class="amt">₹0<small>/ forever</small></div>
+        <p class="note">Get listed and start receiving enquiries.</p>
+        <ul>
+          <li>Standard listing in directory</li>
+          <li>Up to 3 photos</li>
+          <li>Direct enquiry button</li>
+          <li>Map &amp; contact details</li>
+          <li class="no">Featured placement</li>
+          <li class="no">Homepage promotion</li>
+        </ul>
+        <button class="btn btn-ghost btn-block" onclick="location.hash='#listForm';scrollToForm('Free')">Start free</button>
+        <p class="note" style="text-align:center;margin-top:8px">+ optional 12% booking commission</p>
+      </div>
+      <div class="tier feat">
+        <span class="bestseller">Most popular</span>
+        <h3>Featured</h3><div class="amt">₹999<small>/ month</small></div>
+        <p class="note">Stand out and convert more lookers.</p>
+        <ul>
+          <li>Everything in Free</li>
+          <li><b>Featured</b> badge &amp; higher ranking</li>
+          <li>Up to 15 photos + gallery</li>
+          <li>Full amenities &amp; story section</li>
+          <li>Priority enquiry routing</li>
+          <li class="no">Homepage hero slot</li>
+        </ul>
+        <button class="btn btn-gold btn-block" onclick="location.hash='#listForm';scrollToForm('Featured')">Choose Featured</button>
+        <p class="note" style="text-align:center;margin-top:8px">or 8% commission · save with annual</p>
+      </div>
+      <div class="tier">
+        <h3>Premium</h3><div class="amt">₹2,499<small>/ month</small></div>
+        <p class="note">Maximum reach for serious hosts.</p>
+        <ul>
+          <li>Everything in Featured</li>
+          <li><b>Homepage</b> &amp; category-top placement</li>
+          <li>Unlimited photos + video</li>
+          <li>Promoted in trip plans &amp; emails</li>
+          <li>Dedicated account manager</li>
+          <li>Performance dashboard</li>
+        </ul>
+        <button class="btn btn-primary btn-block" onclick="location.hash='#listForm';scrollToForm('Premium')">Go Premium</button>
+        <p class="note" style="text-align:center;margin-top:8px">or pay-per-lead from ₹49/lead</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="section"><div class="wrap split" style="align-items:center">
+    <div class="feature-img"><div class="ph ph-stay1"></div><div class="ph-overlay"></div><span class="ph-label" style="font-size:18px">Verified local hosts</span></div>
+    <div>
+      <span class="eyebrow">Why list with Travel Kotagiri</span>
+      <h2 style="font-size:32px;margin:8px 0 6px">Built for Kotagiri, not a giant marketplace</h2>
+      <ul class="checklist">
+        <li><span class="ck">✓</span><div><b>High-intent travellers</b><span>People here are actively planning a Kotagiri trip — not idly browsing the whole world.</span></div></li>
+        <li><span class="ck">✓</span><div><b>Direct relationship</b><span>Enquiries and bookings come straight to you. You set your prices and your rules.</span></div></li>
+        <li><span class="ck">✓</span><div><b>Low, fair fees</b><span>Start free. Pay for placement, commission or leads — whatever suits your business.</span></div></li>
+        <li><span class="ck">✓</span><div><b>Local support</b><span>We're on the ground in the Nilgiris and help you put your best foot forward.</span></div></li>
+      </ul>
+    </div>
+  </div></section>
+
+  <section class="section" id="listForm" style="background:var(--mist);border-top:1px solid var(--line)"><div class="wrap" style="max-width:760px">
+    <div class="section-head" style="text-align:center;margin-inline:auto"><span class="eyebrow">Get started</span><h2>List your property</h2><p style="margin-inline:auto">Fill this in and our team will set up your listing within 48 hours. No payment needed to start.</p></div>
+    <div class="form-card">
+      <div class="form-row">
+        <div class="field-g"><label>Property / business name *</label><input id="lName" placeholder="e.g. Mistwood Tea Estate Homestay"></div>
+        <div class="field-g"><label>Type *</label><select id="lType"><option>Homestay</option><option>B&amp;B</option><option>Cottage</option><option>Heritage stay</option><option>Restaurant / Café</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="field-g"><label>Your name *</label><input id="lOwner" placeholder="Owner / manager name"></div>
+        <div class="field-g"><label>Phone / WhatsApp *</label><input id="lPhone" placeholder="+91 …"></div>
+      </div>
+      <div class="form-row">
+        <div class="field-g"><label>Email *</label><input id="lEmail" placeholder="you@email.com"></div>
+        <div class="field-g"><label>Area in Kotagiri</label><input id="lArea" placeholder="e.g. Aravenu, Town centre"></div>
+      </div>
+      <div class="field-g"><label>Plan you're interested in</label>
+        <select id="lPlan"><option>Free</option><option>Featured — ₹999/mo</option><option>Premium — ₹2,499/mo</option><option>Commission only</option><option>Pay-per-lead</option><option>Not sure — advise me</option></select></div>
+      <div class="field-g"><label>Tell us about your property</label><textarea id="lDesc" placeholder="Rooms, what makes it special, meals, views, price range…"></textarea></div>
+      <button class="btn btn-gold btn-block" onclick="submitListing()">Submit listing request →</button>
+      <p class="note" style="text-align:center;margin-top:12px">By submitting you agree to be contacted about your listing. No charge until your listing is live and you approve a paid plan.</p>
+    </div>
+  </div></section>`;
+}
+
+function notFound(){return `<section class="section"><div class="wrap empty"><h2>Page not found</h2><p style="margin:10px 0 20px">That page doesn't exist.</p><a class="btn btn-primary" href="#/">Back home</a></div></section>`;}
+
+/* ---- form handlers ---- */
+function doHeroSearch(){
+  const t=document.getElementById('hsType').value;
+  const kw=document.getElementById('hsKw').value.trim();
+  if(kw) toast('Showing results for "'+kw+'"');
+  location.hash='#/'+t;
+}
+function scrollToForm(plan){
+  setTimeout(()=>{const sel=document.getElementById('lPlan'); if(sel){const map={'Free':'Free','Featured':'Featured — ₹999/mo','Premium':'Premium — ₹2,499/mo'}; [...sel.options].forEach(o=>{if(o.value===map[plan])sel.value=o.value});} document.getElementById('listForm')?.scrollIntoView({behavior:'smooth'});},60);
+}
+function enquire(name,kind){
+  const labels={stay:'Booking request',table:'Table reservation',activity:'Activity enquiry',guide:'Guided-visit enquiry'};
+  openModal(`
+    <button class="close" onclick="closeModal()">×</button>
+    <span class="eyebrow">${labels[kind]||'Enquiry'}</span>
+    <h2 style="font-size:26px;margin:6px 0 4px">${esc(name)}</h2>
+    <p class="note" style="margin-bottom:16px">Send your details and the host will get back to you, usually within a few hours.</p>
+    <div class="form-row">
+      <div class="field-g"><label>Name</label><input id="eName" placeholder="Your name"></div>
+      <div class="field-g"><label>Phone / WhatsApp</label><input id="ePhone" placeholder="+91 …"></div>
+    </div>
+    <div class="field-g"><label>Email</label><input id="eEmail" placeholder="you@email.com"></div>
+    ${kind==='table'?'<div class="form-row"><div class="field-g"><label>Date</label><input type="date" id="eDate"></div><div class="field-g"><label>Party size</label><select id="ePax"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6+</option></select></div></div>':''}
+    <div class="field-g"><label>Message</label><textarea id="eMsg" placeholder="Dates, number of people, any requests…"></textarea></div>
+    <button class="btn btn-primary btn-block" onclick="sendEnquiry('${esc(name)}')">Send enquiry →</button>
+  `);
+}
+function sendEnquiry(name){
+  const n=document.getElementById('eName')?.value.trim();
+  if(!n){toast('Please add your name');return;}
+  openModal(`<button class="close" onclick="closeModal()">×</button>
+    <div class="success"><div class="big">✅</div><h2 style="font-size:24px;margin:8px 0">Enquiry sent!</h2>
+    <p class="note">Thanks ${esc(n)} — your enquiry for <b>${esc(name)}</b> is on its way. In the live version this notifies the host instantly. We'll be in touch shortly.</p>
+    <button class="btn btn-primary" style="margin-top:18px" onclick="closeModal()">Done</button></div>`);
+}
+function submitPlan(){
+  const n=document.getElementById('pName')?.value.trim();
+  if(!n){toast('Please add your name');return;}
+  toast('Trip plan request sent — check your inbox soon!');
+  document.getElementById('pName').value='';document.getElementById('pEmail').value='';document.getElementById('pNotes').value='';
+}
+function submitListing(){
+  const n=document.getElementById('lName')?.value.trim();
+  const o=document.getElementById('lOwner')?.value.trim();
+  if(!n||!o){toast('Please add property name and your name');return;}
+  openModal(`<button class="close" onclick="closeModal()">×</button>
+    <div class="success"><div class="big">🎉</div><h2 style="font-size:24px;margin:8px 0">Listing request received!</h2>
+    <p class="note">Thanks ${esc(o)} — we've received your request to list <b>${esc(n)}</b>. Our team will reach out within 48 hours to set up your profile. No payment is needed until your listing is live.</p>
+    <button class="btn btn-gold" style="margin-top:18px" onclick="closeModal()">Great, thanks</button></div>`);
+}
+
+/* ---- modal ---- */
+function openModal(html){document.getElementById('modalBox').innerHTML=html;document.getElementById('modalBg').classList.add('open')}
+function closeModal(){document.getElementById('modalBg').classList.remove('open')}
+document.getElementById('modalBg').addEventListener('click',e=>{if(e.target.id==='modalBg')closeModal()});
+
+/* ---- render ---- */
+function render(){
+  const h=location.hash||'#/';
+  const parts=h.replace('#/','').split('/');
+  const route=parts[0]||''; const arg=parts[1];
+  let html;
+  switch(route){
+    case '': html=viewHome(); break;
+    case 'attractions': html=viewAttractions(); break;
+    case 'attraction': html=viewAttraction(arg); break;
+    case 'things-to-do': html=viewTodo(); break;
+    case 'stays': html=viewStays(); break;
+    case 'stay': html=viewStay(arg); break;
+    case 'eat': html=viewEat(); break;
+    case 'plan': html=viewPlan(); break;
+    case 'list-property': html=viewListProperty(); break;
+    default: html=notFound();
+  }
+  app.innerHTML=html;
+  setActive(); closeMenu();
+  if(!arg) window.scrollTo({top:0});
+}
+window.addEventListener('hashchange',render);
+render();
+</script>
+</body>
+</html>

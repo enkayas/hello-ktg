@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Things to Do — Experiences in Kotagiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #1f3a5c; --pine: #2e5a86; --leaf: #3f6f9e; --tea: #9db4ce;
+      --mist: #eef4f9; --cream: #fbfcfe; --sun: #c79348; --ink: #1e2a38; --muted: #5e6b7c;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--cream); line-height: 1.6; }
+    h1, h2, h3 { font-family: 'Inter Tight', sans-serif; }
+    
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(250, 248, 242, .92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(30, 58, 42, .08);
+    }
+    .nav-in { max-width: 1100px; margin: 0 auto; padding: 14px 22px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 20px; color: var(--forest); text-decoration: none; }
+    .logo em { font-family:'Caveat',cursive; font-weight:700; font-size:26px; color: var(--sun); font-style: normal; margin-right:2px; }
+    .nav-links { display: flex; gap: 26px; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--ink); font-size: 14px; font-weight: 500; }
+    .nav-links a:hover { color: var(--leaf); }
+    
+    .page { margin-top: 70px; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 22px; }
+    
+    .header { padding: 60px 0 40px; }
+    .header h1 { font-size: clamp(28px, 5vw, 48px); margin-bottom: 12px; color: var(--forest); }
+    .header p { font-size: 16px; color: var(--muted); max-width: 720px; }
+    
+    .activity-card {
+      background: #fff; border-radius: 16px; padding: 40px;
+      box-shadow: 0 4px 18px rgba(30, 58, 42, .07);
+      margin-bottom: 32px; scroll-margin-top: 100px;
+    }
+    .activity-card h2 { font-size: 28px; color: var(--forest); margin-bottom: 8px; }
+    
+    .specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0; }
+    @media (max-width: 760px) { .specs { grid-template-columns: repeat(2, 1fr); } }
+    
+    .spec { background: #f9f9f9; border-radius: 12px; padding: 16px; text-align: center; border-top: 3px solid var(--leaf); }
+    .spec-label { font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+    .spec-value { font-size: 16px; font-weight: 600; color: var(--forest); }
+    
+    .description { font-size: 15px; line-height: 1.8; color: var(--ink); margin: 20px 0; }
+    
+    .details-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 24px 0; }
+    @media (max-width: 760px) { .details-grid { grid-template-columns: 1fr; } }
+    
+    .detail-box {
+      background: #f0f8f2; border-radius: 12px; padding: 18px;
+      border-left: 3px solid var(--leaf);
+    }
+    .detail-box h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin-bottom: 8px; }
+    .detail-box p, .detail-box ul { font-size: 14px; color: var(--ink); }
+    .detail-box ul { margin-left: 20px; }
+    .detail-box .highlight { font-weight: 600; color: var(--forest); }
+    
+    .itinerary { background: #faf9f4; border-radius: 12px; padding: 20px; margin: 20px 0; }
+    .itinerary h4 { font-size: 13px; font-weight: 700; color: var(--forest); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px; }
+    .itinerary ol { margin-left: 20px; }
+    .itinerary li { margin-bottom: 8px; font-size: 14px; color: var(--ink); }
+    
+    .includes { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+    .include-tag { background: var(--mist); color: var(--forest); padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; }
+    
+    .toc { background: var(--mist); border-radius: 12px; padding: 20px; margin: 30px 0; }
+    .toc h3 { font-size: 14px; font-weight: 700; color: var(--forest); margin-bottom: 12px; }
+    .toc ul { list-style: none; }
+    .toc a { display: block; padding: 6px 0; color: var(--leaf); text-decoration: none; font-size: 13px; font-weight: 600; }
+    .toc a:hover { color: var(--forest); }
+    
+    .btn { display: inline-block; background: var(--leaf); color: #fff; padding: 11px 22px; border-radius: 999px; font-weight: 600; font-size: 14px; text-decoration: none; border: none; cursor: pointer; transition: .2s; }
+    .btn:hover { background: var(--pine); transform: translateY(-1px); }
+    
+    footer { background: var(--forest); color: #fff; padding: 40px 0 20px; margin-top: 60px; }
+    .foot-logo { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 16px; }
+    .foot-logo em { font-family:'Caveat',cursive; font-weight:700; font-size:24px; color: var(--gold-soft); font-style: normal; margin-right:2px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="travel-kotagiri-landing.html"><em>hello</em>Kotagiri</a>
+    <div class="nav-links">
+      <a href="travel-kotagiri-landing.html#explore">Explore</a>
+      <a href="travel-kotagiri-landing.html#stays">Stays</a>
+      <a href="travel-kotagiri-landing.html#todo">Do</a>
+      <a href="travel-kotagiri-landing.html#plan">Plan</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="wrap">
+    <div class="header">
+      <h1>Things to Do</h1>
+      <p>Six curated experiences, led by people from Kotagiri — tea workers, naturalists, trek guides and tribal elders who know these hills by name.</p>
+    </div>
+    
+    <div class="toc">
+      <h3>Quick Jump</h3>
+      <a href="#catherine-trek">Catherine Falls Trek</a>
+      <a href="#tea-tour">Tea Factory Tour</a>
+      <a href="#birding">Shola Birding Walk</a>
+      <a href="#sullivan-trail">Sullivan Trail Historical Walk</a>
+      <a href="#jeep-safari">Jeep Safari to Rangaswamy</a>
+      <a href="#plantation">Tea/Spice Plantation Walk</a>
+    </div>
+    
+    <!-- CATHERINE FALLS TREK -->
+    <div id="catherine-trek" class="activity-card">
+      <h2>Catherine Falls Trek</h2>
+      
+      <div class="specs">
+        <div class="spec">
+          <div class="spec-label">Duration</div>
+          <div class="spec-value">3–4 hrs</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Difficulty</div>
+          <div class="spec-value">Easy–Moderate</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Group Size</div>
+          <div class="spec-value">2–8 ppl</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Price/Person</div>
+          <div class="spec-value">₹800</div>
+        </div>
+      </div>
+      
+      <p class="description">
+        A half-day guided trek through working tea gardens to Catherine Falls viewpoint. Walk alongside estate workers, learn about tea cultivation, and end at one of the Nilgiris' most spectacular waterfalls. Fullest Oct–Mar.
+      </p>
+      
+      <div class="itinerary">
+        <h4>📋 Itinerary</h4>
+        <ol>
+          <li><b>7:00 am</b> — Meet guide at town center or your homestay</li>
+          <li><b>7:15–8:00 am</b> — Walk through tea gardens, learn about plucking seasons</li>
+          <li><b>8:00–8:30 am</b> — Forest path with bird calls (listen for Nilgiri Flycatcher)</li>
+          <li><b>8:30–9:00 am</b> — Arrival at falls viewpoint; photos & 20-min rest</li>
+          <li><b>9:00–9:45 am</b> — Return walk through estate</li>
+          <li><b>9:45–10:15 am</b> — Tea & snacks at estate owner's home</li>
+          <li><b>10:30 am</b> — Return to town</li>
+        </ol>
+      </div>
+      
+      <div class="details-grid">
+        <div class="detail-box">
+          <h4>✅ What's Included</h4>
+          <div class="includes">
+            <span class="include-tag">Local guide</span>
+            <span class="include-tag">Packed snacks</span>
+            <span class="include-tag">Tea/coffee</span>
+            <span class="include-tag">Route map</span>
+          </div>
+        </div>
+        <div class="detail-box">
+          <h4>🎒 What to Bring</h4>
+          <p>Sturdy hiking shoes, water bottle, light jacket, camera, sunscreen, rain gear (optional).</p>
+        </div>
+        <div class="detail-box">
+          <h4>📅 Best Season</h4>
+          <p><span class="highlight">Oct–Mar</span> for highest water levels. July–Sep is also OK but less dramatic.</p>
+        </div>
+        <div class="detail-box">
+          <h4>🗣️ Booking</h4>
+          <p>Ask your homestay to arrange. Available year-round. Book evening before for next day.</p>
+        </div>
+      </div>
+      
+      <div style="background: #eef4f9; border-radius: 12px; padding: 16px; margin-top: 20px; font-size: 14px; color: var(--ink);">
+        <b>💡 Pro tip:</b> Bring a swimsuit — if water levels are safe, take a dip in the pool below the falls. The trail can be slippery after rain, so wear good grip shoes.
+      </div>
+    </div>
+    
+    <!-- TEA FACTORY TOUR -->
+    <div id="tea-tour" class="activity-card">
+      <h2>Tea Factory Tour</h2>
+      
+      <div class="specs">
+        <div class="spec">
+          <div class="spec-label">Duration</div>
+          <div class="spec-value">2 hrs</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Difficulty</div>
+          <div class="spec-value">Easy</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Group Size</div>
+          <div class="spec-value">2–15 ppl</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Price/Person</div>
+          <div class="spec-value">₹300</div>
+        </div>
+      </div>
+      
+      <p class="description">
+        From leaf to cup in 2 hours. See how fresh-plucked tea leaves are withered, rolled, oxidized, and fired in a working estate factory. Taste the estate's fresh tea and learn why Kotagiri's elevation (1,950m) produces some of India's finest Orthodox tea.
+      </p>
+      
+      <div class="itinerary">
+        <h4>📋 Itinerary</h4>
+        <ol>
+          <li><b>9:00 am</b> — Arrive at tea estate (usually 3–5 km from town)</li>
+          <li><b>9:15–9:45 am</b> — Tea plucking demonstration by estate workers (pick leaves yourself if interested)</li>
+          <li><b>9:45–10:45 am</b> — Full factory tour: withering beds, rolling machines, oxidation, firing chamber</li>
+          <li><b>10:45–11:15 am</b> — Tea tasting in estate parlor: taste 2–3 varieties, learn tasting notes</li>
+          <li><b>11:15–11:45 am</b> — Souvenir shopping & visit estate shop</li>
+        </ol>
+      </div>
+      
+      <div class="details-grid">
+        <div class="detail-box">
+          <h4>✅ What's Included</h4>
+          <div class="includes">
+            <span class="include-tag">Factory guide</span>
+            <span class="include-tag">3 tea samples</span>
+            <span class="include-tag">Tea-tasting notes</span>
+            <span class="include-tag">10% discount on shop</span>
+          </div>
+        </div>
+        <div class="detail-box">
+          <h4>🎒 What to Bring</h4>
+          <p>Comfortable clothes (can get dusty in factory), closed shoes, water, notebook for tasting notes (if interested).</p>
+        </div>
+        <div class="detail-box">
+          <h4>📅 Best Time</h4>
+          <p><span class="highlight">Jan–Mar</span> (peak production). Year-round available but slower production Apr–Jun.</p>
+        </div>
+        <div class="detail-box">
+          <h4>🗣️ Booking</h4>
+          <p>Ask your homestay. Advance booking recommended (2–3 days) especially for groups.</p>
+        </div>
+      </div>
+      
+      <div style="background: #eef4f9; border-radius: 12px; padding: 16px; margin-top: 20px; font-size: 14px; color: var(--ink);">
+        <b>💡 Pro tip:</b> Take home a pack of estate-fresh tea (₹400–600 for premium). It tastes completely different from commercial tea. The workers are proud to share — ask questions!
+      </div>
+    </div>
+    
+    <!-- BIRDING WALK -->
+    <div id="birding" class="activity-card">
+      <h2>Shola Birding Walk</h2>
+      
+      <div class="specs">
+        <div class="spec">
+          <div class="spec-label">Duration</div>
+          <div class="spec-value">3 hrs</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Difficulty</div>
+          <div class="spec-value">Easy</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Group Size</div>
+          <div class="spec-value">2–6 ppl</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Price/Person</div>
+          <div class="spec-value">₹600</div>
+        </div>
+      </div>
+      
+      <p class="description">
+        Early-morning immersion in Longwood Shola forest with a trained naturalist. See 20–30 bird species including the endemic Nilgiri Pipit, Nilgiri Wood Pigeon, and Nilgiri Flycatcher. Binoculars provided. Suits both beginners and experienced birders.
+      </p>
+      
+      <div class="itinerary">
+        <h4>📋 Itinerary</h4>
+        <ol>
+          <li><b>6:00 am</b> — Meet guide at Longwood Shola main gate</li>
+          <li><b>6:15–6:30 am</b> — Introduction to birds & briefing; binoculars check</li>
+          <li><b>6:30–8:00 am</b> — Silent forest walk along birding trail; listen for calls</li>
+          <li><b>8:00–8:15 am</b> — Stop: identify sightings, record in notebook</li>
+          <li><b>8:15–8:45 am</b> — Return walk; second circuit if time permits</li>
+          <li><b>8:45–9:15 am</b> — Tea/coffee & bird discussion in estate shelter</li>
+        </ol>
+      </div>
+      
+      <div class="details-grid">
+        <div class="detail-box">
+          <h4>✅ What's Included</h4>
+          <div class="includes">
+            <span class="include-tag">Naturalist guide</span>
+            <span class="include-tag">Binoculars</span>
+            <span class="include-tag">Bird ID guide</span>
+            <span class="include-tag">Tea/coffee</span>
+          </div>
+        </div>
+        <div class="detail-box">
+          <h4>🎒 What to Bring</h4>
+          <p>Camera with zoom lens (optional), notebook, water, light jacket, dark/muted clothing (birds shy away from bright colors).</p>
+        </div>
+        <div class="detail-box">
+          <h4>📅 Peak Season</h4>
+          <p><span class="highlight">Nov–Feb</span> (most species active). Jul–Sep monsoon also good (fewer people).</p>
+        </div>
+        <div class="detail-box">
+          <h4>🗣️ Booking</h4>
+          <p>Contact: Nilgiris Naturalists Society +91 4266 221234 or ask your homestay. Book 1–2 days prior.</p>
+        </div>
+      </div>
+      
+      <div style="background: #eef4f9; border-radius: 12px; padding: 16px; margin-top: 20px; font-size: 14px; color: var(--ink);">
+        <b>💡 Pro tip:</b> Arrive 5 minutes early. Keep absolute silence during walk — the slightest sound scares birds. The best sightings are 6:00–6:45 am. Even non-birders love the shola forest's quiet magic.
+      </div>
+    </div>
+    
+    <!-- SULLIVAN TRAIL -->
+    <div id="sullivan-trail" class="activity-card">
+      <h2>Sullivan Trail Historical Walk</h2>
+      
+      <div class="specs">
+        <div class="spec">
+          <div class="spec-label">Duration</div>
+          <div class="spec-value">5–6 hrs</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Difficulty</div>
+          <div class="spec-value">Moderate</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Group Size</div>
+          <div class="spec-value">4–12 ppl</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Price/Person</div>
+          <div class="spec-value">₹500</div>
+        </div>
+      </div>
+      
+      <p class="description">
+        Walk stretches of the historic 1819 route John Sullivan used to enter the Nilgiris. Pass through forests, visit the site of his first Kota village encounter, and hear stories of tribal history. This trek is retraced annually on June 15 as an expedition — book early for that date.
+      </p>
+      
+      <div class="itinerary">
+        <h4>📋 Itinerary</h4>
+        <ol>
+          <li><b>7:00 am</b> — Meet guide at Sullivan Memorial or town center</li>
+          <li><b>7:15–7:30 am</b> — Historical briefing: 1819 route and tribal encounters</li>
+          <li><b>7:30–10:00 am</b> — Forest trek on original 1819 path (~4 km)</li>
+          <li><b>10:00–10:30 am</b> — Visit Kota village site; elder storytelling (if available)</li>
+          <li><b>10:30–11:30 am</b> — Packed lunch at scenic spot</li>
+          <li><b>11:30–12:45 pm</b> — Return trek via alternate route</li>
+        </ol>
+      </div>
+      
+      <div class="details-grid">
+        <div class="detail-box">
+          <h4>✅ What's Included</h4>
+          <div class="includes">
+            <span class="include-tag">History guide</span>
+            <span class="include-tag">Packed lunch</span>
+            <span class="include-tag">Route map</span>
+            <span class="include-tag">Tribal stories</span>
+          </div>
+        </div>
+        <div class="detail-box">
+          <h4>🎒 What to Bring</h4>
+          <p>Sturdy hiking boots (forest can be muddy), water (2L), camera, light jacket, rain gear, sunscreen, insect repellent.</p>
+        </div>
+        <div class="detail-box">
+          <h4>📅 Special Event</h4>
+          <p><span class="highlight">June 15 Expedition</span> — Annual re-enactment with larger groups, historical reenactors. Book by May 15 · ₹1,200/person.</p>
+        </div>
+        <div class="detail-box">
+          <h4>🗣️ Booking</h4>
+          <p>Nilgiris Heritage Trust: +91 4266 235456 or your homestay. For June expedition, book very early.</p>
+        </div>
+      </div>
+      
+      <div style="background: #eef4f9; border-radius: 12px; padding: 16px; margin-top: 20px; font-size: 14px; color: var(--ink);">
+        <b>💡 Pro tip:</b> This trek combines adventure with history — great for learning travelers. Guides often share tribal legends and colonial stories. Not just a walk; it's an immersive history lesson.
+      </div>
+    </div>
+    
+    <!-- JEEP SAFARI -->
+    <div id="jeep-safari" class="activity-card">
+      <h2>Jeep Safari to Rangaswamy Peak</h2>
+      
+      <div class="specs">
+        <div class="spec">
+          <div class="spec-label">Duration</div>
+          <div class="spec-value">4–5 hrs</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Difficulty</div>
+          <div class="spec-value">Moderate</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Group Size</div>
+          <div class="spec-value">4–6 per jeep</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Price/Person</div>
+          <div class="spec-value">₹1,200</div>
+        </div>
+      </div>
+      
+      <p class="description">
+        Off-road jeep adventure to Rangaswamy Peak, a sacred site of the Irula tribe, with tribal elder storytelling and panoramic views. Pass Kodanad viewpoint on the way. The 400-foot rock pillar is visible from here. For adventure seekers.
+      </p>
+      
+      <div class="itinerary">
+        <h4>📋 Itinerary</h4>
+        <ol>
+          <li><b>6:30 am</b> — Jeep pickup from town or homestay</li>
+          <li><b>6:45–7:45 am</b> — Drive to Kodanad Viewpoint; photos, sunrise viewing</li>
+          <li><b>7:45–10:15 am</b> — Off-road drive to Rangaswamy Peak (thrilling terrain)</li>
+          <li><b>10:15–10:45 am</b> — Peak visit, tribal guide explains spiritual significance</li>
+          <li><b>10:45–11:15 am</b> — Snacks & rest at peak</li>
+          <li><b>11:15–12:30 pm</b> — Return drive, often different route</li>
+        </ol>
+      </div>
+      
+      <div class="details-grid">
+        <div class="detail-box">
+          <h4>✅ What's Included</h4>
+          <div class="includes">
+            <span class="include-tag">Jeep hire</span>
+            <span class="include-tag">Local guide</span>
+            <span class="include-tag">Bottled water</span>
+            <span class="include-tag">Peak visit</span>
+          </div>
+        </div>
+        <div class="detail-box">
+          <h4>🎒 What to Bring</h4>
+          <p>Camera, light jacket, waterproof bag, sturdy shoes, sunscreen, snacks, water. Not for sensitive stomachs — ride is bumpy!</p>
+        </div>
+        <div class="detail-box">
+          <h4>📅 Best Season</h4>
+          <p><span class="highlight">Oct–Mar</span> (avoid monsoon for safety). Clear days best for views.</p>
+        </div>
+        <div class="detail-box">
+          <h4>🗣️ Booking</h4>
+          <p>Ask your homestay or approach taxi stands at Kotagiri bus station. Book evening before. Min 2 people.</p>
+        </div>
+      </div>
+      
+      <div style="background: #eef4f9; border-radius: 12px; padding: 16px; margin-top: 20px; font-size: 14px; color: var(--ink);">
+        <b>💡 Pro tip:</b> This is not for the faint-hearted — the off-road section has hairpin turns and steep drops. But the views and adrenaline rush make it unforgettable. Tribal guides are wonderful storytellers.
+      </div>
+    </div>
+    
+    <!-- PLANTATION WALK -->
+    <div id="plantation" class="activity-card">
+      <h2>Tea/Spice Plantation Walk</h2>
+      
+      <div class="specs">
+        <div class="spec">
+          <div class="spec-label">Duration</div>
+          <div class="spec-value">2–3 hrs</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Difficulty</div>
+          <div class="spec-value">Easy</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Group Size</div>
+          <div class="spec-value">2–8 ppl</div>
+        </div>
+        <div class="spec">
+          <div class="spec-label">Price/Person</div>
+          <div class="spec-value">₹400</div>
+        </div>
+      </div>
+      
+      <p class="description">
+        Morning walk through working tea and spice plantations with hands-on plucking demonstration. Learn about cultivation, seasonal cycles, and the ecosystem. Many homestays are on working farms — a gentle, locally-rooted experience.
+      </p>
+      
+      <div class="itinerary">
+        <h4>📋 Itinerary</h4>
+        <ol>
+          <li><b>8:00 am</b> — Meet farm owner/guide at plantation entrance</li>
+          <li><b>8:15–8:45 am</b> — Tea plucking demo: try plucking "two leaves and a bud" yourself</li>
+          <li><b>8:45–9:45 am</b> — Walk through tea gardens, spice garden (cardamom, pepper, cinnamon), learn seasonality</li>
+          <li><b>9:45–10:00 am</b> — Shade rest, water, wild fruit tasting (if season permits)</li>
+          <li><b>10:00–11:00 am</b> — Farm lunch: rice, sambar, vegetables, homemade pickle</li>
+          <li><b>11:00 am</b> — Return or optional afternoon tea processing visit</li>
+        </ol>
+      </div>
+      
+      <div class="details-grid">
+        <div class="detail-box">
+          <h4>✅ What's Included</h4>
+          <div class="includes">
+            <span class="include-tag">Farm guide</span>
+            <span class="include-tag">Plucking demo</span>
+            <span class="include-tag">Tea/coffee</span>
+            <span class="include-tag">Farm lunch</span>
+          </div>
+        </div>
+        <div class="detail-box">
+          <h4>🎒 What to Bring</h4>
+          <p>Comfortable shoes (can be muddy), light clothes, hat, water, camera. Hands get wet during tea plucking — bring a towel.</p>
+        </div>
+        <div class="detail-box">
+          <h4>📅 Year-round</h4>
+          <p>Available any time. Busiest in plucking season <span class="highlight">Jan–Mar</span>. Mornings best for activity, afternoons for processing visits.</p>
+        </div>
+        <div class="detail-box">
+          <h4>🗣️ Booking</h4>
+          <p>Most homestays offer this. Simply ask your host — many farms are family-run and close by. No advance booking needed.</p>
+        </div>
+      </div>
+      
+      <div style="background: #eef4f9; border-radius: 12px; padding: 16px; margin-top: 20px; font-size: 14px; color: var(--ink);">
+        <b>💡 Pro tip:</b> This is the most intimate experience — farm owners often share family meals and tea. Kids love it. Not a rushed tourist activity; it's genuine farm life. Perfect for families and slow travelers.
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin: 60px 0 40px; padding: 30px; background: #f9f9f9; border-radius: 12px;">
+      <h3 style="color: var(--forest); margin-bottom: 16px;">Ready to plan your itinerary?</h3>
+      <p style="color: var(--muted); margin-bottom: 20px;">Ask your homestay host — they'll arrange guides, timing, and even combine activities for a full day.</p>
+      <a class="btn" href="travel-kotagiri-landing.html#stays">Browse Homestays →</a>
+    </div>
+    
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot" style="padding: 40px 22px;">
+    <div class="foot-logo"><em>hello</em>Kotagiri</div>
+    <p style="margin-top: 10px; max-width: 280px; color: #ccc; font-size: 14px;">A local guide to the oldest hill station in the Nilgiris — and the homestays that call it home.</p>
+    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.1); font-size: 12px; color: #999;">© 2024 helloKotagiri. All information verified locally.</div>
+  </div>
+</footer>
+
+</body>
+</html>

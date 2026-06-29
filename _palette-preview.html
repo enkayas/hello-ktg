@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palette Preview — Blue / White / Gold</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* SAMPLED FROM THE KODANAD PHOTO — sky-blue · misty slate · sand-gold */
+  --navy:#1f3a5c;       /* deepest sky / shadowed ridge */
+  --blue:#2e5a86;       /* primary — Kodanad sky blue */
+  --slate:#6f93b4;      /* misty mid-ridge */
+  --haze:#acc4d8;       /* valley haze */
+  --mist:#eef4f9;       /* pale sky wash */
+  --cream:#fbfcfe;      /* near-white bg */
+  --gold:#c79348;       /* warm sand-rock accent */
+  --gold-soft:#e8c583;  /* sunlit sand */
+  --ink:#1e2a38;
+  --muted:#5e6b7c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Inter Tight',sans-serif;letter-spacing:-.01em}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+.note{background:var(--navy);color:#cfe0f2;text-align:center;padding:12px;font-size:13.5px;letter-spacing:.02em}
+.note b{color:var(--gold-soft)}
+
+/* NAV — Tourvia floating pill */
+.nav{position:absolute;top:22px;left:50%;transform:translateX(-50%);z-index:10;width:min(1180px,calc(100% - 40px));display:flex;align-items:center;justify-content:space-between;color:#fff}
+.nav .brand{font-family:'Inter Tight';font-weight:700;font-size:24px;color:#fff}
+.nav .brand i{color:var(--gold-soft);font-style:normal}
+.nav .links{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(12px);padding:7px 10px;border-radius:999px}
+.nav .links a{color:#fff;text-decoration:none;font-size:14.5px;font-weight:500;padding:8px 16px;border-radius:999px;transition:.2s}
+.nav .links a:hover{background:rgba(255,255,255,.16)}
+.book{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(12px);color:#fff;text-decoration:none;font-size:14.5px;font-weight:600;padding:7px 8px 7px 20px;border-radius:999px;transition:.2s}
+.book:hover{background:rgba(255,255,255,.22)}
+.book .circ{width:38px;height:38px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;font-size:17px;transition:transform .35s}
+.book:hover .circ{transform:rotate(45deg)}
+
+/* HERO — Tourvia sky-blue + giant wordmark behind peak */
+.hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;justify-content:center;text-align:center;color:#fff;overflow:hidden;
+background:linear-gradient(180deg,#1f3a5c 0%,#2e5a86 30%,#5e93bf 62%,#a9c9e2 100%)}
+/* the mountain photo, masked to sit over the blue sky */
+.hero .peak{position:absolute;inset:0;background:url('https://commons.wikimedia.org/wiki/Special:FilePath/Kodanad.jpg?width=1600') center 62%/cover no-repeat;z-index:2;
+-webkit-mask-image:linear-gradient(to bottom,transparent 0%,transparent 30%,#000 60%);mask-image:linear-gradient(to bottom,transparent 0%,transparent 30%,#000 60%)}
+.hero .clouds{position:absolute;inset:0;z-index:1;background:
+  radial-gradient(280px 120px at 14% 60%,rgba(255,255,255,.5),transparent 70%),
+  radial-gradient(360px 150px at 88% 52%,rgba(255,255,255,.45),transparent 72%),
+  radial-gradient(220px 90px at 70% 30%,rgba(255,255,255,.3),transparent 70%)}
+/* giant translucent wordmark */
+.hero .wordmark{position:absolute;top:20%;left:0;right:0;z-index:3;font-family:'Inter Tight';font-weight:700;
+font-size:clamp(40px,11vw,150px);line-height:.9;letter-spacing:-.03em;color:rgba(255,255,255,.16);text-align:center;pointer-events:none;white-space:nowrap}
+.hero .wordmark span{color:rgba(232,197,131,.30)}  /* 'kotagiri' in soft gold tint */
+.hero svg.curve{position:absolute;bottom:-1px;left:0;width:100%;z-index:5}
+.hero-in{position:relative;z-index:4;padding:0 22px 130px;max-width:760px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:14px}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:var(--gold-soft)}
+.hero h1{font-size:clamp(30px,4.5vw,48px);font-weight:600;line-height:1.12;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.45)}
+.hero h1 em{font-style:italic;color:var(--gold-soft)}
+.hero p{margin:18px auto 28px;font-size:clamp(15px,1.8vw,18px);color:rgba(255,255,255,.94);max-width:560px;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.search-bar{display:flex;background:rgba(255,255,255,.96);border-radius:999px;padding:7px;max-width:520px;margin:0 auto;box-shadow:0 16px 50px rgba(20,32,52,.3)}
+.search-bar input{flex:1;border:none;outline:none;padding:13px 22px;font-size:15px;font-family:inherit;background:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--blue);color:#fff;padding:12px 24px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 2px 8px rgba(47,74,109,.3);transition:.25s}
+.btn:hover{background:var(--navy);transform:translateY(-2px)}
+.btn.gold{background:var(--gold);color:#2a1d05}
+.btn.gold:hover{background:#bd8e2e;color:#fff}
+.chips{margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.chips a{font-size:13px;font-weight:600;color:var(--navy);background:rgba(255,255,255,.78);backdrop-filter:blur(8px);padding:9px 17px;border-radius:999px;text-decoration:none;border:1px solid rgba(255,255,255,.5)}
+
+/* STATS */
+.stats{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:40px 0;position:relative;overflow:hidden}
+.stats::after{content:"";position:absolute;inset:0;background:radial-gradient(600px 200px at 85% 0,rgba(212,162,60,.2),transparent 65%)}
+.stats-in{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;position:relative}
+.stat b{display:block;font-family:'Inter Tight';font-size:clamp(22px,3vw,32px);color:var(--gold-soft);font-weight:700}
+.stat span{font-size:12.5px;opacity:.82}
+
+/* SECTION + CARDS */
+.section{padding:80px 0}
+.eyebrow.dark{color:var(--slate)}.eyebrow.dark::before{background:var(--gold)}
+.section h2{font-size:clamp(28px,4.2vw,40px);color:var(--navy);margin-bottom:10px}
+.lede{color:var(--muted);max-width:560px;font-size:16.5px;margin-bottom:36px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+
+/* immersive cards */
+.icard{position:relative;border-radius:22px;overflow:hidden;display:block;text-decoration:none;min-height:340px;box-shadow:0 12px 30px rgba(20,32,52,.12);transition:.4s}
+.icard:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(20,32,52,.28)}
+.icard .img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .7s}
+.icard:hover .img{transform:scale(1.07)}
+.icard .img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(15,24,40,.88),rgba(15,24,40,.3) 45%,transparent 72%)}
+.ipill{position:absolute;top:16px;left:16px;z-index:2;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(8px);color:#fff;font-size:11px;font-weight:700;letter-spacing:.6px;padding:7px 13px;border-radius:999px}
+.iarrow{position:absolute;bottom:18px;right:18px;z-index:2;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.95);color:var(--navy);display:grid;place-items:center;font-size:17px;transition:.35s}
+.icard:hover .iarrow{transform:rotate(45deg) scale(1.08);background:var(--gold);color:#fff}
+.ibody{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:22px 64px 22px 22px;color:#fff}
+.idist{font-size:12px;font-weight:600;color:var(--gold-soft);display:block;margin-bottom:5px}
+.ibody h3{font-size:22px;color:#fff;margin-bottom:5px}
+.ibody p{font-size:13.5px;color:rgba(255,255,255,.85)}
+
+/* standard stay card */
+.scards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+@media(max-width:820px){.scards{grid-template-columns:1fr}}
+.card{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(20,32,52,.07);box-shadow:0 8px 24px rgba(20,32,52,.07);transition:.35s}
+.card:hover{transform:translateY(-8px);box-shadow:0 28px 56px rgba(20,32,52,.18)}
+.card .ph{height:170px;background-size:cover;background-position:center;position:relative}
+.card .ph .badge{position:absolute;top:12px;left:12px;background:var(--gold);color:#2a1d05;font-size:10px;font-weight:800;letter-spacing:.6px;padding:4px 11px;border-radius:999px}
+.card .body{padding:18px}
+.card h3{font-size:18.5px;color:var(--navy);margin-bottom:6px}
+.card .stars{color:var(--gold);font-size:13px;font-weight:700;margin-bottom:6px}
+.card p{font-size:13.5px;color:var(--muted);margin-bottom:10px}
+.price{font-family:'Inter Tight';font-weight:700;font-size:18px;color:var(--navy)}
+.price small{font-family:'Inter';font-weight:500;font-size:12px;color:var(--muted)}
+.card .row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+
+/* swatches */
+.sw-wrap{padding:50px 0;background:var(--mist)}
+.sw{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px}
+.swatch{width:120px}
+.swatch .chip{height:72px;border-radius:12px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.swatch b{display:block;font-size:13px;margin-top:8px;color:var(--navy)}
+.swatch span{font-size:11.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="note">PREVIEW ONLY · <b>Blue / White / Gold</b> (misty slate-blue) — your live site is unchanged. Hover the cards.</div>
+
+<section class="hero">
+  <div class="clouds"></div>
+  <div class="wordmark">travel<span>kotagiri</span></div>
+  <div class="peak"></div>
+  <nav class="nav">
+    <span class="brand">travel<i>kotagiri</i></span>
+    <span class="links"><a>Explore</a><a>Stays</a><a>Things to Do</a><a>Plan</a></span>
+    <a class="book">Plan my trip <span class="circ">↗</span></a>
+  </nav>
+  <svg class="curve" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 70 L240 40 L480 65 L720 30 L960 65 L1200 35 L1440 60 L1440 120 L0 120 Z" fill="#fbfcfe"/></svg>
+  <div class="hero-in">
+    <span class="eyebrow">THE NILGIRIS · TAMIL NADU · 1,793 M</span>
+    <h1>The quiet side of the <em>Blue Mountains</em></h1>
+    <p>Kotagiri is the oldest hill station in the Nilgiris — older than Ooty, calmer than Coonoor. Tea estates, shola forests, waterfalls and warm homestays.</p>
+    <div class="search-bar"><input placeholder="Search stays, waterfalls, treks…"><a class="btn">Explore</a></div>
+    <div class="chips"><a>⛰️ Kodanad Viewpoint</a><a>💧 Catherine Falls</a><a>🌿 Longwood Shola</a><a>🏡 Homestays</a></div>
+  </div>
+</section>
+
+<div class="stats"><div class="wrap stats-in">
+  <div class="stat"><b>1,793 m</b><span>above sea level — cool all year</span></div>
+  <div class="stat"><b>1819</b><span>first Nilgiris settlement</span></div>
+  <div class="stat"><b>250 ft</b><span>Catherine Falls</span></div>
+  <div class="stat"><b>10–25°C</b><span>year-round, never harsh</span></div>
+</div></div>
+
+<section class="section"><div class="wrap">
+  <span class="eyebrow dark">Explore</span>
+  <h2>Places that make Kotagiri, Kotagiri</h2>
+  <p class="lede">Immersive cards in the new palette — hover to see the lift, the gold arrow and the description reveal.</p>
+  <div class="grid">
+    <a class="icard">
+      <div class="img" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Kodanad.jpg?width=900')"></div>
+      <span class="ipill">VIEWPOINT</span><span class="iarrow">↗</span>
+      <div class="ibody"><span class="idist">18 km · ~40 min</span><h3>Kodanad Viewpoint</h3><p>Panoramic views over the Moyar valley and plains below.</p></div>
+    </a>
+    <a class="icard">
+      <div class="img" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Catherine_Falls_view_from_Dolphin%27s_Nose.jpg?width=900')"></div>
+      <span class="ipill">WATERFALL</span><span class="iarrow">↗</span>
+      <div class="ibody"><span class="idist">~8 km · Aravenu</span><h3>Catherine Falls</h3><p>A roughly 250-ft double cascade near Aravenu.</p></div>
+    </a>
+    <a class="icard">
+      <div class="img" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Shola.jpg?width=900')"></div>
+      <span class="ipill">FOREST</span><span class="iarrow">↗</span>
+      <div class="ibody"><span class="idist">3 km from bus stand</span><h3>Longwood Shola</h3><p>A 116-hectare Ramsar wetland and shola forest.</p></div>
+    </a>
+  </div>
+</div></section>
+
+<section class="section" style="padding-top:0"><div class="wrap">
+  <span class="eyebrow dark">Stay</span>
+  <h2>Homestays, cottages &amp; outdoor stays</h2>
+  <p class="lede">Standard stay cards in the new palette — gold "Featured" badge, gold stars, navy pricing.</p>
+  <div class="scards">
+    <div class="card"><div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiritea.jpg?width=900')"><span class="badge">FEATURED</span></div>
+      <div class="body"><h3>Tea Estate Homestay</h3><div class="stars">★ 4.8 <small style="color:var(--muted);font-weight:500">(32)</small></div><p>3 rooms in a working estate — meals from the family kitchen.</p>
+      <div class="row"><span class="price">₹2,500 <small>/ night</small></span><a class="btn" style="padding:9px 18px">Book</a></div></div></div>
+    <div class="card"><div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Kotagiri_Town.jpg?width=900')"></div>
+      <div class="body"><h3>Misty Valley B&amp;B</h3><div class="stars">★ 4.6 <small style="color:var(--muted);font-weight:500">(21)</small></div><p>Two valley-view rooms near Aravenu — breakfast included.</p>
+      <div class="row"><span class="price">₹1,800 <small>/ night</small></span><a class="btn" style="padding:9px 18px">Book</a></div></div></div>
+    <div class="card"><div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Shola_forest_and_grassland.jpg?width=900')"></div>
+      <div class="body"><h3>Pine Edge Cottage</h3><div class="stars">★ 4.5 <small style="color:var(--muted);font-weight:500">(9)</small></div><p>A full cottage with kitchen near Longwood Shola.</p>
+      <div class="row"><span class="price">₹3,200 <small>/ night</small></span><a class="btn gold" style="padding:9px 18px">Book</a></div></div></div>
+  </div>
+</div></section>
+
+<div class="sw-wrap"><div class="wrap">
+  <span class="eyebrow dark">The palette</span>
+  <h2 style="font-family:'Inter Tight';color:var(--navy);font-size:26px">Misty slate-blue · white · gold</h2>
+  <div class="sw">
+    <div class="swatch"><div class="chip" style="background:#1b2c44"></div><b>Navy</b><span>#1b2c44</span></div>
+    <div class="swatch"><div class="chip" style="background:#2f4a6d"></div><b>Blue</b><span>#2f4a6d</span></div>
+    <div class="swatch"><div class="chip" style="background:#5b7da6"></div><b>Slate</b><span>#5b7da6</span></div>
+    <div class="swatch"><div class="chip" style="background:#9db4ce"></div><b>Haze</b><span>#9db4ce</span></div>
+    <div class="swatch"><div class="chip" style="background:#eef3f8"></div><b>Mist</b><span>#eef3f8</span></div>
+    <div class="swatch"><div class="chip" style="background:#d4a23c"></div><b>Gold</b><span>#d4a23c</span></div>
+    <div class="swatch"><div class="chip" style="background:#f3d391"></div><b>Gold soft</b><span>#f3d391</span></div>
+  </div>
+</div></div>
+
+</body>
+</html>

@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>helloKotagiri — The Quiet Side of the Nilgiris</title>
+<meta name="description" content="Discover Kotagiri — the oldest hill station in the Nilgiris. Tea estates, misty trails, waterfalls and verified homestays at 1,793 m.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Blue / white / gold — sampled from the Kodanad photo.
+     Variable names kept (forest/pine/leaf…) so the whole site recolors at once;
+     the VALUES are now the blue palette. */
+  --forest:#1f3a5c;   /* deepest navy-blue (was forest green) */
+  --pine:#2e5a86;     /* primary blue */
+  --leaf:#3f6f9e;     /* mid blue (accent/links/buttons) */
+  --tea:#9db4ce;      /* light haze blue */
+  --mist:#eef4f9;     /* pale sky wash */
+  --cream:#fbfcfe;    /* near-white background */
+  --sun:#c79348;      /* warm sand-gold accent */
+  --gold-soft:#e8c583;/* sunlit sand */
+  --ink:#1e2a38;
+  --muted:#5e6b7c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,.serif{font-family:'Inter Tight',sans-serif}
+img{max-width:100%}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+section{padding:96px 0}
+@media(max-width:760px){section{padding:64px 0}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--leaf);margin-bottom:14px}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:var(--sun);display:inline-block}
+h2{font-size:clamp(28px,4.2vw,42px);color:var(--forest);font-weight:600;margin-bottom:10px;letter-spacing:-.02em;line-height:1.12}
+.lede{color:var(--muted);max-width:580px;font-size:16.5px;line-height:1.6}
+
+/* NAV — floating pill over the hero, solidifies on scroll */
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:50;width:min(1180px,calc(100% - 28px));
+background:rgba(20,38,28,.28);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
+border:1px solid rgba(255,255,255,.16);border-radius:999px;transition:background .3s,box-shadow .3s,border-color .3s,top .3s}
+nav.scrolled{top:8px;background:rgba(250,248,242,.92);border-color:rgba(30,58,42,.08);box-shadow:0 8px 30px rgba(30,58,42,.12)}
+.nav-in{max-width:none;margin:0;padding:11px 14px 11px 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:21px;color:#fff;text-decoration:none;letter-spacing:-.01em;transition:color .3s}
+.logo em{font-family:'Caveat',cursive;font-weight:700;font-size:27px;font-style:normal;margin-right:2px;color:#f3d391;transition:color .3s}
+nav.scrolled .logo{color:var(--forest)}
+nav.scrolled .logo em{color:var(--leaf)}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a:not(.btn){text-decoration:none;color:rgba(255,255,255,.9);font-size:14.5px;font-weight:500;padding:8px 14px;border-radius:999px;transition:.2s}
+.nav-links a:not(.btn):hover{color:#fff;background:rgba(255,255,255,.12)}
+nav.scrolled .nav-links a:not(.btn){color:var(--ink)}
+nav.scrolled .nav-links a:not(.btn):hover{color:var(--leaf);background:rgba(74,124,89,.08)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--leaf);color:#fff;padding:12px 24px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 2px 8px rgba(74,124,89,.28);transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s,background .25s}
+.btn:hover{background:var(--pine);transform:translateY(-2px);box-shadow:0 8px 20px rgba(45,82,64,.32)}
+.btn:active{transform:translateY(0)}
+.btn.outline{background:transparent;color:var(--forest);border:1.5px solid rgba(30,58,42,.25);box-shadow:none}
+.btn.outline:hover{background:var(--forest);color:#fff;border-color:var(--forest)}
+.btn.light{background:#fff;color:var(--forest);box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.btn.light:hover{background:#fff;color:var(--pine)}
+@media(max-width:820px){.nav-links a:not(.btn){display:none}}
+
+/* HERO — Tourvia sky-blue + giant two-tone wordmark behind the peak */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;justify-content:center;text-align:center;color:#fff;overflow:hidden;
+background:linear-gradient(180deg,#1f3a5c 0%,#2e5a86 30%,#5e93bf 62%,#a9c9e2 100%)}
+.hero .peak{position:absolute;inset:0;z-index:2;background:url('https://commons.wikimedia.org/wiki/Special:FilePath/Kodanad.jpg?width=1600') center 62%/cover no-repeat;
+-webkit-mask-image:linear-gradient(to bottom,transparent 0%,transparent 28%,#000 58%);mask-image:linear-gradient(to bottom,transparent 0%,transparent 28%,#000 58%)}
+.hero .clouds{position:absolute;inset:0;z-index:1;background:
+  radial-gradient(280px 120px at 14% 60%,rgba(255,255,255,.5),transparent 70%),
+  radial-gradient(360px 150px at 88% 52%,rgba(255,255,255,.45),transparent 72%),
+  radial-gradient(220px 90px at 70% 30%,rgba(255,255,255,.3),transparent 70%)}
+.hero .wordmark{position:absolute;top:19%;left:0;right:0;z-index:3;font-family:'Inter Tight',sans-serif;font-weight:800;
+font-size:clamp(40px,11vw,150px);line-height:.9;letter-spacing:-.03em;color:rgba(255,255,255,.16);text-align:center;pointer-events:none;white-space:nowrap}
+.hero .wordmark .wm-hello{font-family:'Caveat',cursive;font-weight:700;color:rgba(232,197,131,.5);margin-right:.12em} /* 'hello' script */
+.hero h1,.hero .sub{text-shadow:0 2px 30px rgba(0,0,0,.45)}
+.hero svg.scene{position:absolute;bottom:-1px;left:0;width:100%;height:auto;display:block;z-index:5}
+.hero-in{position:relative;z-index:4;padding:0 22px 130px;max-width:780px}
+.hero h1{font-size:clamp(32px,5vw,54px);font-weight:700;line-height:1.1;color:#fff;text-wrap:balance;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--gold-soft)}
+.hero p.sub{margin:20px auto 30px;font-size:clamp(15px,1.9vw,18px);color:rgba(255,255,255,.94);max-width:560px;line-height:1.6}
+.hero .eyebrow{color:var(--gold-soft)}
+.hero .eyebrow::before{background:var(--gold-soft)}
+.search-bar{display:flex;background:rgba(255,255,255,.96);border-radius:999px;padding:7px;max-width:540px;margin:0 auto;box-shadow:0 16px 50px rgba(30,58,42,.22);border:1px solid rgba(255,255,255,.6);transition:box-shadow .3s,transform .3s}
+.search-bar:focus-within{box-shadow:0 20px 60px rgba(30,58,42,.28);transform:translateY(-2px)}
+.search-bar input{flex:1;border:none;outline:none;padding:13px 22px;font-size:15px;border-radius:999px;font-family:'Inter',sans-serif;color:var(--ink);background:transparent}
+.search-bar .btn{white-space:nowrap}
+.hero-chips{margin-top:24px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero-chips a{font-size:13px;font-weight:600;color:var(--forest);background:rgba(255,255,255,.7);backdrop-filter:blur(8px);padding:9px 17px;border-radius:999px;text-decoration:none;border:1px solid rgba(255,255,255,.5);transition:transform .25s cubic-bezier(.22,1,.36,1),background .25s,box-shadow .25s}
+.hero-chips a:hover{background:#fff;transform:translateY(-2px);box-shadow:0 8px 20px rgba(30,58,42,.14)}
+
+/* STATS STRIP */
+.stats{background:linear-gradient(135deg,var(--forest),var(--pine));color:#fff;padding:42px 0;position:relative;overflow:hidden}
+.stats::after{content:"";position:absolute;inset:0;background:radial-gradient(600px 200px at 85% 0,rgba(217,164,65,.18),transparent 65%);pointer-events:none}
+.stats-in{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;position:relative}
+.stat{position:relative}
+.stat:not(:last-child)::after{content:"";position:absolute;right:-12px;top:50%;transform:translateY(-50%);height:38px;width:1px;background:rgba(255,255,255,.14)}
+.stat b{display:block;font-family:'Inter Tight',sans-serif;font-size:clamp(22px,3vw,32px);color:var(--sun);font-weight:700;letter-spacing:-.01em}
+.stat span{font-size:12.5px;opacity:.82;line-height:1.4;display:block;margin-top:3px}
+@media(max-width:680px){.stats-in{grid-template-columns:repeat(2,1fr);gap:28px}.stat:nth-child(2)::after{display:none}}
+
+/* CARDS */
+.grid{display:grid;gap:22px;margin-top:38px}
+.grid.c3{grid-template-columns:repeat(3,1fr)}
+.grid.c4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:880px){.grid.c3,.grid.c4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid.c3,.grid.c4{grid-template-columns:1fr}}
+/* ---- Modern cards: whole card lifts as one unit, image zooms inside frame ---- */
+.card{background:#fff;border-radius:20px;box-shadow:0 1px 2px rgba(30,58,42,.06),0 8px 24px rgba(30,58,42,.06);
+display:flex;flex-direction:column;position:relative;overflow:hidden;border:1px solid rgba(30,58,42,.06);
+transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s cubic-bezier(.22,1,.36,1),border-color .35s}
+.card:hover{transform:translateY(-8px);box-shadow:0 1px 2px rgba(30,58,42,.06),0 28px 56px rgba(30,58,42,.20);border-color:rgba(74,124,89,.25)}
+/* image zoom is clipped to the photo frame — never detaches from the text */
+.card .ph{height:188px;position:relative;display:flex;align-items:flex-end;padding:14px;color:#fff;overflow:hidden;
+background-size:cover;background-position:center;background-color:#7fa6cc;
+transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.card:hover .ph{transform:scale(1.06)}
+/* counter-scale the labels so they don't distort with the zoom */
+.card .ph .tag,.card .ph .dist{transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.card:hover .ph .tag,.card:hover .ph .dist{transform:scale(.945)}
+/* fallback gradient if a photo fails to load */
+.card .ph::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(135deg,#7fa6cc,#2e5a86)}
+.card .ph[style*="background-image"]::after{display:none}
+/* legibility scrim + subtle lift of the dark overlay on hover */
+.card .ph::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(15,30,20,.55));transition:opacity .35s;opacity:.9}
+.card:hover .ph::before{opacity:1}
+.card .ph .tag{position:absolute;top:12px;left:12px;z-index:2;background:rgba(255,255,255,.92);color:var(--forest);font-size:10.5px;font-weight:800;padding:5px 11px;border-radius:999px;letter-spacing:.6px;backdrop-filter:blur(4px)}
+.card .ph .dist{position:relative;z-index:2;font-size:12px;font-weight:600;background:rgba(15,30,20,.5);padding:5px 11px;border-radius:999px;backdrop-filter:blur(6px)}
+.card .body{padding:20px;flex:1;display:flex;flex-direction:column}
+.card h3{font-size:18.5px;color:var(--forest);margin-bottom:6px;letter-spacing:-.01em}
+.card p{font-size:13.5px;color:var(--muted);flex:1;line-height:1.55}
+/* link turns into an animated pill on hover */
+.card .link{margin-top:14px;font-size:13px;font-weight:700;color:var(--leaf);text-decoration:none;display:inline-flex;align-items:center;gap:5px;align-self:flex-start;transition:gap .25s,color .2s}
+.card .link:hover{color:var(--pine);gap:9px}
+/* gentle lift on the season + reach tiles to match */
+.season,.reach .r{transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s cubic-bezier(.22,1,.36,1);position:relative}
+.season:hover,.reach .r:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(30,58,42,.16)}
+@media (prefers-reduced-motion:reduce){.card,.card .ph,.season,.reach .r,.card .link{transition:none}.card:hover,.season:hover,.reach .r:hover{transform:none}.card:hover .ph{transform:none}}
+
+/* ---- Immersive overlay cards (Safaz-style): photo fills card, text on top ---- */
+.icard{position:relative;border-radius:22px;overflow:hidden;display:block;text-decoration:none;aspect-ratio:3/3.5;min-height:340px;
+box-shadow:0 1px 2px rgba(30,58,42,.06),0 12px 30px rgba(30,58,42,.10);
+transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s cubic-bezier(.22,1,.36,1)}
+.icard:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(15,30,20,.28)}
+.icard .img{position:absolute;inset:0;background-size:cover;background-position:center;background-color:#7fa6cc;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.icard:hover .img{transform:scale(1.07)}
+.icard .img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,15,.86) 0%,rgba(10,22,15,.32) 42%,rgba(10,22,15,.05) 70%)}
+.icard .ipill{position:absolute;top:16px;left:16px;z-index:2;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(8px);color:#fff;font-size:11px;font-weight:700;letter-spacing:.6px;padding:7px 13px;border-radius:999px}
+.icard .iarrow{position:absolute;bottom:18px;right:18px;z-index:2;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.95);color:var(--forest);display:grid;place-items:center;font-size:17px;transition:transform .35s cubic-bezier(.22,1,.36,1),background .25s}
+.icard:hover .iarrow{transform:rotate(45deg) scale(1.08);background:var(--sun);color:#fff}
+.icard .ibody{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:22px 64px 22px 22px;color:#fff}
+.icard .ibody .idist{font-size:12px;font-weight:600;color:#f3d391;letter-spacing:.3px;display:block;margin-bottom:5px}
+.icard .ibody h3{font-family:'Inter Tight',sans-serif;font-size:22px;font-weight:600;color:#fff;margin-bottom:5px;letter-spacing:-.01em}
+.icard .ibody p{font-size:13.5px;color:rgba(255,255,255,.85);line-height:1.5;max-height:0;opacity:0;overflow:hidden;transition:max-height .45s ease,opacity .35s ease,margin .35s ease}
+.icard:hover .ibody p{max-height:90px;opacity:1;margin-top:2px}
+@media (prefers-reduced-motion:reduce){.icard,.icard .img{transition:none}.icard:hover{transform:none}.icard:hover .img{transform:none}.icard .ibody p{max-height:90px;opacity:1}}
+
+/* STAYS */
+#stays{background:var(--mist)}
+.stay-price{font-size:14px;color:var(--forest);font-weight:700;margin-top:8px}
+.stay-price small{color:var(--muted);font-weight:500}
+.badges{display:flex;gap:6px;margin-bottom:8px}
+.badge{font-size:10px;font-weight:800;letter-spacing:.8px;padding:3px 9px;border-radius:999px}
+.badge.v{background:var(--leaf);color:#fff}
+.badge.f{background:var(--sun);color:#fff}
+.stars{color:var(--sun);font-size:13px;font-weight:700}
+
+/* SEASONS */
+.seasons{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:38px}
+@media(max-width:760px){.seasons{grid-template-columns:repeat(2,1fr)}}
+.season{background:#fff;border-radius:16px;padding:22px;border-top:5px solid var(--tea);box-shadow:0 4px 14px rgba(30,58,42,.06)}
+.season.best{border-top-color:var(--sun);position:relative}
+.season.best::after{content:"BEST TIME";position:absolute;top:14px;right:14px;font-size:9px;font-weight:800;letter-spacing:1px;background:var(--sun);color:#fff;padding:3px 8px;border-radius:999px}
+.season .ico{font-size:26px}
+.season h3{font-size:16px;color:var(--forest);margin:8px 0 4px}
+.season p{font-size:13px;color:var(--muted)}
+.season b{color:var(--ink)}
+
+/* REACH */
+#plan{background:linear-gradient(180deg,var(--cream),var(--mist))}
+.reach{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:38px}
+@media(max-width:760px){.reach{grid-template-columns:repeat(2,1fr)}}
+.reach .r{background:#fff;border-radius:16px;padding:22px;text-align:center;box-shadow:0 4px 14px rgba(30,58,42,.06)}
+.reach .r .ico{font-size:26px}
+.reach .r b{display:block;font-family:'Inter Tight',sans-serif;font-size:17px;color:var(--forest);margin:8px 0 2px}
+.reach .r span{font-size:12.5px;color:var(--muted)}
+
+/* OWNER CTA */
+.owner{background:var(--forest);color:#fff;border-radius:26px;padding:clamp(34px,6vw,64px);display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center;position:relative;overflow:hidden}
+.owner::before{content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;background:rgba(143,185,150,.15)}
+.owner::after{content:"";position:absolute;right:40px;bottom:-110px;width:240px;height:240px;border-radius:50%;background:rgba(217,164,65,.12)}
+@media(max-width:820px){.owner{grid-template-columns:1fr}}
+.owner h2{color:#fff}
+.owner p{color:#c8d8cc;font-size:15px;max-width:480px}
+.owner ul{list-style:none;margin:18px 0 26px;display:grid;gap:10px}
+.owner ul li{font-size:14px;color:#e7efe8;padding-left:26px;position:relative}
+.owner ul li::before{content:"✓";position:absolute;left:0;color:var(--sun);font-weight:800}
+.owner .panel{position:relative;z-index:2;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:26px;backdrop-filter:blur(6px)}
+.owner .panel h3{font-size:17px;margin-bottom:14px;color:#fff}
+.owner .panel input,.owner .panel select{width:100%;margin-bottom:10px;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-family:'Inter',sans-serif;font-size:13.5px;outline:none}
+.owner .panel input::placeholder{color:#b9cabd}
+.owner .panel select{color:#b9cabd}
+.owner .panel .btn{width:100%;background:var(--sun)}
+.owner .panel .btn:hover{background:#c2902f}
+.owner .panel small{display:block;text-align:center;margin-top:10px;font-size:11px;color:#9fb3a4}
+
+/* PRICING */
+#pricing{background:var(--mist)}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:38px;align-items:start;perspective:1200px}
+@media(max-width:880px){.pricing-grid{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto}}
+.tier{background:#fff;border-radius:18px;padding:30px 26px;box-shadow:0 4px 18px rgba(30,58,42,.07);display:flex;flex-direction:column;border:2px solid transparent;position:relative}
+.tier.feat{border-color:var(--sun);box-shadow:0 18px 44px rgba(217,164,65,.2)}
+.tier .pop{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--sun);color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;padding:5px 14px;border-radius:999px}
+.tier h3{font-size:21px;color:var(--forest)}
+.price-amt{font-family:'Inter Tight',sans-serif;font-size:40px;font-weight:700;color:var(--forest);margin:8px 0 2px}
+.price-amt span{font-family:'Inter',sans-serif;font-size:14px;font-weight:500;color:var(--muted)}
+.tier-sub{font-size:13.5px;color:var(--muted);margin-bottom:6px}
+.tier ul{list-style:none;margin:16px 0 22px;display:flex;flex-direction:column;gap:11px}
+.tier li{font-size:13.8px;color:var(--ink);padding-left:26px;position:relative;line-height:1.45}
+.tier li::before{content:"✓";position:absolute;left:0;color:var(--leaf);font-weight:800}
+.tier li.no{color:var(--muted)}
+.tier li.no::before{content:"–";color:var(--muted)}
+.tier .btn{width:100%;text-align:center}
+.tier-foot{display:block;text-align:center;margin-top:10px;font-size:11.5px;color:var(--muted)}
+
+/* FOOTER */
+footer{background:#15263a;color:#a9bccf;padding:54px 0 30px;font-size:13.5px}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+@media(max-width:760px){.foot{grid-template-columns:1fr 1fr}}
+footer h4{color:#fff;font-size:14px;margin-bottom:12px}
+footer a{display:block;color:#a9bccf;text-decoration:none;margin-bottom:8px}
+footer a:hover{color:#fff}
+.foot-logo{font-family:'Inter Tight',sans-serif;font-size:20px;color:#fff;font-weight:700}
+.foot-logo em{font-family:'Caveat',cursive;font-weight:700;font-size:26px;color:var(--gold-soft);font-style:normal;margin-right:2px}
+.copy{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-top:20px;text-align:center;font-size:12px;color:#7f93a8}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+
+/* BOOKING MODAL */
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="#top"><em>hello</em>Kotagiri</a>
+    <div class="nav-links">
+      <a href="#explore">Explore</a>
+      <a href="hidden-kotagiri.html">Hidden Kotagiri</a>
+      <a href="nature-birding.html">Sholas &amp; Birding</a>
+      <a href="#stays">Stays</a>
+      <a href="restaurants.html">Eat</a>
+      <a href="#plan">Plan</a>
+      <a href="#list" class="btn light" style="padding:9px 18px">List Your Property</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="clouds"></div>
+  <div class="wordmark"><span class="wm-hello">hello</span>Kotagiri</div>
+  <div class="peak"></div>
+  <svg class="scene" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 70 L240 40 L480 65 L720 30 L960 65 L1200 35 L1440 60 L1440 120 L0 120 Z" fill="#fbfcfe"/>
+  </svg>
+  <div class="hero-in">
+    <span class="eyebrow">THE NILGIRIS · TAMIL NADU · 1,793 M</span>
+    <h1>The quiet side of the <em>Blue Mountains</em></h1>
+    <p class="sub">Kotagiri is the oldest hill station in the Nilgiris — older than Ooty, calmer than Coonoor. Tea estates, shola forests, waterfalls and homestays run by people who grew up here.</p>
+    <div class="search-bar">
+      <input type="text" placeholder="Search stays, waterfalls, treks…">
+      <a class="btn" href="#stays">Explore</a>
+    </div>
+    <div class="hero-chips">
+      <a href="#explore">⛰️ Kodanad Viewpoint</a>
+      <a href="#explore">💧 Catherine Falls</a>
+      <a href="#explore">🌿 Longwood Shola</a>
+      <a href="#stays">🏡 Homestays</a>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="wrap stats-in">
+    <div class="stat"><b>1,793 m</b><span>above sea level — cool all year</span></div>
+    <div class="stat"><b>1819</b><span>first Nilgiris settlement, by John Sullivan</span></div>
+    <div class="stat"><b>250 ft</b><span>Catherine Falls — 2nd highest in the Nilgiris</span></div>
+    <div class="stat"><b>10–25°C</b><span>year-round, never harsh</span></div>
+  </div>
+</div>
+
+<!-- EXPLORE -->
+<section id="explore">
+  <div class="wrap">
+    <span class="eyebrow rv">Explore</span>
+    <h2 class="rv">Places that make Kotagiri, Kotagiri</h2>
+    <p class="lede rv">Less commercial than Ooty, every spot here is a short, scenic drive from town — through tea gardens most of the way.</p>
+    <div class="grid c3">
+      <a class="icard rv" href="explore-details.html#kodanad">
+        <div class="img" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Kodanad.jpg?width=900')"></div>
+        <span class="ipill">VIEWPOINT</span><span class="iarrow">↗</span>
+        <div class="ibody"><span class="idist">18 km · ~40 min</span><h3>Kodanad Viewpoint</h3><p>A panoramic view over the Moyar valley and plains below — best on a clear morning before clouds gather.</p></div>
+      </a>
+      <a class="icard rv" href="explore-details.html#catherine">
+        <div class="img" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Catherine_Falls_view_from_Dolphin%27s_Nose.jpg?width=900')"></div>
+        <span class="ipill">WATERFALL</span><span class="iarrow">↗</span>
+        <div class="ibody"><span class="idist">~8 km · Aravenu</span><h3>Catherine Falls</h3><p>A roughly 250-ft double cascade near Aravenu. Visit a recognised viewpoint and avoid slippery, unverified shortcuts.</p></div>
+      </a>
+      <a class="icard rv" href="explore-details.html#longwood">
+        <div class="img" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Shola.jpg?width=900')"></div>
+        <span class="ipill">FOREST</span><span class="iarrow">↗</span>
+        <div class="ibody"><span class="idist">3 km from bus stand</span><h3>Longwood Shola</h3><p>A 116-hectare Ramsar wetland and shola forest with an official guided, family-friendly trail.</p></div>
+      </a>
+      <a class="icard rv" href="explore-details.html#sullivan">
+        <div class="img" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/John_Sullivan_Ootacamund.jpg?width=900');background-position:top center"></div>
+        <span class="ipill">HERITAGE</span><span class="iarrow">↗</span>
+        <div class="ibody"><span class="idist">Kannerimukku · 2 km</span><h3>Sullivan Memorial</h3><p>A restored bungalow at Kannerimukku that offers context on Kotagiri's colonial-era and indigenous history.</p></div>
+      </a>
+      <a class="icard rv" href="explore-details.html#rangaswamy">
+        <div class="img" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Rangasamy_Peak_seen_from_Kodanad.jpg?width=900')"></div>
+        <span class="ipill">PEAK</span><span class="iarrow">↗</span>
+        <div class="ibody"><span class="idist">~20 km · via Kodanad</span><h3>Rangaswamy Peak &amp; Pillar</h3><p>A sacred Nilgiri landscape and striking peak, now available through an official guided forest trek.</p></div>
+      </a>
+      <a class="icard rv" href="explore-details.html#nmr">
+        <div class="img" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/NMR_train_at_Ketti_05-02-26_75.jpeg?width=900')"></div>
+        <span class="ipill">DAY TRIP</span><span class="iarrow">↗</span>
+        <div class="ibody"><span class="idist">Coonoor · 23 km</span><h3>Nilgiri Mountain Railway</h3><p>Ride the UNESCO-listed mountain railway from nearby Coonoor, with live schedules checked through Indian Railways.</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DISCOVER MORE (teasers to new pages) -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head rv" style="max-width:680px;margin-bottom:30px">
+      <span class="eyebrow">Go deeper</span>
+      <h2>For the curious traveller</h2>
+      <p class="lede">Beyond the headline sights — the quiet corners, the ancient forest, and the rare birds that make the Nilgiris special.</p>
+    </div>
+    <div class="grid c2" style="display:grid;grid-template-columns:1fr 1fr;gap:22px">
+      <a class="icard rv" href="hidden-kotagiri.html" style="min-height:300px">
+        <div class="img" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Rangasamy_Peak_seen_from_Kodanad.jpg?width=1100')"></div>
+        <span class="ipill">OFF THE BEATEN PATH</span><span class="iarrow">↗</span>
+        <div class="ibody"><span class="idist">Sacred peaks · quiet falls · echoing valleys</span><h3>Hidden Kotagiri</h3><p>Rangaswamy Peak &amp; Pillar, Elk Falls &amp; Uyilathi, the Kookal echoing valley and tea-estate walks most visitors never find.</p></div>
+      </a>
+      <a class="icard rv" href="nature-birding.html" style="min-height:300px">
+        <div class="img" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiri_Flycatcher_by_N.A._Naseer.jpg?width=1100')"></div>
+        <span class="ipill">FORESTS &amp; WILD BIRDS</span><span class="iarrow">↗</span>
+        <div class="ibody"><span class="idist">Longwood Shola · 10 of 16 endemics</span><h3>Sholas &amp; Birding</h3><p>Understand the shola–grassland mosaic and find Western Ghats endemics — laughingthrush, blue robin, wood-pigeon and more.</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STAYS -->
+<section id="stays">
+  <div class="wrap">
+    <span class="eyebrow rv">Stay</span>
+    <h2 class="rv">Homestays, cottages &amp; outdoor stays</h2>
+    <p class="lede rv">A researched shortlist of places to stay around Kotagiri, with direct host enquiries and links to official property pages where available.</p>
+    <div class="grid c3">
+      <div class="card rv">
+        <div class="ph" style="background-image:url('https://silvertipcafe.com/wp-content/uploads/2024/06/DB_1927.jpeg')"><span class="tag">HOMESTAY</span></div>
+        <div class="body">
+          <div class="badges"><span class="badge f">FEATURED</span><span class="badge v">WEB VERIFIED</span></div>
+          <h3>Silvertip Homestay</h3>
+          <p>Behind Silvertip Cafe in Aravenu — private suites, garden seating, Wi-Fi &amp; workspace, with optional campfire, BBQ and local Badaga meals.</p>
+          <div class="stars">★ 4.7 <small style="color:var(--muted);font-weight:500">(58 Airbnb reviews)</small></div>
+          <div class="stay-price">Check live rates <small>· suites &amp; full cottage</small></div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <a class="btn" href="book.html?stay=Silvertip%20Homestay&host=919381107922">Enquire</a>
+            <a class="link" href="https://silvertipcafe.com/silvertip-homestay/" target="_blank" rel="noopener">Website →</a>
+          </div>
+        </div>
+      </div>
+      <div class="card rv">
+        <div class="ph" style="background-image:url('https://silvertipcafe.com/wp-content/uploads/2025/01/sunset-camps-1024x768-jpeg.webp')"><span class="tag">CAMPING &amp; GLAMPING</span></div>
+        <div class="body">
+          <div class="badges"><span class="badge f">FEATURED</span><span class="badge v">WEB VERIFIED</span></div>
+          <h3>Sunset Camping &amp; Glamping</h3>
+          <p>Moon Road, Aravenu — sunset-facing tents and glamping domes in a fenced tea-estate campground with games, campfires, BBQ and restaurant access.</p>
+          <div class="stars">Groups welcome <small style="color:var(--muted);font-weight:500">· tents for 2–20 campers</small></div>
+          <div class="stay-price">Check live rates <small>· tents &amp; domes</small></div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <a class="btn" href="book.html?stay=Sunset%20Camping%20and%20Glamping&host=919381107922">Enquire</a>
+            <a class="link" href="https://silvertipcafe.com/sunset/" target="_blank" rel="noopener">Website →</a>
+          </div>
+        </div>
+      </div>
+      <div class="card rv">
+        <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiritea.jpg?width=900')"></div>
+        <div class="body">
+          <div class="badges"><span class="badge v">VERIFIED</span></div>
+          <h3>Tea Estate Homestay</h3>
+          <p>3 rooms in a working estate — morning walks through the plantation, meals from the family kitchen.</p>
+          <div class="stars">★ 4.8 <small style="color:var(--muted);font-weight:500">(32 reviews)</small></div>
+          <div class="stay-price">₹2,500 <small>/ night</small></div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+            <a class="btn" href="book.html?stay=Tea%20Estate%20Homestay&host=919962541214">Book</a>
+            <a class="link" href="kotagiri_homestays.html">Map &amp; details →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:34px" class="rv">
+      <button id="toggleStays" class="btn">See all stays</button>
+    </div>
+    
+    <!-- All stays (initially hidden) -->
+    <div id="allStaysGrid" style="display:none;margin-top:38px">
+      <div class="grid c3">
+        <!-- Misty Valley B&B -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Kotagiri_Town.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Misty Valley B&amp;B</h3>
+            <p>Two valley-view rooms near Aravenu — breakfast included, Catherine Falls viewpoint 10 minutes away.</p>
+            <div class="stars">★ 4.6 <small style="color:var(--muted);font-weight:500">(21 reviews)</small></div>
+            <div class="stay-price">₹1,800 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Misty%20Valley%20B%26B&host=919962541214">Book</a>
+              <a class="link" href="kotagiri_homestays.html">Map &amp; details →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pine Edge Cottage -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Shola_forest_and_grassland.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Pine Edge Cottage</h3>
+            <p>A full cottage with kitchen near Longwood Shola — made for slow weeks and remote work in the hills.</p>
+            <div class="stars">★ 4.5 <small style="color:var(--muted);font-weight:500">(9 reviews)</small></div>
+            <div class="stay-price">₹3,200 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Pine%20Edge%20Cottage&host=919962541214">Book</a>
+              <a class="link" href="kotagiri_homestays.html">Map &amp; details →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nithya Valley View -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiritea.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Nithya Valley View</h3>
+            <p>Near River Side Factory, Aravenu — 286 photos, home-cooked meals, peaceful valley views.</p>
+            <div class="stars">★ 4.8 <small style="color:var(--muted);font-weight:500">(192 reviews)</small></div>
+            <div class="stay-price">₹2,800 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Nithya%20Valley%20View&host=08147099516">Book</a>
+              <a class="link" href="http://www.thehoneycomb.in/" target="_blank">Website →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Oraganic Farmer Estate View -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiritea.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Oraganic Farmer Estate View</h3>
+            <p>Near Nayara Petrol Bunk, Aravenu — working organic farm, garden views.</p>
+            <div class="stars">★ 4.8 <small style="color:var(--muted);font-weight:500">(5 reviews)</small></div>
+            <div class="stay-price">₹2,400 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Oraganic%20Farmer&host=09054623315">Book</a>
+              <a class="link" href="tel:09054623315">Call →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Cloud Nine Resorts -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Kotagiri_Town.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Cloud Nine Resorts</h3>
+            <p>Yellacombai, Kodanad — 3-star resort with tea estate views and housekeeping.</p>
+            <div class="stars">★ 4.1 <small style="color:var(--muted);font-weight:500">(127 reviews)</small></div>
+            <div class="stay-price">₹3,500 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Cloud%20Nine&host=08460485956">Book</a>
+              <a class="link" href="tel:08460485956">Call →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Trilan Cottages -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Shola_forest_and_grassland.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Trilan Cottages</h3>
+            <p>Kannerimukku — tea estate homestay with kitchen, 80 photos, family-friendly.</p>
+            <div class="stars">★ 4.4 <small style="color:var(--muted);font-weight:500">(421 reviews)</small></div>
+            <div class="stay-price">₹2,900 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Trilan%20Cottages&host=919962541214">Book</a>
+              <a class="link" href="http://www.trilancottages.com/" target="_blank">Website →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Green Pearl Cottages -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Kodanad.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Green Pearl Cottages</h3>
+            <p>Near Rajeshwari Tea Factory, Konavakorai — scenic location, complimentary breakfast.</p>
+            <div class="stars">★ 4.1 <small style="color:var(--muted);font-weight:500">(226 reviews)</small></div>
+            <div class="stay-price">₹2,600 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Green%20Pearl&host=919962541214">Book</a>
+              <a class="link" href="http://www.greenpearlcottage.com/" target="_blank">Website →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Airy Home Stay -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/CATHERINE_WATER_FALLS.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Airy Home Stay</h3>
+            <p>Ketti — 40 reviews, high rating, WiFi, parking available.</p>
+            <div class="stars">★ 4.9 <small style="color:var(--muted);font-weight:500">(40 reviews)</small></div>
+            <div class="stay-price">₹2,200 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Airy%20Home%20Stay&host=09035081711">Book</a>
+              <a class="link" href="tel:09035081711">Call →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- IVC Villa -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiri_Flycatcher_by_N.A._Naseer.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>IVC Villa</h3>
+            <p>Milidane — 433 reviews, fireplace, butler service, laundry.</p>
+            <div class="stars">★ 3.7 <small style="color:var(--muted);font-weight:500">(433 reviews)</small></div>
+            <div class="stay-price">₹1,500 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=IVC%20Villa&host=919962541214">Book</a>
+              <a class="link" href="kotagiri_homestays.html">Details →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- White House Resort -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/John_Sullivan_Ootacamund.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>White House Resort</h3>
+            <p>Donnington — 275 reviews, valley-facing, wake-up call service.</p>
+            <div class="stars">★ 4.6 <small style="color:var(--muted);font-weight:500">(275 reviews)</small></div>
+            <div class="stay-price">₹2,700 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=White%20House&host=919962541214">Book</a>
+              <a class="link" href="kotagiri_homestays.html">Details →</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Peri Resorts -->
+        <div class="card rv">
+          <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Rangasamy_Peak_seen_from_Kodanad.jpg?width=900')"></div>
+          <div class="body">
+            <div class="badges"><span class="badge v">VERIFIED</span></div>
+            <h3>Peri Resorts</h3>
+            <p>Battakorai, Donnington — 197 reviews, 24-hour concierge, butler service.</p>
+            <div class="stars">★ 4.1 <small style="color:var(--muted);font-weight:500">(197 reviews)</small></div>
+            <div class="stay-price">₹3,800 <small>/ night</small></div>
+            <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+              <a class="btn" href="book.html?stay=Peri%20Resorts&host=919962541214">Book</a>
+              <a class="link" href="kotagiri_homestays.html">Details →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:34px">
+        <button id="collapseStays" class="btn outline">Show fewer stays</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EAT & DRINK -->
+<section id="eat" style="background:var(--mist);border-top:1px solid rgba(31,58,92,.07);border-bottom:1px solid rgba(31,58,92,.07)">
+  <div class="wrap">
+    <span class="eyebrow rv">Eat &amp; drink</span>
+    <h2 class="rv">Culinary delights of Kotagiri</h2>
+    <p class="lede rv">From single-estate Nilgiri tea and hill-station cafés to crisp dosas and whimsical garden dining — where to eat well in and around Kotagiri.</p>
+    <div class="grid c3">
+
+      <!-- Silvertip Cafe -->
+      <div class="card rv">
+        <div class="ph" style="background-image:url('https://silvertipcafe.com/wp-content/uploads/2024/06/DB_1927.jpeg')"><span class="tag">CAFÉ</span></div>
+        <div class="body">
+          <div class="badges"><span class="badge f">FEATURED</span><span class="badge v">WEB VERIFIED</span></div>
+          <h3>Silvertip Cafe</h3>
+          <p>A quaint café just before Aravenu — estate teas &amp; coffee, sandwiches, noodles, muffins and brownies, with a mini book-shop and plants for sale.</p>
+          <div class="stars">★ 4.5 <small style="color:var(--muted);font-weight:500">· Aravenu, SH-15</small></div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <a class="btn" href="book.html?stay=Silvertip%20Cafe%20(table)&host=919381107922">Enquire</a>
+            <a class="link" href="https://silvertipcafe.com/" target="_blank" rel="noopener">Website →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dosapoint by Silvertip -->
+      <div class="card rv">
+        <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Masala_Dosa_from_Karnataka.jpg?width=900')"><span class="tag">SOUTH INDIAN</span></div>
+        <div class="body">
+          <div class="badges"><span class="badge f">FEATURED</span><span class="badge v">WEB VERIFIED</span></div>
+          <h3>Dosapoint by Silvertip</h3>
+          <p>Warm, cosy diner in Johnstone Square serving dosas and Tamil Nadu favourites. Opens early (9 AM); dine-in &amp; delivery, with a kids' menu.</p>
+          <div class="stars">★ 4.4 <small style="color:var(--muted);font-weight:500">· Johnstone Square, Kotagiri</small></div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <a class="btn" href="book.html?stay=Dosapoint%20by%20Silvertip%20(table)&host=919381107922">Enquire</a>
+            <a class="link" href="https://silvertipcafe.com/dosapoint/" target="_blank" rel="noopener">Website →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Silvertip Cafe Select -->
+      <div class="card rv">
+        <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/A_cup_of_coffee_with_latte_art.jpg?width=900')"><span class="tag">SPECIALTY COFFEE</span></div>
+        <div class="body">
+          <div class="badges"><span class="badge f">FEATURED</span><span class="badge v">WEB VERIFIED</span></div>
+          <h3>Silvertip Cafe Select</h3>
+          <p>An elevated coffee experience in Kotagiri town — artisanal blends, gourmet pastries and contemporary plates. Famed brownies &amp; lemon tea.</p>
+          <div class="stars">★ 4.5 <small style="color:var(--muted);font-weight:500">(306 reviews) · Johnstone Square</small></div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <a class="btn" href="book.html?stay=Silvertip%20Cafe%20Select%20(table)&host=919381107922">Enquire</a>
+            <a class="link" href="https://silvertipcafe.com/silvertip-select/" target="_blank" rel="noopener">Website →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hobbit Garden Restaurant -->
+      <div class="card rv">
+        <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Shola_forest_and_grassland.jpg?width=900')"><span class="tag">GARDEN DINING</span></div>
+        <div class="body">
+          <div class="badges"><span class="badge f">FEATURED</span><span class="badge v">WEB VERIFIED</span></div>
+          <h3>Hobbit Garden Restaurant</h3>
+          <p>A whimsical, hobbit-inspired garden restaurant in Aravenu — international dishes and local specialities from fresh, locally-sourced produce.</p>
+          <div class="stars">Open daily 12–8:30 PM <small style="color:var(--muted);font-weight:500">· Kesalada Rd, Aravenu</small></div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <a class="btn" href="book.html?stay=Hobbit%20Garden%20Restaurant%20(table)&host=919381107922">Enquire</a>
+            <a class="link" href="https://www.thehobbitrestaurant.in/" target="_blank" rel="noopener">Website →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tea County -->
+      <div class="card rv">
+        <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiritea.jpg?width=900')"><span class="tag">TEA &amp; DINING</span></div>
+        <div class="body">
+          <div class="badges"><span class="badge v">LOCAL FAVOURITE</span></div>
+          <h3>Tea County Restaurant</h3>
+          <p>A well-loved spot for its ambience and food — and tea brewed from the finest Nilgiri leaves. A reliable sit-down meal in town.</p>
+          <div class="stars">★ 4.2 <small style="color:var(--muted);font-weight:500">· Kotagiri town</small></div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <a class="btn" href="book.html?stay=Tea%20County%20Restaurant%20(table)&host=919962541214">Enquire</a>
+            <a class="link" href="https://www.tripadvisor.in/Restaurants-g1162479-Kotagiri_The_Nilgiris_District_Tamil_Nadu.html" target="_blank" rel="noopener">Reviews →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Manna JSP -->
+      <div class="card rv">
+        <div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Masala_Dosa_from_Karnataka.jpg?width=900')"><span class="tag">PURE VEG</span></div>
+        <div class="body">
+          <div class="badges"><span class="badge v">LOCAL FAVOURITE</span></div>
+          <h3>Manna JSP Restaurant</h3>
+          <p>Popular vegetarian multi-cuisine — South Indian, North Indian, Chinese and tandoori — a dependable, value-friendly meal loved by locals and visitors.</p>
+          <div class="stars">★ 4.1 <small style="color:var(--muted);font-weight:500">· near Johnston Square</small></div>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <a class="btn" href="book.html?stay=Manna%20JSP%20Restaurant%20(table)&host=919962541214">Enquire</a>
+            <a class="link" href="https://www.tripadvisor.in/Restaurants-g1162479-Kotagiri_The_Nilgiris_District_Tamil_Nadu.html" target="_blank" rel="noopener">Reviews →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="note" style="background:#fff;border:1px solid rgba(31,58,92,.1);border-left:4px solid var(--sun);border-radius:12px;padding:18px 22px;margin-top:30px;font-size:14.5px">
+      <b style="color:var(--forest)">Taste the local flavour.</b> Kotagiri is Badaga country — ask your homestay host about home-cooked Badaga meals, and don't leave without trying a cup of single-estate Nilgiri tea (the chocolate, cardamom and ginger varieties are local favourites).
+    </div>
+    <div style="text-align:center;margin-top:30px" class="rv">
+      <a class="btn" href="restaurants.html">See all restaurants &amp; cafés →</a>
+    </div>
+  </div>
+</section>
+
+<!-- THINGS TO DO -->
+<section id="todo">
+  <div class="wrap">
+    <span class="eyebrow rv">Experience</span>
+    <h2 class="rv">Things to do, the local way</h2>
+    <p class="lede rv">Guided by people from Kotagiri — estate workers, naturalists and trail walkers who know these hills by name.</p>
+    <div class="grid c4">
+      <div class="card rv"><div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/CATHERINE_WATER_FALLS.jpg?width=900')"></div><div class="body"><h3>Catherine Falls Trek</h3><p>Half-day guided trek through tea gardens to the falls viewpoint. Easy–moderate.</p><a class="link" href="activities-details.html#catherine-trek">From ₹800 →</a></div></div>
+      <div class="card rv"><div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiritea.jpg?width=900');background-position:bottom"></div><div class="body"><h3>Tea Factory Tour</h3><p>Leaf to cup in 2 hours — watch withering, rolling and firing, then taste estate-fresh tea.</p><a class="link" href="activities-details.html#tea-tour">From ₹300 →</a></div></div>
+      <div class="card rv"><div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiri_Flycatcher_by_N.A._Naseer.jpg?width=900')"></div><div class="body"><h3>Shola Birding Walk</h3><p>Early-morning walk in Longwood Shola with a naturalist. Binoculars provided.</p><a class="link" href="activities-details.html#birding">From ₹600 →</a></div></div>
+      <div class="card rv"><div class="ph" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Shola-grass-mountain-Grass_HillsNP.jpg?width=900')"></div><div class="body"><h3>Sullivan Trail</h3><p>Walk stretches of the historic 1819 route into the hills — retraced every June.</p><a class="link" href="activities-details.html#sullivan-trail">Guided →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN -->
+<section id="plan">
+  <div class="wrap">
+    <span class="eyebrow rv">Plan</span>
+    <h2 class="rv">When to come &amp; how to reach</h2>
+    <p class="lede rv">Kotagiri sits in a rain shadow behind the Doddabetta range — so it often stays clear even when Ooty is wrapped in monsoon cloud.</p>
+    <div class="seasons">
+      <div class="season best rv"><div class="ico">✨</div><h3>Oct – Mar</h3><p><b>9–22°C.</b> Crisp air, clear valley views, low crowds in Nov–Feb. Carry warm layers for mornings.</p></div>
+      <div class="season rv"><div class="ico">🌸</div><h3>Apr – Jun</h3><p><b>15–25°C.</b> Pleasant escape from the plains' heat. June 15: Sullivan Trail expedition week.</p></div>
+      <div class="season rv"><div class="ico">🌦</div><h3>Jul – Sep</h3><p><b>Misty &amp; green.</b> Lighter rain than Ooty thanks to the rain shadow — waterfalls at their best.</p></div>
+      <div class="season rv"><div class="ico">🍃</div><h3>All year</h3><p><b>10–25°C range.</b> Never harsh. The classic subtropical highland climate of the Nilgiris.</p></div>
+    </div>
+    <div class="reach">
+      <div class="r rv"><div class="ico">✈️</div><b>Coimbatore</b><span>Nearest airport · 70 km · ~2.5 hrs by road</span></div>
+      <div class="r rv"><div class="ico">🚂</div><b>Mettupalayam / Coonoor</b><span>Rail heads · 33 km / 23 km · toy train via Coonoor</span></div>
+      <div class="r rv"><div class="ico">🚗</div><b>From Ooty</b><span>28–32 km · a scenic 1–1.5 hr drive through estates</span></div>
+      <div class="r rv"><div class="ico">🚌</div><b>By Bus</b><span>Regular TNSTC buses from Ooty, Coonoor &amp; Mettupalayam</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- OWNER CTA -->
+<section id="list">
+  <div class="wrap">
+    <div class="owner rv">
+      <div>
+        <span class="eyebrow" style="color:var(--sun)">For property owners</span>
+        <h2>Own a homestay in Kotagiri?</h2>
+        <p>Travellers planning a Nilgiris trip are searching for exactly what you offer. Get found, get enquiries, keep 100% of your booking.</p>
+        <ul>
+          <li>Direct WhatsApp &amp; call enquiries — zero commission</li>
+          <li>"Verified" badge after our in-person visit</li>
+          <li>Monthly stats: views, taps, enquiries</li>
+          <li>Free basic listing to start · paid plans from ₹999/month</li>
+        </ul>
+        <a class="btn light" href="#pricing">See plans &amp; pricing</a>
+      </div>
+      <div class="panel">
+        <h3>Apply to list your property</h3>
+        <input type="text" id="lpName" placeholder="Property name">
+        <input type="text" id="lpOwner" placeholder="Your name">
+        <input type="text" id="lpPhone" placeholder="WhatsApp number">
+        <input type="text" id="lpEmail" placeholder="Email (optional)">
+        <input type="text" id="lpLocation" placeholder="Location / village">
+        <select id="lpType"><option value="">Property type</option><option>Homestay</option><option>B&amp;B</option><option>Cottage</option><option>Guesthouse</option><option>Camping / Glamping</option><option>Restaurant / Café</option></select>
+        <select id="lpPlan"><option value="">Plan you're interested in</option><option>Free</option><option>Featured — ₹999/mo</option><option>Premium — ₹2,499/mo</option><option>Commission only</option><option>Pay-per-lead</option><option>Not sure — advise me</option></select>
+        <button class="btn" id="lpSubmit" onclick="ktgSubmitListing()">Submit — we'll visit &amp; verify</button>
+        <small id="lpMsg">No payment now. We respond within 48 hours.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <span class="eyebrow rv">Plans &amp; pricing</span>
+    <h2 class="rv">Simple plans that grow with you</h2>
+    <p class="lede rv">Start free and only pay when you want more reach. Every plan keeps your guest relationship direct — no booking commission unless you choose it.</p>
+    <div class="pricing-grid">
+      <div class="tier rv">
+        <h3>Free</h3>
+        <div class="price-amt">₹0<span>/ forever</span></div>
+        <p class="tier-sub">Get listed and start taking enquiries.</p>
+        <ul>
+          <li>Standard listing in the directory</li>
+          <li>Up to 3 photos</li>
+          <li>Direct WhatsApp &amp; call enquiries</li>
+          <li>Map &amp; contact details</li>
+          <li class="no">Featured placement</li>
+          <li class="no">Homepage promotion</li>
+        </ul>
+        <a class="btn outline" href="#list">Start free</a>
+        <small class="tier-foot">Optional 12% booking commission</small>
+      </div>
+      <div class="tier feat rv">
+        <span class="pop">MOST POPULAR</span>
+        <h3>Featured</h3>
+        <div class="price-amt">₹999<span>/ month</span></div>
+        <p class="tier-sub">Stand out and turn lookers into bookings.</p>
+        <ul>
+          <li>Everything in Free</li>
+          <li><b>Featured</b> badge &amp; higher ranking</li>
+          <li>Up to 15 photos + gallery</li>
+          <li>Full amenities &amp; story section</li>
+          <li>Priority enquiry routing</li>
+          <li class="no">Homepage hero slot</li>
+        </ul>
+        <a class="btn" href="#list">Choose Featured</a>
+        <small class="tier-foot">or 8% commission · save with annual</small>
+      </div>
+      <div class="tier rv">
+        <h3>Premium</h3>
+        <div class="price-amt">₹2,499<span>/ month</span></div>
+        <p class="tier-sub">Maximum reach for serious hosts.</p>
+        <ul>
+          <li>Everything in Featured</li>
+          <li><b>Homepage</b> &amp; category-top placement</li>
+          <li>Unlimited photos + video</li>
+          <li>Promoted in trip plans &amp; emails</li>
+          <li>Dedicated account manager</li>
+          <li>Performance dashboard</li>
+        </ul>
+        <a class="btn" href="#list">Go Premium</a>
+        <small class="tier-foot">or pay-per-lead from ₹49/lead</small>
+      </div>
+    </div>
+    <p class="lede rv" style="margin:28px auto 0;text-align:center;max-width:640px">Prefer to pay only for results? Stay free and choose <b>commission per booking</b> or <b>pay-per-enquiry leads</b> on any plan. <a href="#list" style="color:var(--leaf);font-weight:700;text-decoration:none">Talk to us →</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="foot-logo"><em>hello</em>Kotagiri</div>
+      <p style="margin-top:10px;max-width:280px">A local guide to the oldest hill station in the Nilgiris — and the homestays that call it home.</p>
+    </div>
+    <div><h4>Discover</h4><a href="#explore">Places to visit</a><a href="#stays">Homestays &amp; B&amp;Bs</a><a href="#eat">Where to eat</a><a href="hidden-kotagiri.html">Hidden Kotagiri</a><a href="nature-birding.html">Sholas &amp; Birding</a></div>
+    <div><h4>Hosts</h4><a href="#list">List your property</a><a href="#pricing">Plans &amp; pricing</a><a href="property-manager.html">Host dashboard</a><a href="hosts.html">Host guidelines</a></div>
+    <div><h4>Connect</h4><a id="footInsta" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a><a id="footWa" href="#">WhatsApp</a><a id="footMail" href="#">Contact us</a></div>
+  </div>
+  <div class="wrap copy">© 2026 helloKotagiri · Made in the Nilgiris 🌿<br>
+  Photos via <a href="https://commons.wikimedia.org" style="display:inline">Wikimedia Commons</a> contributors (CC BY-SA) — see <a href="#" style="display:inline">photo credits</a>.</div>
+</footer>
+
+<script src="ktg-data.js"></script>
+<script>
+/* ============================================================
+   ▼▼▼  EDIT YOUR CONTACT DETAILS HERE (one place) ▼▼▼
+   Replace the placeholder values below with your real ones.
+   - WHATSAPP: digits only, with country code, no + or spaces (e.g. 919876543210)
+   - EMAIL:    your contact email
+   - INSTAGRAM: full URL to your profile
+   ============================================================ */
+const CONTACT = {
+  WHATSAPP: "91XXXXXXXXXX",            // TODO: your WhatsApp number
+  EMAIL:    "hello@hellokotagiri.com", // TODO: your contact email
+  INSTAGRAM:"https://instagram.com/"   // TODO: your Instagram URL
+};
+(function wireContact(){
+  const wa=document.getElementById('footWa');
+  if(wa) wa.href="https://wa.me/"+CONTACT.WHATSAPP+"?text="+encodeURIComponent("Hi! I have a question about Travel Kotagiri.");
+  const mail=document.getElementById('footMail');
+  if(mail) mail.href="mailto:"+CONTACT.EMAIL+"?subject="+encodeURIComponent("helloKotagiri enquiry");
+  const insta=document.getElementById('footInsta');
+  if(insta) insta.href=CONTACT.INSTAGRAM;
+})();
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* nav gains shadow once you scroll past the hero top */
+const navEl=document.querySelector('nav');
+const onScroll=()=>{navEl.classList.toggle('scrolled',window.scrollY>20)};
+onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+/* Toggle "See all stays" button */
+document.getElementById('toggleStays').addEventListener('click',function(){
+  const allStaysGrid=document.getElementById('allStaysGrid');
+  allStaysGrid.style.display=allStaysGrid.style.display==='none'?'block':'none';
+  allStaysGrid.querySelectorAll('.rv').forEach(el=>{if(!el.classList.contains('in')){io.observe(el);}});
+  window.scrollTo({top:allStaysGrid.offsetTop-100,behavior:'smooth'});
+});
+
+document.getElementById('collapseStays').addEventListener('click',function(){
+  document.getElementById('allStaysGrid').style.display='none';
+  window.scrollTo({top:document.getElementById('stays').offsetTop-100,behavior:'smooth'});
+});
+
+/* ---- List Your Property → save to Supabase ---- */
+async function ktgSubmitListing(){
+  const g=id=>document.getElementById(id);
+  const name=g('lpName').value.trim(), owner=g('lpOwner').value.trim(), phone=g('lpPhone').value.trim();
+  const msg=g('lpMsg'), btn=g('lpSubmit');
+  if(!name||!owner||!phone){ msg.textContent='Please add property name, your name and WhatsApp number.'; msg.style.color='#b03a2e'; return; }
+  btn.disabled=true; btn.textContent='Submitting…';
+  try{
+    await KTG.submitListing({
+      property_name:name, owner_name:owner, phone:phone,
+      email:g('lpEmail').value.trim()||null,
+      location:g('lpLocation').value.trim()||null,
+      property_type:g('lpType').value||null,
+      plan:g('lpPlan').value||null
+    });
+    msg.style.color='var(--leaf)';
+    msg.textContent='✅ Received! Our team will reach out within 48 hours. No payment needed to start.';
+    btn.textContent='Submitted ✓';
+    ['lpName','lpOwner','lpPhone','lpEmail','lpLocation'].forEach(i=>g(i).value='');
+    g('lpType').value=''; g('lpPlan').value='';
+  }catch(e){
+    msg.style.color='#b03a2e';
+    msg.textContent='Something went wrong — please try again, or WhatsApp us directly.';
+    btn.disabled=false; btn.textContent="Submit — we'll visit & verify";
+    console.error(e);
+  }
+}
+</script>
+</body>
+</html>

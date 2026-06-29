@@ -1,0 +1,287 @@
+{
+  "explore": [
+    {
+      "id": "kodanad",
+      "name": "Kodanad Viewpoint",
+      "tag": "VIEWPOINT",
+      "distance": "18 km · ~40 min",
+      "rating": 4.6,
+      "description": "A 220° panorama over the Moyar valley and the plains below — best at sunrise, when the mist lifts off the eastern slopes.",
+      "details": "The highest point in Kotagiri, Kodanad offers breathtaking views of the Nilgiri plateau and the plains stretching to the horizon. Ideal for sunrise photography.",
+      "highlights": ["220° panorama", "Sunrise viewpoint", "Photography hotspot", "Tea estates below"],
+      "timing": "Best: 6 am – 8 am",
+      "entryFee": "Free",
+      "contact": "Local Guide Recommended"
+    },
+    {
+      "id": "catherine",
+      "name": "Catherine Falls",
+      "tag": "WATERFALL",
+      "distance": "8 km · Aravenu",
+      "rating": 4.5,
+      "description": "A 250-ft double cascade, the second highest in the Nilgiris. Fullest after the monsoon — July to December.",
+      "details": "Named after Catherine Mary, a British settler's daughter, this waterfall is a spectacular double cascade visible from the Dolphin's Nose viewpoint. The trek down is moderate.",
+      "highlights": ["250-ft cascade", "Double falls", "Trek through forests", "Photography"],
+      "timing": "Best: Oct – Feb (highest water)",
+      "entryFee": "Free",
+      "contact": "Local Trek Guides: ₹500–800"
+    },
+    {
+      "id": "longwood",
+      "name": "Longwood Shola",
+      "tag": "FOREST",
+      "distance": "3 km from town center",
+      "rating": 4.3,
+      "description": "116 hectares of rare surviving shola rainforest with a quiet birding trail — home to over 100 bird species.",
+      "details": "A pristine shola forest ecosystem with endemic flora and fauna. Home to the Nilgiri Pipit, Nilgiri Wood Pigeon, and over 60 bird species. Designated as a QCC (Quality Circle Council) conservation site.",
+      "highlights": ["100+ bird species", "Shola forest", "Heritage trees", "Nilgiri endemic birds"],
+      "timing": "Best: Early morning (6–8 am)",
+      "entryFee": "₹50/person",
+      "contact": "Forest Department; Naturalist Guide: ₹600"
+    },
+    {
+      "id": "sullivan",
+      "name": "John Sullivan Memorial",
+      "tag": "HERITAGE",
+      "distance": "Kannerimukku · 2 km",
+      "rating": 4.2,
+      "description": "The restored 1819 bungalow where the Nilgiris story began — now a museum of colonial and tribal hill history.",
+      "details": "John Sullivan discovered Kotagiri in 1819 and established the first European settlement. His bungalow has been restored and opened as a museum showcasing the early colonial period and Kota tribal artifacts.",
+      "highlights": ["Colonial history", "1819 heritage", "Tribal artifacts", "Museum"],
+      "timing": "9 am – 5 pm (weekends closed)",
+      "entryFee": "₹100/person",
+      "contact": "+91 4266 262537"
+    },
+    {
+      "id": "rangaswamy",
+      "name": "Rangaswamy Peak & Pillar",
+      "tag": "PEAK",
+      "distance": "20 km · via Kodanad",
+      "rating": 4.1,
+      "description": "A sacred conical peak of the Irula tribe beside a striking 400-ft rock pillar — visible from Kodanad.",
+      "details": "Revered by the indigenous Irula tribe, Rangaswamy Peak stands as a spiritual landmark. The 400-ft pillar beside it is a geological marvel. Accessible by jeep trek.",
+      "highlights": ["Spiritual significance", "400-ft rock pillar", "Jeep trek", "Tribal heritage"],
+      "timing": "Best: Oct – Mar",
+      "entryFee": "Free · Jeep hire: ₹1,500–2,000",
+      "contact": "Local Jeep Operators"
+    },
+    {
+      "id": "nehru",
+      "name": "Nehru Park",
+      "tag": "PARK",
+      "distance": "1 km from town center",
+      "rating": 4.1,
+      "description": "A scenic hilltop park with botanical garden, grassy meadows, and panoramic town views.",
+      "details": "Named after India's first PM, Nehru Park is Kotagiri's main public recreational space. Features a small botanical garden, toy train ride (weekends), and a pleasant picnic area.",
+      "highlights": ["Botanical garden", "Picnic area", "Town views", "Family-friendly"],
+      "timing": "9 am – 5 pm daily",
+      "entryFee": "Free · Toy train: ₹20",
+      "contact": "Kotagiri Municipality"
+    },
+    {
+      "id": "nilgiritrains",
+      "name": "Nilgiri Mountain Railway",
+      "tag": "DAY TRIP",
+      "distance": "Coonoor · 23 km",
+      "rating": 4.4,
+      "description": "Ride the UNESCO-listed toy train through Coonoor's hills — pair it with Elk Falls and a tea-estate walk on the way back.",
+      "details": "The UNESCO World Heritage Nilgiri Mountain Railway is a 46-km narrow-gauge train from Mettupalayam to Ooty, passing through Coonoor. A scenic 1.5-hour journey through tunnels, bridges, and tea estates.",
+      "highlights": ["UNESCO heritage", "Narrow-gauge train", "Scenic tunnels", "Tea estates"],
+      "timing": "Trains: 6:40 am (depart), 3:10 pm (return)",
+      "entryFee": "₹400–800 (class dependent)",
+      "contact": "South Indian Railways; +91 423 2442265"
+    }
+  ],
+  
+  "activities": [
+    {
+      "id": "catherine_trek",
+      "name": "Catherine Falls Trek",
+      "category": "TREK",
+      "duration": "3–4 hours",
+      "difficulty": "Easy–Moderate",
+      "groupSize": "2–8 people",
+      "pricePerPerson": 800,
+      "description": "Half-day guided trek through tea gardens to the falls viewpoint.",
+      "itinerary": ["Tea estate walk (45 min)", "Forest path (30 min)", "Falls viewpoint (15 min hike)", "Return"],"includes": ["Local guide", "Packed snacks", "Tea at estate"],
+      "seasonal": "Best Oct–Mar (water levels)",
+      "provider": "Local Trek Operators",
+      "contact": "+91 9962541214 or local homestay"
+    },
+    {
+      "id": "tea_factory",
+      "name": "Tea Factory Tour",
+      "category": "AGRO-TOURISM",
+      "duration": "2 hours",
+      "difficulty": "Easy",
+      "groupSize": "2–15 people",
+      "pricePerPerson": 300,
+      "description": "Leaf to cup in 2 hours — watch withering, rolling and firing, then taste estate-fresh tea.",
+      "itinerary": ["Tea plucking demo (20 min)", "Processing plant tour (60 min)", "Tea tasting (30 min)", "Souvenir shopping"],
+      "includes": ["Factory guide", "Estate tea samples", "Light refreshment"],
+      "seasonal": "Year-round (busiest: Jan–Mar)",
+      "provider": "Kotagiri Tea Estates",
+      "contact": "Estate Managers · Advance booking recommended"
+    },
+    {
+      "id": "birding",
+      "name": "Shola Birding Walk",
+      "category": "NATURE WALK",
+      "duration": "3 hours",
+      "difficulty": "Easy",
+      "groupSize": "2–6 people",
+      "pricePerPerson": 600,
+      "description": "Early-morning walk in Longwood Shola with a naturalist. Binoculars provided.",
+      "itinerary": ["Forest entry & briefing (10 min)", "Silent bird-watching walk (140 min)", "Tea break & bird notes (10 min)"],
+      "includes": ["Naturalist guide", "Binoculars", "Bird ID guide", "Tea/coffee"],
+      "seasonal": "Year-round (peak: Nov–Feb)",
+      "provider": "Nilgiris Naturalists Society",
+      "contact": "+91 4266 221234"
+    },
+    {
+      "id": "sullivan_trail",
+      "name": "Sullivan Trail Historical Walk",
+      "category": "HERITAGE WALK",
+      "duration": "5–6 hours",
+      "difficulty": "Moderate",
+      "groupSize": "4–12 people",
+      "pricePerPerson": 500,
+      "description": "Walk stretches of the historic 1819 route into the hills — retraced every June.",
+      "itinerary": ["1819 route briefing", "Forest path (4 km)", "Sullivan's Kota village visit", "Lunch", "Return"],
+      "includes": ["History guide", "Packed lunch", "Route map"],
+      "seasonal": "Best: Oct–Mar (June expedition)",
+      "provider": "Nilgiris Heritage Trust",
+      "contact": "+91 4266 235456"
+    },
+    {
+      "id": "jeep_safari",
+      "name": "Jeep Safari to Rangaswamy Peak",
+      "category": "ADVENTURE",
+      "duration": "4–5 hours",
+      "difficulty": "Moderate",
+      "groupSize": "4–6 per jeep",
+      "pricePerPerson": 1200,
+      "description": "Off-road drive to Rangaswamy Peak with tribal elder storytelling and panoramic views.",
+      "itinerary": ["Kodanad viewpoint (photo stop)", "Off-road to Rangaswamy", "Peak visit & stories", "Return"],
+      "includes": ["Jeep hire", "Local guide", "Bottled water"],
+      "seasonal": "Oct–Mar (avoid monsoon)",
+      "provider": "Local Jeep Operators",
+      "contact": "Kotagiri taxi stands"
+    },
+    {
+      "id": "plantation",
+      "name": "Tea/Spice Plantation Walk",
+      "category": "AGRO-TOURISM",
+      "duration": "2–3 hours",
+      "difficulty": "Easy",
+      "groupSize": "2–8 people",
+      "pricePerPerson": 400,
+      "description": "Morning walk through working tea and spice plantations with plucking demo and farm lunch.",
+      "itinerary": ["Plucking demonstration", "Plantation walk", "Spice garden tour", "Farm lunch"],
+      "includes": ["Farm guide", "Tea/coffee", "Lunch"],
+      "seasonal": "Year-round",
+      "provider": "Local Homestay Farms",
+      "contact": "Homestay operators"
+    }
+  ],
+  
+  "transport": [
+    {
+      "from": "Coimbatore",
+      "to": "Kotagiri",
+      "distance": "70 km",
+      "time": "2.5–3 hours",
+      "modes": [
+        {"type": "Private taxi/cab", "cost": "₹1,500–2,000", "notes": "Convenient, flexible"},
+        {"type": "Shared cab/van", "cost": "₹300–500", "notes": "Ola/Uber available"},
+        {"type": "Bus (TNSTC)", "cost": "₹150–250", "notes": "Comfortable, budget option"}
+      ],
+      "route": "National Highway 44 towards Ooty"
+    },
+    {
+      "from": "Ooty",
+      "to": "Kotagiri",
+      "distance": "28–32 km",
+      "time": "1–1.5 hours",
+      "modes": [
+        {"type": "Private taxi/cab", "cost": "₹800–1,200", "notes": "Scenic drive"},
+        {"type": "Bus (TNSTC)", "cost": "₹100–150", "notes": "Regular service, hourly"},
+        {"type": "Bike/scooter rental", "cost": "₹500–800", "notes": "Adventurous riders only"}
+      ],
+      "route": "Ooty-Kotagiri Road, through tea estates"
+    },
+    {
+      "from": "Coonoor",
+      "to": "Kotagiri",
+      "distance": "23 km",
+      "time": "1 hour",
+      "modes": [
+        {"type": "Private taxi", "cost": "₹600–900", "notes": "Via Mettupalayam"},
+        {"type": "Bus (TNSTC)", "cost": "₹80–120", "notes": "2 services daily"},
+        {"type": "Toy train + jeep", "cost": "₹400 + ₹500", "notes": "Most scenic"}
+      ],
+      "route": "Via Mettupalayam or direct hill road"
+    },
+    {
+      "from": "Mettupalayam",
+      "to": "Kotagiri",
+      "distance": "33 km",
+      "time": "1.5–2 hours",
+      "modes": [
+        {"type": "Toy train to Coonoor + taxi", "cost": "₹800 total", "notes": "UNESCO experience"},
+        {"type": "Direct taxi", "cost": "₹600–800", "notes": "Faster, scenic"}
+      ],
+      "route": "Mountain road with 34 hairpin bends"
+    }
+  ],
+  
+  "seasons": [
+    {
+      "season": "Oct – Mar (Winter)",
+      "status": "BEST_TIME",
+      "temperature": "9–22°C",
+      "weather": "Crisp air, clear valley views, low crowds (Nov–Feb especially)",
+      "highlights": ["Clear skies", "Wildflower blooms (Feb–Mar)", "Perfect trekking", "Photography"],
+      "tips": "Carry warm layers for mornings and evenings. Rain gear optional."
+    },
+    {
+      "season": "Apr – Jun (Summer)",
+      "status": "GOOD",
+      "temperature": "15–25°C",
+      "weather": "Pleasant escape from plains heat. June 15: Sullivan Trail expedition week.",
+      "highlights": ["Comfortable weather", "Lower altitude heat", "Adventure week", "Green valleys"],
+      "tips": "Summer heat from plains drives visitors up. Ideal for treks and activities."
+    },
+    {
+      "season": "Jul – Sep (Monsoon)",
+      "status": "MODERATE",
+      "temperature": "18–22°C",
+      "weather": "Misty & green. Lighter rain than Ooty thanks to rain shadow — waterfalls at best.",
+      "highlights": ["Lush greenery", "Waterfalls full", "Fewer tourists", "Photography"],
+      "tips": "Bring waterproof gear. Landslide risk on some roads. Better transport by afternoon."
+    },
+    {
+      "season": "Year-round",
+      "status": "ALWAYS",
+      "temperature": "10–25°C range",
+      "weather": "Never harsh. The classic subtropical highland climate of the Nilgiris.",
+      "highlights": ["Pleasant weather", "No extreme seasons", "Safe for families", "Predictable"],
+      "tips": "Kotagiri is quieter in off-season (Apr, Sep). Book early for peak months."
+    }
+  ],
+  
+  "localInfo": {
+    "elevation": "1,950 m (6,400 ft)",
+    "population": "28,207",
+    "founded": "1819 (John Sullivan)",
+    "postcode": "643217",
+    "timezone": "IST (UTC+5:30)",
+    "language": "Tamil, English widely spoken",
+    "currency": "Indian Rupee (₹)",
+    "emergency": {
+      "police": "100 / +91 4266 221234",
+      "ambulance": "102 / +91 4266 240001",
+      "hospital": "Civil Hospital Kotagiri +91 4266 240001"
+    }
+  }
+}

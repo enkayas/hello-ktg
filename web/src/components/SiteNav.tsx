@@ -45,11 +45,11 @@ export default function SiteNav({ variant = "hero" }: Props) {
         <div className="flex items-center gap-1">
           {[
             { href: "/explore", label: "Explore" },
-            { href: "/hidden-kotagiri", label: "Hidden Kotagiri" },
+            { href: "/hidden-gems", label: "Hidden Gems" },
             { href: "/nature-birding", label: "Sholas & Birding" },
-            { href: "/stays", label: "Stays" },
+            { href: "/stay", label: "Stay" },
             { href: "/eat", label: "Eat" },
-            { href: "/plan", label: "Plan" },
+            { href: "/plan-my-trip", label: "Plan My Trip" },
           ].map((link) => (
             <Link
               key={link.href}
@@ -64,14 +64,14 @@ export default function SiteNav({ variant = "hero" }: Props) {
             </Link>
           ))}
           <Link
-            href="/list-your-property"
+            href="/list-your-business"
             className={`tap ml-1 inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold no-underline transition ${
               solid
                 ? "bg-white text-forest shadow-md hover:text-pine"
                 : "bg-white text-forest shadow-md hover:text-pine"
             }`}
           >
-            List Your Property
+            List Your Business
           </Link>
         </div>
       </div>

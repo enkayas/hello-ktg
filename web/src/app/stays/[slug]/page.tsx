@@ -44,7 +44,7 @@ export default async function StayPage({
     <>
       <SiteNav variant="solid" />
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-24 md:py-28">
-        <Link href="/stays" className="text-sm font-semibold text-leaf">
+        <Link href="/stay" className="text-sm font-semibold text-tea">
           ← All stays
         </Link>
 

@@ -189,7 +189,7 @@ export const HIDDEN_SPOTS = [
     description:
       "A hidden valley where the hills seem to answer back — an off-beat, uncommercial pocket that pairs with an Elk Falls visit.",
     image: wiki("Shola_forest_and_grassland.jpg", 1100),
-    href: "/hidden-kotagiri#kookal",
+    href: "/hidden-gems",
   },
   {
     id: "ellad",
@@ -199,6 +199,6 @@ export const HIDDEN_SPOTS = [
     description:
       "A local favourite — quiet estate trails through some of Kotagiri's prettiest tea paths. No ticket counters, just hills and tea.",
     image: wiki("Nilgiritea.jpg", 1100),
-    href: "/hidden-kotagiri#ellad",
+    href: "/hidden-gems",
   },
 ];

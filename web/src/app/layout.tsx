@@ -1,46 +1,28 @@
 import type { Metadata } from "next";
-import { Caveat, Inter, Inter_Tight } from "next/font/google";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 import "./globals.css";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const interTight = Inter_Tight({
-  variable: "--font-display",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const caveat = Caveat({
-  variable: "--font-script",
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: {
-    default: "helloKotagiri — The Quiet Side of the Nilgiris",
-    template: "%s · helloKotagiri",
+    default: "HelloKotagiri — Discover Nilgiris Like a Local",
+    template: "%s · HelloKotagiri",
   },
   description:
-    "Discover Kotagiri — the oldest hill station in the Nilgiris. Tea estates, misty trails, waterfalls and verified homestays at 1,793 m.",
+    "Smart stays, local food, scenic routes, hidden gems and nearby experiences across Kotagiri and the Nilgiris.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${interTight.variable} ${caveat.variable} h-full antialiased`}
+      className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className={`${GeistSans.className} flex min-h-full flex-col`}>
+        {children}
+      </body>
     </html>
   );
 }

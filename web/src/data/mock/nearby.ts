@@ -1,0 +1,94 @@
+import type { NearbyItem } from "./types";
+
+const img = (id: string) =>
+  `https://images.unsplash.com/photo-${id}?w=800&q=80&auto=format&fit=crop`;
+
+export const nearbyItems: NearbyItem[] = [
+  {
+    id: "n1",
+    name: "Silvertip Cafe",
+    category: "restaurant",
+    distance: "1.2 km",
+    bestFor: "Breakfast & estate tea",
+    tags: ["Open Now", "Food", "Cafés", "Parking"],
+    image: img("1495474473367-a7fedd892b71"),
+    openNow: true,
+  },
+  {
+    id: "n2",
+    name: "Longwood Shola Entry",
+    category: "viewpoint",
+    distance: "2.8 km",
+    bestFor: "Morning birding walk",
+    tags: ["Viewpoints", "Family Friendly", "Senior Friendly"],
+    image: img("1441974231531-c6227db76b6e"),
+  },
+  {
+    id: "n3",
+    name: "Misty Valley B&B",
+    category: "stay",
+    distance: "3.5 km",
+    bestFor: "Family weekend stay",
+    tags: ["Stays", "Family Friendly", "Food"],
+    image: img("1582719478250-c89cae4dc85b"),
+  },
+  {
+    id: "n4",
+    name: "Town Square Parking",
+    category: "parking",
+    distance: "0.8 km",
+    bestFor: "Safe daytime parking",
+    tags: ["Parking", "Family Friendly", "Clean Restrooms"],
+    image: img("1590366841952-962297e3ee0b"),
+  },
+  {
+    id: "n5",
+    name: "Mountain Brew Café",
+    category: "café",
+    distance: "1.5 km",
+    bestFor: "Coffee & workcation",
+    tags: ["Cafés", "Open Now", "Food"],
+    image: img("1509042239860-f550ce710b93"),
+    openNow: true,
+  },
+  {
+    id: "n6",
+    name: "Catherine Falls Viewpoint",
+    category: "viewpoint",
+    distance: "8.4 km",
+    bestFor: "Half-day waterfall trip",
+    tags: ["Viewpoints", "Family Friendly"],
+    image: img("1439069582845-503a2728edca"),
+  },
+  {
+    id: "n7",
+    name: "HP Petrol Bunk",
+    category: "fuel",
+    distance: "2.1 km",
+    bestFor: "Fuel & convenience",
+    tags: ["Parking", "Open Now"],
+    image: img("1590366841952-962297e3ee0b"),
+    openNow: true,
+  },
+  {
+    id: "n8",
+    name: "Tea Factory Tour",
+    category: "experience",
+    distance: "4.2 km",
+    bestFor: "Agro-tourism & tasting",
+    tags: ["Family Friendly", "Senior Friendly"],
+    image: img("1558618666-fcd25c85cd64"),
+  },
+];
+
+export const nearMeFilters = [
+  "Open Now",
+  "Food",
+  "Stays",
+  "Viewpoints",
+  "Cafés",
+  "Parking",
+  "Family Friendly",
+  "Senior Friendly",
+  "Clean Restrooms",
+] as const;

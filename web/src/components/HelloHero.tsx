@@ -62,7 +62,7 @@ export default function HelloHero() {
             readOnly
             onFocus={(e) => e.currentTarget.blur()}
           />
-          <Btn href="/stays" className="!px-5 !py-2.5">
+          <Btn href="/stay" className="!px-5 !py-2.5">
             Explore
           </Btn>
         </div>
@@ -71,7 +71,7 @@ export default function HelloHero() {
             { href: "/explore/kodanad", label: "⛰️ Kodanad Viewpoint" },
             { href: "/explore/catherine", label: "💧 Catherine Falls" },
             { href: "/explore/longwood", label: "🌿 Longwood Shola" },
-            { href: "/stays", label: "🏡 Homestays" },
+            { href: "/stay", label: "🏡 Homestays" },
           ].map((chip) => (
             <Link
               key={chip.href}

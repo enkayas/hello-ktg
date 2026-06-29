@@ -88,7 +88,7 @@ export default async function ExploreDetailPage({ params }: Props) {
           </p>
         ) : null}
         <div className="mt-10 flex flex-wrap gap-3">
-          <Btn href="/stays">Find a place to stay</Btn>
+          <Btn href="/stay">Find a place to stay</Btn>
           <Btn href="/explore" variant="outline">
             ← All places
           </Btn>

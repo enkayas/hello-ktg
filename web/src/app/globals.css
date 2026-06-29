@@ -1,33 +1,42 @@
 @import "tailwindcss";
 
-/* helloKotagiri — blue / white / gold palette from index.html */
+/* HelloKotagiri — Blue Mountains palette (design handoff / hellokotagiri.com) */
 :root {
-  --forest: #1f3a5c;
-  --pine: #2e5a86;
-  --leaf: #3f6f9e;
-  --tea: #9db4ce;
-  --mist: #eef4f9;
-  --cream: #fbfcfe;
-  --sun: #c79348;
-  --gold-soft: #e8c583;
-  --ink: #1e2a38;
-  --muted: #5e6b7c;
+  --primary: #1d3a58;
+  --primary-dark: #122740;
+  --primary-mid: #264a6e;
+  --steel: #3b6e9c;
+  --accent: #dda23c;
+  --accent-hover: #e7b255;
+  --canvas: #f3f6f8;
+  --surface: #ffffff;
+  --ink: #1e2a33;
+  --muted: #54616b;
+  --line: #e2e8ee;
+  --grey: #d8e0e6;
+  --open: #128a4f;
+  --closed: #c9610b;
+  --whatsapp: #1fa15a;
 }
 
 @theme inline {
-  --color-forest: var(--forest);
-  --color-pine: var(--pine);
-  --color-leaf: var(--leaf);
-  --color-tea: var(--tea);
-  --color-mist: var(--mist);
-  --color-cream: var(--cream);
-  --color-sun: var(--sun);
-  --color-gold-soft: var(--gold-soft);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-mid: var(--primary-mid);
+  --color-steel: var(--steel);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-display);
-  --font-script: var(--font-script);
+  --color-line: var(--line);
+  --color-grey: var(--grey);
+  --color-open: var(--open);
+  --color-closed: var(--closed);
+  --color-whatsapp: var(--whatsapp);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 html {
@@ -35,47 +44,83 @@ html {
 }
 
 body {
-  background: var(--cream);
+  background: var(--canvas);
   color: var(--ink);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, .display {
-  font-family: var(--font-display), system-ui, sans-serif;
-  letter-spacing: -0.02em;
+.font-mono {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@media (pointer: coarse) {
-  button, a[role="button"], .tap {
-    min-height: 44px;
+@keyframes hk-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
   }
 }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--leaf);
+@keyframes hk-mist {
+  0% {
+    transform: translateX(-2%);
+  }
+  100% {
+    transform: translateX(2%);
+  }
 }
 
-.eyebrow::before {
-  content: "";
-  width: 22px;
-  height: 1.5px;
-  background: var(--sun);
-  display: inline-block;
+.animate-hk-pulse {
+  animation: hk-pulse 2.2s ease-in-out infinite;
 }
 
-.eyebrow-light {
-  color: var(--gold-soft);
+.animate-hk-mist {
+  animation: hk-mist 16s ease-in-out infinite alternate;
 }
 
-.eyebrow-light::before {
-  background: var(--gold-soft);
+.hero-radial {
+  background: radial-gradient(
+    130% 140% at 12% 0%,
+    #264a6e 0%,
+    #1d3a58 50%,
+    #122740 100%
+  );
+}
+
+.home-hero-bg {
+  background: radial-gradient(
+    135% 120% at 50% -15%,
+    color-mix(in srgb, var(--primary), #ffffff 16%) 0%,
+    var(--primary) 45%,
+    color-mix(in srgb, var(--primary), #000000 36%) 100%
+  );
+}
+
+.card-hover {
+  transition:
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -22px rgba(18, 40, 60, 0.45);
+}
+
+.gem-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 46px -24px rgba(18, 40, 60, 0.45);
+}
+
+@media (pointer: coarse) {
+  button,
+  a.tap {
+    min-height: 44px;
+  }
 }

@@ -6,6 +6,18 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  async redirects() {
+    return [
+      { source: "/stays", destination: "/stay", permanent: true },
+      { source: "/plan", destination: "/plan-my-trip", permanent: true },
+      { source: "/hidden-kotagiri", destination: "/hidden-gems", permanent: true },
+      {
+        source: "/hidden-kotagiri/:path*",
+        destination: "/hidden-gems",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

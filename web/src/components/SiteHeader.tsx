@@ -8,11 +8,11 @@ export default function SiteHeader() {
           Travel <span className="text-leaf">Kotagiri</span>
         </Link>
         <nav className="flex items-center gap-4 text-sm">
-          <Link href="/stays" className="font-medium text-ink hover:text-leaf">
+          <Link href="/stay" className="font-medium text-ink hover:text-tea">
             Stays
           </Link>
           <Link
-            href="/list-your-property"
+            href="/list-your-business"
             className="tap inline-flex items-center rounded-full bg-leaf px-4 py-2 font-semibold text-white hover:bg-pine"
           >
             List your stay

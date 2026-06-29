@@ -21,8 +21,8 @@ export default function SiteFooter() {
           <Link href="/explore" className="mb-2 block hover:text-white">
             Places to visit
           </Link>
-          <Link href="/hidden-kotagiri" className="mb-2 block hover:text-white">
-            Hidden Kotagiri
+          <Link href="/hidden-gems" className="mb-2 block hover:text-white">
+            Hidden Gems
           </Link>
           <Link href="/nature-birding" className="mb-2 block hover:text-white">
             Sholas &amp; Birding
@@ -36,14 +36,14 @@ export default function SiteFooter() {
         </div>
         <div>
           <h4 className="mb-3 font-semibold text-white">Plan &amp; host</h4>
-          <Link href="/stays" className="mb-2 block hover:text-white">
+          <Link href="/stay" className="mb-2 block hover:text-white">
             Where to stay
           </Link>
-          <Link href="/plan" className="mb-2 block hover:text-white">
+          <Link href="/plan-my-trip" className="mb-2 block hover:text-white">
             Plan your trip
           </Link>
-          <Link href="/list-your-property" className="mb-2 block hover:text-white">
-            List your property
+          <Link href="/list-your-business" className="mb-2 block hover:text-white">
+            List your business
           </Link>
           <Link href="/owner/login" className="mb-2 block hover:text-white">
             Owner login

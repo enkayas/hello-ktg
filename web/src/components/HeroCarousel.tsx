@@ -76,7 +76,7 @@ export default function HeroCarousel() {
           style={{ animationDelay: "0.24s" }}
         >
           <Link
-            href="/stays"
+            href="/stay"
             className="tap inline-flex items-center justify-center rounded-full bg-leaf px-7 py-3 font-semibold text-white shadow-lg transition hover:bg-pine"
           >
             Browse stays
